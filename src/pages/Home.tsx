@@ -62,7 +62,11 @@ const Home: React.FC = () => {
         <Container>
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="Power Interview Logo" className="h-8 w-8 rounded-xl" />
+              <img
+                src={`${import.meta.env.BASE_URL}logo.png`}
+                alt="Power Interview Logo"
+                className="h-8 w-8 rounded-xl"
+              />
               <span className="text-xl font-bold">Power Interview</span>
             </div>
 
@@ -1078,7 +1082,11 @@ const Home: React.FC = () => {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="mb-4 flex items-center gap-2">
-                <img src="/logo.png" alt="Power Interview Logo" className="h-6 w-6" />
+                <img
+                  src={`${import.meta.env.BASE_URL}logo.png`}
+                  alt="Power Interview Logo"
+                  className="h-6 w-6"
+                />
                 <span className="text-lg font-bold">Power Interview</span>
               </div>
               <p className="mb-4 text-sm text-muted-foreground">
