@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 
 import {
-  ArrowRight,
-  Brain,
-  Check,
-  ChevronDown,
-  Code,
-  Lock,
-  Mail,
-  Menu,
-  MessageCircle,
-  Mic,
-  Shield,
-  Video,
-  X,
-} from 'lucide-react';
+  SiAudacity,
+  SiCheckmarx,
+  SiGithub,
+  SiGoogle,
+  SiProtonmail,
+  SiReplit,
+  SiShieldsdotio,
+  SiTelegram,
+  SiX,
+  SiZoom,
+} from '@icons-pack/react-simple-icons';
 
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
@@ -117,11 +114,9 @@ const Home: React.FC = () => {
                   href="https://github.com/PowerInterviewAI/client"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex items-center gap-2"
                 >
-                  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <title>GitHub</title>
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                  </svg>
+                  <SiGithub className="h-4 w-4" />
                   GitHub
                 </a>
               </Button>
@@ -142,7 +137,18 @@ const Home: React.FC = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? (
+                <SiX className="h-6 w-6" />
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
             </button>
           </div>
 
@@ -192,11 +198,9 @@ const Home: React.FC = () => {
                       href="https://github.com/PowerInterviewAI/client"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="flex items-center gap-2"
                     >
-                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <title>GitHub</title>
-                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                      </svg>
+                      <SiGithub className="h-4 w-4" />
                       GitHub
                     </a>
                   </Button>
@@ -246,7 +250,14 @@ const Home: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     Download Now
-                    <ArrowRight className="h-4 w-4" />
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </a>
                 </Button>
                 <Button
@@ -256,7 +267,14 @@ const Home: React.FC = () => {
                   className="gap-2"
                 >
                   Learn More
-                  <ChevronDown className="h-4 w-4" />
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
                 </Button>
               </div>
 
@@ -271,7 +289,7 @@ const Home: React.FC = () => {
                   role="img"
                   aria-label="Product demo video placeholder"
                 >
-                  <Video className="h-20 w-20 text-muted-foreground" aria-hidden="true" />
+                  <SiZoom className="h-20 w-20 text-muted-foreground" aria-hidden="true" />
                   <span className="ml-4 text-muted-foreground">Product Demo Placeholder</span>
                 </div>
               </div>
@@ -301,7 +319,7 @@ const Home: React.FC = () => {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Video className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiZoom className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Real-Time Face Swap</CardTitle>
                   <CardDescription>
                     Transform your video appearance during live interviews with advanced face swap
@@ -312,7 +330,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Mic className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiAudacity className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Live Transcription</CardTitle>
                   <CardDescription>
                     Dual-channel transcription with automatic speaker detection and full
@@ -323,7 +341,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Brain className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiGoogle className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>AI Reply Suggestions</CardTitle>
                   <CardDescription>
                     Get personalized, context-aware responses based on your CV, job description, and
@@ -334,7 +352,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Code className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiReplit className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Code Suggestions</CardTitle>
                   <CardDescription>
                     Screenshot analysis with LLM-powered solutions for coding problems, complete
@@ -345,7 +363,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Shield className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiShieldsdotio className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Stealth Mode</CardTitle>
                   <CardDescription>
                     Operate discreetly with hotkeys, opacity control, and smart window positioning.
@@ -356,7 +374,20 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <Lock className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <svg
+                    className="mb-2 h-10 w-10 text-primary"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
                   <CardTitle>Privacy First</CardTitle>
                   <CardDescription>
                     Your data stays with you. Secure local storage, no data mining, and full control
@@ -374,7 +405,19 @@ const Home: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   Get Started Now
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <svg
+                    className="ml-2 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </a>
               </Button>
             </div>
@@ -423,23 +466,23 @@ const Home: React.FC = () => {
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">600 credits (~60 minutes)</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Real-time transcription</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">AI reply suggestions</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Code assistance</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Face swap feature</span>
                     </li>
                   </ul>
@@ -476,27 +519,27 @@ const Home: React.FC = () => {
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">6,000 credits (~600 minutes)</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Real-time transcription</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">AI reply suggestions</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Code assistance</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Face swap feature</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Priority support</span>
                     </li>
                   </ul>
@@ -528,31 +571,31 @@ const Home: React.FC = () => {
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">60,000 credits (~6,000 minutes)</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Real-time transcription</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">AI reply suggestions</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Code assistance</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Face swap feature</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Priority support</span>
                     </li>
                     <li className="flex items-start">
-                      <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
+                      <SiCheckmarx className="mr-2 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-sm">Dedicated account manager</span>
                     </li>
                   </ul>
@@ -723,7 +766,19 @@ const Home: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   Join Them Today
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <svg
+                    className="ml-2 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7-7"
+                    />
+                  </svg>
                 </a>
               </Button>
             </div>
@@ -810,11 +865,21 @@ const Home: React.FC = () => {
                   >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                       <CardTitle className="text-lg font-semibold">{faq.question}</CardTitle>
-                      <ChevronDown
+                      <svg
                         className={`h-5 w-5 transition-transform ${
                           openFaqIndex === index ? 'rotate-180' : ''
                         }`}
-                      />
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
                     </CardHeader>
                   </button>
                   {openFaqIndex === index && (
@@ -830,7 +895,7 @@ const Home: React.FC = () => {
               <p className="mb-4 text-muted-foreground">Still have questions?</p>
               <Button variant="outline" onClick={() => scrollToSection('contact')}>
                 Contact Us
-                <Mail className="ml-2 h-4 w-4" />
+                <SiProtonmail className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </Container>
@@ -915,13 +980,13 @@ const Home: React.FC = () => {
 
                     <Button type="submit" size="lg" className="w-full">
                       Send Message
-                      <Mail className="ml-2 h-4 w-4" />
+                      <SiProtonmail className="ml-2 h-4 w-4" />
                     </Button>
                   </form>
 
                   <div className="mt-6 space-y-4 border-t pt-6">
                     <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-muted-foreground" />
+                      <SiProtonmail className="h-5 w-5 text-muted-foreground" />
                       <div>
                         <p className="text-sm font-medium">Email</p>
                         <a
@@ -934,15 +999,7 @@ const Home: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <svg
-                        role="img"
-                        viewBox="0 0 24 24"
-                        className="h-5 w-5 text-muted-foreground"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <title>GitHub</title>
-                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                      </svg>
+                      <SiGithub className="h-5 w-5 text-muted-foreground" />
                       <div>
                         <p className="text-sm font-medium">GitHub</p>
                         <a
@@ -957,7 +1014,7 @@ const Home: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <MessageCircle className="h-5 w-5 text-muted-foreground" />
+                      <SiTelegram className="h-5 w-5 text-muted-foreground" />
                       <div>
                         <p className="text-sm font-medium">Telegram</p>
                         <a
@@ -999,15 +1056,7 @@ const Home: React.FC = () => {
                   className="text-muted-foreground transition-colors hover:text-primary"
                   aria-label="GitHub"
                 >
-                  <svg
-                    className="h-5 w-5 text-muted-foreground"
-                    role="img"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <title>GitHub</title>
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                  </svg>
+                  <SiGithub className="h-5 w-5" />
                 </a>
                 <a
                   href="https://t.me/power_interview_ai"
@@ -1016,14 +1065,14 @@ const Home: React.FC = () => {
                   className="text-muted-foreground transition-colors hover:text-primary"
                   aria-label="Telegram"
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <SiTelegram className="h-5 w-5" />
                 </a>
                 <a
                   href="mailto:power-interview@protonmail.com"
                   className="text-muted-foreground transition-colors hover:text-primary"
                   aria-label="Email"
                 >
-                  <Mail className="h-5 w-5" />
+                  <SiProtonmail className="h-5 w-5" />
                 </a>
               </div>
             </div>
