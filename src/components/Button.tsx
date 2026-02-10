@@ -1,42 +1,40 @@
 import React from 'react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline';
+import { Button as ShadcnButton, type ButtonProps as ShadcnButtonProps } from './ui/button';
+
+interface ButtonProps extends Omit<ShadcnButtonProps, 'variant' | 'size'> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
-  className = '',
-  children,
-  ...props
-}) => {
-  const baseClasses =
-    'inline-flex items-center justify-center rounded-full font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
-
-  const variantClasses = {
-    primary:
-      'bg-zinc-900 text-zinc-50 hover:bg-zinc-700 focus:ring-zinc-900 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-300',
-    secondary:
-      'bg-zinc-100 text-zinc-900 hover:bg-zinc-200 focus:ring-zinc-500 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700',
-    outline:
-      'border border-zinc-300 bg-transparent text-zinc-900 hover:bg-zinc-100 focus:ring-zinc-500 dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-900',
+/**
+ * Custom Button component that wraps shadcn/ui Button
+ * Provides backward compatibility with existing variant names
+ */
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', size = 'md', ...props }) => {
+  // Map custom variants to shadcn variants
+  const variantMap: Record<ButtonProps['variant'] & string, ShadcnButtonProps['variant']> = {
+    primary: 'default',
+    secondary: 'secondary',
+    outline: 'outline',
+    ghost: 'ghost',
+    destructive: 'destructive',
+    link: 'link',
   };
 
-  const sizeClasses = {
-    sm: 'h-9 px-4 text-sm',
-    md: 'h-12 px-5 text-base',
-    lg: 'h-14 px-6 text-lg',
+  // Map custom sizes to shadcn sizes
+  const sizeMap: Record<ButtonProps['size'] & string, ShadcnButtonProps['size']> = {
+    sm: 'sm',
+    md: 'default',
+    lg: 'lg',
   };
-
-  const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   return (
-    <button className={combinedClasses} {...props}>
-      {children}
-    </button>
+    <ShadcnButton
+      variant={variant ? variantMap[variant] : 'default'}
+      size={size ? sizeMap[size] : 'default'}
+      {...props}
+    />
   );
 };
 

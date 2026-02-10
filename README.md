@@ -7,9 +7,11 @@ A modern interview preparation platform built with React, TypeScript, Vite, and 
 - ⚡️ **Vite** - Lightning-fast development and build tool
 - ⚛️ **React 18** - Latest React features
 - 🎨 **Tailwind CSS** - Utility-first CSS framework
+- 🎭 **shadcn/ui** - Beautiful, accessible components built with Radix UI
 - 📝 **TypeScript** - Type safety and better developer experience
 - 💅 **Prettier** - Code formatting with import sorting
 - 🔍 **ESLint** - Code linting for best practices
+- 🎣 **Husky & lint-staged** - Pre-commit hooks for code quality
 - 📦 **Production-ready** - Optimized build configuration
 
 ## 📁 Project Structure
@@ -19,8 +21,10 @@ power-interview-hero/
 ├── src/
 │   ├── assets/         # Static assets (images, fonts, etc.)
 │   ├── components/     # Reusable React components
+│   │   └── ui/         # shadcn/ui components
 │   ├── config/         # Configuration files
 │   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility libraries (cn function)
 │   ├── pages/          # Page components
 │   ├── styles/         # Global styles
 │   ├── types/          # TypeScript type definitions
@@ -95,6 +99,50 @@ Lint code:
 
 ```bash
 npm run lint
+```
+
+## 🎨 shadcn/ui Components
+
+This project uses [shadcn/ui](https://ui.shadcn.com/) for beautiful, accessible UI components.
+
+### Available Components
+
+- **Button** - Versatile button with multiple variants (default, destructive, outline, secondary, ghost, link)
+- **Card** - Flexible card component for content grouping
+
+### Adding More Components
+
+Due to peer dependency conflicts, components are added manually:
+
+1. Install required dependencies:
+
+   ```bash
+   npm install @radix-ui/[package-name] --legacy-peer-deps
+   ```
+
+2. Copy component code from [ui.shadcn.com](https://ui.shadcn.com/) to `src/components/ui/`
+
+3. Export the component in `src/components/index.ts`
+
+For detailed instructions, see [src/components/ui/README.md](src/components/ui/README.md).
+
+### Using Components
+
+```tsx
+import { Button, Card, CardContent, CardHeader, CardTitle } from '@/components';
+
+<Button variant="default" size="lg">
+  Click me
+</Button>
+
+<Card>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+  </CardHeader>
+  <CardContent>
+    Content goes here
+  </CardContent>
+</Card>
 ```
 
 ## 📦 Deployment

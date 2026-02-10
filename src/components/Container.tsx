@@ -1,13 +1,18 @@
 import React from 'react';
 
+import { cn } from '@/lib/utils';
+
 interface ContainerProps {
   children: React.ReactNode;
   className?: string;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, className = '' }) => {
+/**
+ * Container component for consistent max-width and padding
+ */
+const Container: React.FC<ContainerProps> = ({ children, className }) => {
   return (
-    <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
+    <div className={cn('mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8', className)}>{children}</div>
   );
 };
 
