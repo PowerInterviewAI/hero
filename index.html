@@ -31,7 +31,7 @@
     <meta property="og:locale" content="en_US" />
 
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#1a0f0a" />
     <meta name="application-name" content="Power Interview" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -102,6 +102,18 @@
         "contactType": "Customer Support"
       }
     }
+    </script>
+
+    <!-- Initialize theme to prevent flash of unstyled content -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.add('light');
+            }
+        })();
     </script>
 </head>
 
