@@ -4,10 +4,10 @@
 
 export const APP_CONFIG = {
   name: 'Power Interview Hero',
-  description: 'Your interview preparation companion',
-  version: '0.1.0',
-  author: 'Your Name',
-  repository: 'https://github.com/yourusername/power-interview-hero',
+  description: 'Your ultimate interview coaching companion',
+  version: '0.10.0',
+  author: 'Alpha Dev',
+  repository: 'https://github.com/PowerInterviewAI/hero.git',
 } as const;
 
 /**
