@@ -2,9 +2,9 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/power-interview-hero/',
+  base: mode === 'development' ? '/' : '/hero/',
   resolve: {
     alias: {
       '@': '/src',
@@ -30,4 +30,4 @@ export default defineConfig({
   preview: {
     port: 4173,
   },
-});
+}));
