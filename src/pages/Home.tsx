@@ -21,7 +21,6 @@ import {
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { APP_CONFIG } from '@/config/constants';
 import { useTheme } from '@/hooks/useTheme';
 
 const Home: React.FC = () => {
@@ -1241,10 +1240,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="mt-12 border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>
-              &copy; {new Date().getFullYear()} Power Interview. All rights reserved. Version{' '}
-              {APP_CONFIG.version}
-            </p>
+            <p>&copy; {new Date().getFullYear()} Power Interview. All rights reserved.</p>
             <p className="mt-2">
               Made to help you ace your interviews while protecting your privacy
             </p>
