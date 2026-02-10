@@ -9,7 +9,14 @@ import {
   SiX,
   SiZoom,
 } from '@icons-pack/react-simple-icons';
-import { Captions, Ghost, MessageSquareCode, MessageSquareText, UserLock } from 'lucide-react';
+import {
+  ArrowRight,
+  Captions,
+  Ghost,
+  MessageSquareCode,
+  MessageSquareText,
+  UserLock,
+} from 'lucide-react';
 
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
@@ -803,19 +810,7 @@ const Home: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   Join Them Today
-                  <svg
-                    className="ml-2 h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7-7"
-                    />
-                  </svg>
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </a>
               </Button>
             </div>
