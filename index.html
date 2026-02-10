@@ -3,10 +3,118 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/logo.ico" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Power Interview Hero - Your interview preparation companion" />
-    <title>Power Interview Hero</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Power Interview - Privacy-First AI Interview Assistant | Ace Your Interviews</title>
+    <meta name="title" content="Power Interview - Privacy-First AI Interview Assistant | Ace Your Interviews" />
+    <meta name="description"
+        content="Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Start with 30 free credits! Pay with coins only - no credit card, PayPal, or bank required. Privacy-first desktop application." />
+    <meta name="keywords"
+        content="interview preparation, AI interview assistant, technical interview, behavioral interview, face swap, real-time transcription, code suggestions, interview coach, privacy-first, stealth mode, interview practice, cryptocurrency payment, no credit card, coin payment" />
+    <meta name="author" content="Power Interview AI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://powerinterviewai.github.io/hero/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://powerinterviewai.github.io/hero/" />
+    <meta property="og:title" content="Power Interview - Privacy-First AI Interview Assistant" />
+    <meta property="og:description"
+        content="Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Get 30 free credits to start - pay with coins only, no credit card required!" />
+    <meta property="og:image" content="https://powerinterviewai.github.io/hero/logo.png" />
+    <meta property="og:site_name" content="Power Interview" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#1a0f0a" />
+    <meta name="application-name" content="Power Interview" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Power Interview" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Power Interview",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "20",
+        "highPrice": "500",
+        "priceCurrency": "USD",
+        "offerCount": "3"
+      },
+      "description": "Privacy-first AI interview assistant with real-time transcription, intelligent suggestions, and face swap technology for technical and behavioral interviews.",
+      "author": {
+        "@type": "Organization",
+        "name": "Power Interview AI",
+        "url": "https://powerinterviewai.github.io/hero/",
+        "logo": "https://powerinterviewai.github.io/hero/logo.png",
+        "sameAs": [
+          "https://github.com/PowerInterviewAI/client",
+          "https://t.me/power_interview_ai"
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "156"
+      },
+      "screenshot": "https://powerinterviewai.github.io/hero/logo.png",
+      "softwareVersion": "0.10.1",
+      "downloadUrl": "https://github.com/PowerInterviewAI/client/releases/latest",
+      "featureList": [
+        "Real-time face swap technology",
+        "Live transcription with speaker detection",
+        "AI-powered reply suggestions",
+        "Code assistance with screenshot analysis",
+        "Stealth mode with hotkeys",
+        "Privacy-first local data storage"
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Power Interview AI",
+      "url": "https://powerinterviewai.github.io/hero/",
+      "logo": "https://powerinterviewai.github.io/hero/logo.png",
+      "description": "Privacy-first AI interview assistant helping candidates ace technical and behavioral interviews.",
+      "email": "power-interview@protonmail.com",
+      "sameAs": [
+        "https://github.com/PowerInterviewAI/client",
+        "https://t.me/power_interview_ai"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "power-interview@protonmail.com",
+        "contactType": "Customer Support"
+      }
+    }
+    </script>
+
+    <!-- Initialize theme to prevent flash of unstyled content -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.add('light');
+            }
+        })();
+    </script>
 </head>
 
 <body>
