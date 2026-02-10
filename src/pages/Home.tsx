@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
 import {
-  SiAudacity,
   SiCheckmarx,
   SiGithub,
-  SiGoogle,
   SiProtonmail,
-  SiReplit,
-  SiShieldsdotio,
+  SiSuperuser,
   SiTelegram,
   SiX,
   SiZoom,
 } from '@icons-pack/react-simple-icons';
+import { Captions, Ghost, MessageSquareCode, MessageSquareText, UserLock } from 'lucide-react';
 
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
@@ -371,7 +369,7 @@ const Home: React.FC = () => {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <SiZoom className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <SiSuperuser className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Real-Time Face Swap</CardTitle>
                   <CardDescription>
                     Transform your video appearance during live interviews with advanced face swap
@@ -382,7 +380,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <SiAudacity className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <Captions className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Live Transcription</CardTitle>
                   <CardDescription>
                     Dual-channel transcription with automatic speaker detection and full
@@ -393,7 +391,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <SiGoogle className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <MessageSquareText className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>AI Reply Suggestions</CardTitle>
                   <CardDescription>
                     Get personalized, context-aware responses based on your CV, job description, and
@@ -404,7 +402,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <SiReplit className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <MessageSquareCode className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Code Suggestions</CardTitle>
                   <CardDescription>
                     Screenshot analysis with LLM-powered solutions for coding problems, complete
@@ -415,7 +413,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <SiShieldsdotio className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+                  <Ghost className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Stealth Mode</CardTitle>
                   <CardDescription>
                     Operate discreetly with hotkeys, opacity control, and smart window positioning.
@@ -426,20 +424,7 @@ const Home: React.FC = () => {
 
               <Card className="transition-shadow hover:shadow-lg">
                 <CardHeader>
-                  <svg
-                    className="mb-2 h-10 w-10 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    />
-                  </svg>
+                  <UserLock className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
                   <CardTitle>Privacy First</CardTitle>
                   <CardDescription>
                     Your data stays with you. Secure local storage, no data mining, and full control
