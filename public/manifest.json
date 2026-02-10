@@ -1,0 +1,41 @@
+{
+    "name": "Power Interview - Privacy-First AI Interview Assistant",
+    "short_name": "Power Interview",
+    "description": "Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.ico",
+            "sizes": "48x48",
+            "type": "image/x-icon"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "business",
+        "education"
+    ],
+    "screenshots": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
