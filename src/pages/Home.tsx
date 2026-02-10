@@ -259,6 +259,11 @@ const Home: React.FC = () => {
                 </Button>
               </div>
 
+              <p className="mt-4 text-sm text-muted-foreground">
+                🎁 Start with <span className="font-semibold text-foreground">30 free credits</span>{' '}
+                - No credit card required
+              </p>
+
               <div className="mt-12 rounded-lg border bg-muted/30 p-2">
                 <div
                   className="flex aspect-video items-center justify-center rounded bg-muted"
@@ -385,6 +390,16 @@ const Home: React.FC = () => {
               <p className="text-lg text-muted-foreground">
                 Choose the plan that fits your interview preparation needs
               </p>
+              <div className="mt-6 inline-flex flex-col gap-2">
+                <div className="rounded-lg bg-primary/10 px-6 py-3 text-center">
+                  <p className="text-sm font-semibold text-primary">
+                    🎁 New users get 30 free credits to try all features!
+                  </p>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Credit usage: 10 credits per minute of AI assistance
+                </p>
+              </div>
             </div>
 
             <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
@@ -397,12 +412,13 @@ const Home: React.FC = () => {
                     <span className="text-4xl font-bold">$20</span>
                     <span className="text-muted-foreground"> / 600 credits</span>
                   </div>
+                  <p className="mt-2 text-sm text-muted-foreground">~60 minutes of AI assistance</p>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
-                      <span className="text-sm">600 AI credits</span>
+                      <span className="text-sm">600 credits (~60 minutes)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
@@ -447,12 +463,15 @@ const Home: React.FC = () => {
                     <span className="text-4xl font-bold">$100</span>
                     <span className="text-muted-foreground"> / 6,000 credits</span>
                   </div>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    ~600 minutes of AI assistance
+                  </p>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
-                      <span className="text-sm">6,000 AI credits</span>
+                      <span className="text-sm">6,000 credits (~600 minutes)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
@@ -496,12 +515,15 @@ const Home: React.FC = () => {
                     <span className="text-4xl font-bold">$500</span>
                     <span className="text-muted-foreground"> / 60,000 credits</span>
                   </div>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    ~6,000 minutes of AI assistance
+                  </p>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
-                      <span className="text-sm">60,000 AI credits</span>
+                      <span className="text-sm">60,000 credits (~6,000 minutes)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 h-5 w-5 shrink-0 text-primary" />
@@ -757,12 +779,12 @@ const Home: React.FC = () => {
                 {
                   question: 'How do credits work?',
                   answer:
-                    'Credits are used for AI-powered features like reply suggestions, code analysis, and face swap processing. Different actions consume different amounts of credits. You can purchase credit packs starting from 600 credits ($20) up to 60,000 credits ($500).',
+                    'Credits are consumed at a rate of 10 credits per minute when using AI-powered features like reply suggestions, code analysis, transcription, and face swap processing. For example, a 30-minute interview session would use approximately 300 credits. You can purchase credit packs starting from 600 credits ($20 for ~60 minutes) up to 60,000 credits ($500 for ~6,000 minutes).',
                 },
                 {
                   question: 'Is there a free trial?',
                   answer:
-                    'While we do not offer a traditional free trial, you can start with our Starter plan at $20 for 600 credits to test all features. This is a low-risk way to experience the full capabilities of Power Interview.',
+                    'Yes! All new users receive 30 free credits to try out all features (approximately 3 minutes of AI assistance). This allows you to experience the full capabilities of Power Interview risk-free. After that, you can choose from our affordable pricing plans starting at just $20 for 600 credits.',
                 },
                 {
                   question: 'Can I get a refund?',
