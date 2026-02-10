@@ -2,15 +2,9 @@ import React from 'react';
 
 import { ArrowRight, BookOpen, Brain, Target } from 'lucide-react';
 
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  Container,
-} from '@/components';
+import Container from '@/components/custom/Container';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { APP_CONFIG } from '@/config/constants';
 
 const Home: React.FC = () => {
