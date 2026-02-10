@@ -89,6 +89,13 @@ const Home: React.FC = () => {
                 Features
               </button>
               <button
+                onClick={() => scrollToSection('why-choose-heading')}
+                className="text-sm font-medium transition-colors hover:text-primary"
+                aria-label="Navigate to why choose section"
+              >
+                Why Us
+              </button>
+              <button
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium transition-colors hover:text-primary"
                 aria-label="Navigate to pricing section"
@@ -225,6 +232,12 @@ const Home: React.FC = () => {
                   Features
                 </button>
                 <button
+                  onClick={() => scrollToSection('why-choose-heading')}
+                  className="text-sm font-medium transition-colors hover:text-primary"
+                >
+                  Why Us
+                </button>
+                <button
                   onClick={() => scrollToSection('pricing')}
                   className="text-sm font-medium transition-colors hover:text-primary"
                 >
@@ -339,6 +352,26 @@ const Home: React.FC = () => {
                 - Pay with coins only (No credit card, PayPal, or bank required)
               </p>
 
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
+                <div className="flex items-center gap-2 rounded-lg border bg-background/50 px-3 py-1.5">
+                  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z" />
+                  </svg>
+                  <span>Windows Only (MacOS & Linux Coming Soon)</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-lg border bg-amber-500/10 px-3 py-1.5 text-amber-700 dark:text-amber-400">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  <span className="font-medium">For Legal Use Only</span>
+                </div>
+              </div>
+
               <div className="mt-12 rounded-lg border bg-muted/30 p-2">
                 <div
                   className="flex aspect-video items-center justify-center rounded bg-muted"
@@ -379,7 +412,26 @@ const Home: React.FC = () => {
                   <CardTitle>Real-Time Face Swap</CardTitle>
                   <CardDescription>
                     Transform your video appearance during live interviews with advanced face swap
-                    technology and virtual camera integration
+                    technology. <span className="font-semibold text-foreground">Simple setup:</span>{' '}
+                    Just install{' '}
+                    <a
+                      href="https://obsproject.com/download"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      OBS Studio
+                    </a>{' '}
+                    and{' '}
+                    <a
+                      href="https://vb-audio.com/Cable/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      VB-Cable
+                    </a>{' '}
+                    - no configuration needed!
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -463,6 +515,155 @@ const Home: React.FC = () => {
                   </svg>
                 </a>
               </Button>
+            </div>
+          </Container>
+        </section>
+
+        {/* Why Choose Power Interview Section */}
+        <section className="py-16 md:py-24" aria-labelledby="why-choose-heading">
+          <Container>
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <h2
+                id="why-choose-heading"
+                className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+              >
+                Why Power Interview Stands Out
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                The most advanced and privacy-focused AI interview assistant on the market
+              </p>
+            </div>
+
+            <div className="mx-auto max-w-4xl">
+              <div className="grid gap-6 md:gap-8">
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      Unmatched Face Swap Technology
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      Unlike basic screen recording tools or simple overlay assistants (like
+                      Interview Copilot, Final Round AI), Power Interview offers{' '}
+                      <span className="font-semibold text-foreground">
+                        real-time face swap with OBS integration
+                      </span>
+                      . Other tools can't modify your video feed - we can. No complex setup required
+                      - just install OBS and VB-Cable and you're ready!
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      True Privacy Protection
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      Most AI interview assistants (Interviewing.io, Pramp, even some
+                      "privacy-focused" tools) store your data on their servers.
+                      <span className="font-semibold text-foreground"> We don't.</span> All your
+                      sensitive information stays on your device with encrypted local storage. No
+                      data mining, no selling your information to third parties, no cloud storage
+                      risks.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      Advanced Stealth Mode
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      While tools like Yoodli and Big Interview offer practice features, they don't
+                      help during{' '}
+                      <span className="font-semibold text-foreground">live interviews</span>. Our
+                      stealth mode makes the window{' '}
+                      <span className="font-semibold text-foreground">
+                        completely invisible during screen sharing
+                      </span>
+                      , won't show in screenshots, and can be controlled entirely via hotkeys.
+                      Perfect for real interview scenarios.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      Cryptocurrency Payment Only
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      No credit card required, no PayPal, no bank details. Pay with cryptocurrency
+                      coins for{' '}
+                      <span className="font-semibold text-foreground">
+                        maximum anonymity and privacy
+                      </span>
+                      . Unlike subscription-based competitors (HireVue, Karat), you only pay for
+                      what you need - no recurring charges, no account tracking.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      Comprehensive AI Features
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      Get everything in one tool: dual-channel transcription, AI reply suggestions
+                      based on YOUR CV and job description,
+                      <span className="font-semibold text-foreground">
+                        {' '}
+                        screenshot-based code analysis with syntax highlighting
+                      </span>
+                      , and real-time assistance. Other tools like LeetCode Premium or HackerRank
+                      only cover coding - we cover the entire interview.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border-primary/50 bg-primary/5">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <SiCheckmarx className="h-6 w-6 text-primary" />
+                      No Setup Complexity
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      Competitors often require complex API setups, browser extensions with
+                      permission risks, or cloud service configurations. Power Interview is a{' '}
+                      <span className="font-semibold text-foreground">
+                        standalone desktop application
+                      </span>{' '}
+                      - download, install, and start. Face swap? Just install OBS and VB-Cable - no
+                      configuration needed.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </div>
+
+              <div className="mt-12 rounded-lg border-2 border-primary bg-primary/5 p-6 text-center">
+                <p className="text-lg font-semibold text-foreground">
+                  Power Interview isn't just another interview prep tool - it's the most advanced,
+                  privacy-focused, and feature-rich AI assistant built specifically for real
+                  interview scenarios.
+                </p>
+                <Button size="lg" className="mt-6" asChild>
+                  <a
+                    href="https://github.com/PowerInterviewAI/client/releases/latest"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Experience the Difference
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </Container>
         </section>
@@ -846,12 +1047,17 @@ const Home: React.FC = () => {
                 {
                   question: 'What is the face swap feature and how does it work?',
                   answer:
-                    'The face swap feature uses advanced AI to replace your face in real-time video with a photo you provide. It integrates with virtual camera software like OBS, allowing you to use it in any video conferencing application. Perfect for privacy protection or personal presentation preferences.',
+                    'The face swap feature uses advanced AI to replace your face in real-time video with a photo you provide. Setup is incredibly simple: just install OBS Studio (https://obsproject.com/download) and VB-Cable (https://vb-audio.com/Cable/) - no configuration needed! Once installed, the feature works seamlessly with any video conferencing application. Perfect for privacy protection or personal presentation preferences.',
+                },
+                {
+                  question: 'What platforms are supported?',
+                  answer:
+                    'Currently, Power Interview is available for Windows only. We are actively working on MacOS and Linux versions. Stay tuned for updates! Follow our GitHub repository or join our Telegram channel to be notified when new platform versions are released.',
                 },
                 {
                   question: 'Do I need special hardware to run Power Interview?',
                   answer:
-                    'Power Interview runs on most modern computers. You will need Node.js (v18+), Python (v3.12), and optionally OBS Virtual Camera for the face swap feature and VB-Audio Virtual Cable for audio routing. Detailed installation instructions are provided.',
+                    'Power Interview runs on most modern Windows computers without special hardware requirements. For the face swap feature, simply install OBS Studio (https://obsproject.com/download) and VB-Cable (https://vb-audio.com/Cable/) - both free and require no configuration. Detailed installation instructions are provided in the documentation.',
                 },
                 {
                   question: 'How accurate is the AI transcription?',
@@ -1057,6 +1263,129 @@ const Home: React.FC = () => {
                           Power Interview AI
                         </a>
                       </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </Container>
+        </section>
+
+        {/* Legal Notice Section */}
+        <section
+          className="border-y bg-amber-500/5 py-12 md:py-16"
+          aria-labelledby="legal-notice-heading"
+        >
+          <Container>
+            <div className="mx-auto max-w-4xl">
+              <div className="mb-8 text-center">
+                <h2
+                  id="legal-notice-heading"
+                  className="mb-4 text-2xl font-bold tracking-tight text-amber-900 dark:text-amber-400 sm:text-3xl"
+                >
+                  ⚠️ Important Legal Notice
+                </h2>
+              </div>
+
+              <Card className="border-amber-500/50 bg-background">
+                <CardContent className="pt-6">
+                  <div className="space-y-6 text-sm leading-relaxed text-muted-foreground">
+                    <div>
+                      <h3 className="mb-2 font-semibold text-foreground">Intended Use</h3>
+                      <p>
+                        Power Interview is designed as an{' '}
+                        <span className="font-semibold text-foreground">educational tool</span> for
+                        interview preparation and practice. This software should only be used for
+                        legitimate, legal purposes in accordance with all applicable laws and
+                        regulations in your jurisdiction.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="mb-2 font-semibold text-foreground">
+                        Face Swap Feature - Legal Use Only
+                      </h3>
+                      <p>
+                        The face swap feature is particularly powerful and must be used{' '}
+                        <span className="font-semibold text-amber-700 dark:text-amber-400">
+                          responsibly and legally
+                        </span>
+                        . Using face swap technology to impersonate another person, misrepresent
+                        your identity, or deceive interviewers may be{' '}
+                        <span className="font-semibold text-foreground">illegal</span> and could
+                        result in:
+                      </p>
+                      <ul className="ml-6 mt-2 list-disc space-y-1">
+                        <li>Criminal charges for fraud or identity theft</li>
+                        <li>Civil liability for misrepresentation</li>
+                        <li>Permanent ban from hiring platforms and companies</li>
+                        <li>Damage to your professional reputation</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="mb-2 font-semibold text-foreground">User Responsibility</h3>
+                      <p>
+                        <span className="font-semibold text-foreground">
+                          You are solely responsible
+                        </span>{' '}
+                        for ensuring your use of Power Interview complies with all applicable laws,
+                        terms of service of platforms you use it with, and ethical standards. By
+                        using this software, you:
+                      </p>
+                      <ul className="ml-6 mt-2 list-disc space-y-1">
+                        <li>Agree to use it only for lawful purposes</li>
+                        <li>
+                          Accept full responsibility for your actions while using the software
+                        </li>
+                        <li>Acknowledge that you have read and understand this legal notice</li>
+                        <li>
+                          Agree not to hold the developers liable for any misuse of the software
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="mb-2 font-semibold text-foreground">Platform Compliance</h3>
+                      <p>
+                        Many interview platforms and companies have specific terms of service and
+                        acceptable use policies. It is
+                        <span className="font-semibold text-foreground">
+                          {' '}
+                          your responsibility
+                        </span>{' '}
+                        to review and comply with these terms. Violation of platform policies may
+                        result in account termination, legal action, or other consequences.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="mb-2 font-semibold text-foreground">No Warranty</h3>
+                      <p>
+                        Power Interview is provided "as is" without warranty of any kind. The
+                        developers make no representations about the suitability, reliability,
+                        availability, timeliness, or accuracy of the software. Use at your own risk.
+                      </p>
+                    </div>
+
+                    <div className="rounded-lg border-2 border-amber-500 bg-amber-500/10 p-4">
+                      <p className="font-semibold text-amber-900 dark:text-amber-400">
+                        ⚖️ By downloading and using Power Interview, you acknowledge that you have
+                        read, understood, and agree to use this software ethically, legally, and
+                        responsibly. If you do not agree to these terms, do not use this software.
+                      </p>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="text-xs text-muted-foreground">
+                        For questions about legal use, please contact:{' '}
+                        <a
+                          href="mailto:power-interview@protonmail.com"
+                          className="font-medium text-primary hover:underline"
+                        >
+                          power-interview@protonmail.com
+                        </a>
+                      </p>
                     </div>
                   </div>
                 </CardContent>
