@@ -261,7 +261,7 @@ const Home: React.FC = () => {
 
               <p className="mt-4 text-sm text-muted-foreground">
                 🎁 Start with <span className="font-semibold text-foreground">30 free credits</span>{' '}
-                - No credit card required
+                - Pay with coins only (No credit card, PayPal, or bank required)
               </p>
 
               <div className="mt-12 rounded-lg border bg-muted/30 p-2">
@@ -399,6 +399,11 @@ const Home: React.FC = () => {
                 <p className="text-sm text-muted-foreground">
                   Credit usage: 10 credits per minute of AI assistance
                 </p>
+                <div className="mt-2 rounded-lg border border-primary/20 bg-background px-4 py-2 text-center">
+                  <p className="text-xs font-medium text-foreground">
+                    💰 Payment: Coins only - No credit card, PayPal, or bank required
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -782,9 +787,14 @@ const Home: React.FC = () => {
                     'Credits are consumed at a rate of 10 credits per minute when using AI-powered features like reply suggestions, code analysis, transcription, and face swap processing. For example, a 30-minute interview session would use approximately 300 credits. You can purchase credit packs starting from 600 credits ($20 for ~60 minutes) up to 60,000 credits ($500 for ~6,000 minutes).',
                 },
                 {
+                  question: 'What payment methods do you accept?',
+                  answer:
+                    'We accept cryptocurrency coins only. No credit card, PayPal, or traditional bank payments are required. This ensures maximum privacy and security for your transactions. Simply purchase coins and use them to buy credit packs within the application.',
+                },
+                {
                   question: 'Is there a free trial?',
                   answer:
-                    'Yes! All new users receive 30 free credits to try out all features (approximately 3 minutes of AI assistance). This allows you to experience the full capabilities of Power Interview risk-free. After that, you can choose from our affordable pricing plans starting at just $20 for 600 credits.',
+                    'Yes! All new users receive 30 free credits to try out all features (approximately 3 minutes of AI assistance). This allows you to experience the full capabilities of Power Interview risk-free, with no payment information needed. After that, you can choose from our affordable pricing plans starting at just $20 for 600 credits, payable with coins only.',
                 },
                 {
                   question: 'Can I get a refund?',
