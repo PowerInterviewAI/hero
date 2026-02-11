@@ -38,6 +38,12 @@ const mediaItems = [
       'Real-time AI-powered interview assistance with instant suggestions and transcription',
   },
   {
+    src: 'media/code.test.mp4',
+    type: 'video',
+    title: 'Code Test Assistance',
+    description: 'AI-powered code suggestions and solutions for technical interviews',
+  },
+  {
     src: 'media/face.henrry.mp4',
     type: 'video',
     title: 'Face Swap - Henry',
@@ -67,12 +73,7 @@ const mediaItems = [
     title: 'Meeting Demo - Tonny',
     description: 'Complete interview scenario with real-time AI coaching and suggestions',
   },
-  {
-    src: 'media/code.test.mp4',
-    type: 'video',
-    title: 'Code Test Assistance',
-    description: 'AI-powered code suggestions and solutions for technical interviews',
-  },
+
   {
     src: 'media/meeting.tonny.face.liveassist.png',
     type: 'image',
