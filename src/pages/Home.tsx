@@ -1363,7 +1363,7 @@ const Home: React.FC = () => {
           aria-labelledby="contact-heading"
         >
           <Container>
-            <div className="mx-auto max-w-2xl">
+            <div className="mx-auto max-w-4xl">
               <div className="mb-12 text-center">
                 <h2
                   id="contact-heading"
@@ -1376,69 +1376,106 @@ const Home: React.FC = () => {
                 </p>
               </div>
 
-              <Card>
-                <CardContent>
-                  <div className="mt-6 space-y-4">
-                    <div className="flex items-center gap-3">
-                      <SiProtonmail className="h-5 w-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium">Email</p>
-                        <a
-                          href="mailto:power-interview@protonmail.com"
-                          className="text-sm text-muted-foreground hover:text-primary"
-                        >
-                          power-interview@protonmail.com
-                        </a>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Email Card */}
+                <a
+                  href="mailto:power-interview@protonmail.com"
+                  className="group block transition-transform hover:scale-105"
+                >
+                  <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
+                    <CardContent className="flex flex-col items-center p-8 text-center">
+                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                        <SiProtonmail className="h-8 w-8 text-primary" />
                       </div>
-                    </div>
+                      <h3 className="mb-2 text-xl font-semibold">Email</h3>
+                      <p className="text-sm text-muted-foreground group-hover:text-primary">
+                        power-interview@protonmail.com
+                      </p>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Send us an email for detailed inquiries
+                      </p>
+                    </CardContent>
+                  </Card>
+                </a>
 
-                    <div className="flex items-center gap-3">
-                      <SiGithub className="h-5 w-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium">GitHub</p>
-                        <a
-                          href="https://github.com/PowerInterviewAI/client"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-muted-foreground hover:text-primary"
-                        >
-                          github.com/PowerInterviewAI/client
-                        </a>
+                {/* GitHub Card */}
+                <a
+                  href="https://github.com/PowerInterviewAI/client"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block transition-transform hover:scale-105"
+                >
+                  <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
+                    <CardContent className="flex flex-col items-center p-8 text-center">
+                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                        <SiGithub className="h-8 w-8 text-primary" />
                       </div>
-                    </div>
+                      <h3 className="mb-2 text-xl font-semibold">GitHub</h3>
+                      <p className="text-sm text-muted-foreground group-hover:text-primary">
+                        PowerInterviewAI/client
+                      </p>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        View source code, report issues, and contribute
+                      </p>
+                    </CardContent>
+                  </Card>
+                </a>
 
-                    <div className="flex items-center gap-3">
-                      <SiTelegram className="h-5 w-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium">Telegram</p>
-                        <a
-                          href="https://t.me/power_interview_ai"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-muted-foreground hover:text-primary"
-                        >
-                          Power Interview AI
-                        </a>
+                {/* Telegram Card */}
+                <a
+                  href="https://t.me/power_interview_ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block transition-transform hover:scale-105"
+                >
+                  <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
+                    <CardContent className="flex flex-col items-center p-8 text-center">
+                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                        <SiTelegram className="h-8 w-8 text-primary" />
                       </div>
-                    </div>
+                      <h3 className="mb-2 text-xl font-semibold">Telegram</h3>
+                      <p className="text-sm text-muted-foreground group-hover:text-primary">
+                        @power_interview_ai
+                      </p>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Join our Telegram community for updates
+                      </p>
+                    </CardContent>
+                  </Card>
+                </a>
 
-                    <div className="flex items-center gap-3">
-                      <SiDiscord className="h-5 w-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium">Discord</p>
-                        <a
-                          href="https://discord.gg/HZ9sHsh2U7"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-muted-foreground hover:text-primary"
-                        >
-                          Power Interview AI
-                        </a>
+                {/* Discord Card */}
+                <a
+                  href="https://discord.gg/HZ9sHsh2U7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block transition-transform hover:scale-105"
+                >
+                  <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
+                    <CardContent className="flex flex-col items-center p-8 text-center">
+                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                        <SiDiscord className="h-8 w-8 text-primary" />
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                      <h3 className="mb-2 text-xl font-semibold">Discord</h3>
+                      <p className="text-sm text-muted-foreground group-hover:text-primary">
+                        Power Interview AI
+                      </p>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Chat with us and other users on Discord
+                      </p>
+                    </CardContent>
+                  </Card>
+                </a>
+              </div>
+
+              <div className="mt-12 rounded-lg border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10 p-8 text-center">
+                <p className="mb-2 text-lg font-semibold text-foreground">
+                  Need immediate assistance?
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Join our Discord or Telegram community for real-time support and discussions
+                </p>
+              </div>
             </div>
           </Container>
         </section>
