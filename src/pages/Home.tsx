@@ -88,6 +88,7 @@ const Home: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isFading, setIsFading] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -103,17 +104,31 @@ const Home: React.FC = () => {
     }
   };
 
-  // Carousel navigation functions
+  // Carousel navigation functions with fade effect
   const goToNextMedia = () => {
-    setCurrentMediaIndex((prev) => (prev + 1) % mediaItems.length);
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentMediaIndex((prev) => (prev + 1) % mediaItems.length);
+      setIsFading(false);
+    }, 300);
   };
 
   const goToPrevMedia = () => {
-    setCurrentMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+      setIsFading(false);
+    }, 300);
   };
 
   const goToMedia = (index: number) => {
-    setCurrentMediaIndex(index);
+    if (index !== currentMediaIndex) {
+      setIsFading(true);
+      setTimeout(() => {
+        setCurrentMediaIndex(index);
+        setIsFading(false);
+      }, 300);
+    }
   };
 
   const togglePlayPause = () => {
@@ -475,7 +490,11 @@ const Home: React.FC = () => {
               <div className="mt-12 rounded-lg border bg-muted/30 p-2">
                 <div className="relative overflow-hidden rounded bg-black">
                   {/* Media Display */}
-                  <div className="relative aspect-video">
+                  <div
+                    className={`relative aspect-video transition-opacity duration-300 ${
+                      isFading ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  >
                     {mediaItems[currentMediaIndex].type === 'video' ? (
                       <video
                         ref={videoRef}
