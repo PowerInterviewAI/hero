@@ -28,15 +28,15 @@ This project is configured for automatic deployment to GitHub Pages using GitHub
    - Under "Build and deployment", select "GitHub Actions" as the source
 
 3. **Update base URL in vite.config.ts:**
-   - Change the `base` property to match your repository name:
+   - The `base` property is already configured for the `/hero/` subdirectory:
      ```typescript
-     base: '/your-repo-name/';
+     base: '/hero/';
      ```
 
 4. **Automatic Deployment:**
    - The GitHub Actions workflow will automatically trigger on pushes to the `main` branch
    - Check the "Actions" tab in your GitHub repository to monitor deployment progress
-   - Once complete, your site will be available at: `https://yourusername.github.io/your-repo-name/`
+   - Once complete, your site will be available at: `https://powerinterviewai.github.io/hero/`
 
 ### Manual Deployment
 
