@@ -6,4 +6,4 @@ Allow: /
 # Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://powerinterviewai.github.io/hero/sitemap.xml
+Sitemap: https://powerinterviewai.github.io/sitemap.xml
