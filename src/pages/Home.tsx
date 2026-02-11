@@ -965,9 +965,14 @@ const Home: React.FC = () => {
                 <CardHeader className="pt-8">
                   <CardTitle className="text-2xl">Pro</CardTitle>
                   <CardDescription>Best value for serious job seekers</CardDescription>
-                  <div className="mt-4">
-                    <span className="text-4xl font-bold">$100</span>
-                    <span className="text-muted-foreground"> / 6,000 credits</span>
+                  <div className="mt-4 flex flex-wrap items-baseline gap-3">
+                    <div>
+                      <span className="text-4xl font-bold">$100</span>
+                      <span className="text-muted-foreground"> / 6,000 credits</span>
+                    </div>
+                    <span className="animate-pulse rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-green-400/50">
+                      💰 Save 50%
+                    </span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
                     ~600 minutes of AI assistance
@@ -1017,9 +1022,14 @@ const Home: React.FC = () => {
                 <CardHeader>
                   <CardTitle className="text-2xl">Enterprise</CardTitle>
                   <CardDescription>For heavy users and teams</CardDescription>
-                  <div className="mt-4">
-                    <span className="text-4xl font-bold">$500</span>
-                    <span className="text-muted-foreground"> / 60,000 credits</span>
+                  <div className="mt-4 flex flex-wrap items-baseline gap-3">
+                    <div>
+                      <span className="text-4xl font-bold">$500</span>
+                      <span className="text-muted-foreground"> / 60,000 credits</span>
+                    </div>
+                    <span className="animate-pulse rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-orange-400/50">
+                      🔥 Save 75%
+                    </span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
                     ~6,000 minutes of AI assistance
