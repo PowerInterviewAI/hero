@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import {
   SiCheckmarx,
+  SiDiscord,
   SiGithub,
   SiProtonmail,
   SiSuperuser,
@@ -28,11 +29,6 @@ const Home: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -44,19 +40,6 @@ const Home: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
       setMobileMenuOpen(false);
     }
-  };
-
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    window.location.href = `mailto:power-interview@protonmail.com?subject=Contact from ${formData.name}&body=${formData.message}`;
   };
 
   return (
@@ -1394,69 +1377,8 @@ const Home: React.FC = () => {
               </div>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Send us a message</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible
-                  </CardDescription>
-                </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleFormSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleFormChange}
-                        className="w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        placeholder="Your name"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleFormChange}
-                        className="w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="message" className="text-sm font-medium">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        required
-                        value={formData.message}
-                        onChange={handleFormChange}
-                        rows={5}
-                        className="w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        placeholder="Tell us how we can help..."
-                      />
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full">
-                      Send Message
-                      <SiProtonmail className="ml-2 h-4 w-4" />
-                    </Button>
-                  </form>
-
-                  <div className="mt-6 space-y-4 border-t pt-6">
+                  <div className="mt-6 space-y-4">
                     <div className="flex items-center gap-3">
                       <SiProtonmail className="h-5 w-5 text-muted-foreground" />
                       <div>
@@ -1491,6 +1413,21 @@ const Home: React.FC = () => {
                         <p className="text-sm font-medium">Telegram</p>
                         <a
                           href="https://t.me/power_interview_ai"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-muted-foreground hover:text-primary"
+                        >
+                          Power Interview AI
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <SiDiscord className="h-5 w-5 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">Discord</p>
+                        <a
+                          href="https://discord.gg/HZ9sHsh2U7"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm text-muted-foreground hover:text-primary"
@@ -1665,6 +1602,15 @@ const Home: React.FC = () => {
                   aria-label="Telegram"
                 >
                   <SiTelegram className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://discord.gg/HZ9sHsh2U7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                  aria-label="Discord"
+                >
+                  <SiDiscord className="h-5 w-5" />
                 </a>
                 <a
                   href="mailto:power-interview@protonmail.com"
