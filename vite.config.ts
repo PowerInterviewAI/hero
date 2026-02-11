@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === 'development' ? '/' : '/hero/',
+  base: '/',
   resolve: {
     alias: {
       '@': '/src',

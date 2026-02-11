@@ -6,37 +6,37 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
-        <loc>https://powerinterviewai.github.io/hero/</loc>
+        <loc>https://powerinterviewai.github.io/</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://powerinterviewai.github.io/hero/#features</loc>
+        <loc>https://powerinterviewai.github.io/#features</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://powerinterviewai.github.io/hero/#pricing</loc>
+        <loc>https://powerinterviewai.github.io/#pricing</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://powerinterviewai.github.io/hero/#testimonials</loc>
+        <loc>https://powerinterviewai.github.io/#testimonials</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://powerinterviewai.github.io/hero/#faq</loc>
+        <loc>https://powerinterviewai.github.io/#faq</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://powerinterviewai.github.io/hero/#contact</loc>
+        <loc>https://powerinterviewai.github.io/#contact</loc>
         <lastmod>2026-02-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
