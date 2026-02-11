@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   SiCheckmarx,
@@ -8,15 +8,18 @@ import {
   SiSuperuser,
   SiTelegram,
   SiX,
-  SiZoom,
 } from '@icons-pack/react-simple-icons';
 import {
   ArrowRight,
   Captions,
+  ChevronLeft,
+  ChevronRight,
   FileDown,
   Ghost,
   MessageSquareCode,
   MessageSquareText,
+  Pause,
+  Play,
   UserLock,
 } from 'lucide-react';
 
@@ -25,10 +28,67 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/hooks/useTheme';
 
+// Media carousel data
+const mediaItems = [
+  {
+    src: 'media/live.interview.assistant.mp4',
+    type: 'video',
+    title: 'Live Interview Assistant',
+    description:
+      'Real-time AI-powered interview assistance with instant suggestions and transcription',
+  },
+  {
+    src: 'media/face.henrry.mp4',
+    type: 'video',
+    title: 'Face Swap - Henry',
+    description: 'Real-time face swap technology for enhanced privacy during interviews',
+  },
+  {
+    src: 'media/face.tonny.mp4',
+    type: 'video',
+    title: 'Face Swap - Tonny',
+    description: 'Seamless face replacement with natural expressions and movements',
+  },
+  {
+    src: 'media/face.victor.mp4',
+    type: 'video',
+    title: 'Face Swap - Victor',
+    description: 'Advanced AI face transformation maintaining professional appearance',
+  },
+  {
+    src: 'media/meeting.henry.mp4',
+    type: 'video',
+    title: 'Meeting Demo - Henry',
+    description: 'Full meeting demonstration with AI assistance and face swap features',
+  },
+  {
+    src: 'media/meeting.tonny.mp4',
+    type: 'video',
+    title: 'Meeting Demo - Tonny',
+    description: 'Complete interview scenario with real-time AI coaching and suggestions',
+  },
+  {
+    src: 'media/code.test.mp4',
+    type: 'video',
+    title: 'Code Test Assistance',
+    description: 'AI-powered code suggestions and solutions for technical interviews',
+  },
+  {
+    src: 'media/meeting.tonny.face.liveassist.png',
+    type: 'image',
+    title: 'Live Assist Interface',
+    description: 'Clean and intuitive interface showing face swap and live assistance features',
+  },
+];
+
 const Home: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const imageTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -41,6 +101,56 @@ const Home: React.FC = () => {
       setMobileMenuOpen(false);
     }
   };
+
+  // Carousel navigation functions
+  const goToNextMedia = () => {
+    setCurrentMediaIndex((prev) => (prev + 1) % mediaItems.length);
+  };
+
+  const goToPrevMedia = () => {
+    setCurrentMediaIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+  };
+
+  const goToMedia = (index: number) => {
+    setCurrentMediaIndex(index);
+  };
+
+  const togglePlayPause = () => {
+    setIsPlaying((prev) => !prev);
+  };
+
+  // Handle video ended event - auto advance to next media
+  const handleVideoEnded = () => {
+    goToNextMedia();
+  };
+
+  // Handle image timer - show for 5 seconds then advance
+  useEffect(() => {
+    const currentMedia = mediaItems[currentMediaIndex];
+
+    if (currentMedia.type === 'image' && isPlaying) {
+      imageTimerRef.current = setTimeout(() => {
+        goToNextMedia();
+      }, 5000); // 5 seconds for images
+    }
+
+    return () => {
+      if (imageTimerRef.current) {
+        clearTimeout(imageTimerRef.current);
+      }
+    };
+  }, [currentMediaIndex, isPlaying]);
+
+  // Handle video play/pause
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.play().catch((e) => console.log('Video play error:', e));
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying, currentMediaIndex]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -360,14 +470,82 @@ const Home: React.FC = () => {
                 </div>
               </div>
 
+              {/* Product Demo Carousel */}
               <div className="mt-12 rounded-lg border bg-muted/30 p-2">
-                <div
-                  className="flex aspect-video items-center justify-center rounded bg-muted"
-                  role="img"
-                  aria-label="Product demo video placeholder"
-                >
-                  <SiZoom className="h-20 w-20 text-muted-foreground" aria-hidden="true" />
-                  <span className="ml-4 text-muted-foreground">Product Demo Placeholder</span>
+                <div className="relative overflow-hidden rounded bg-black">
+                  {/* Media Display */}
+                  <div className="relative aspect-video">
+                    {mediaItems[currentMediaIndex].type === 'video' ? (
+                      <video
+                        ref={videoRef}
+                        key={mediaItems[currentMediaIndex].src}
+                        className="h-full w-full object-contain"
+                        src={`${import.meta.env.BASE_URL}${mediaItems[currentMediaIndex].src}`}
+                        autoPlay={isPlaying}
+                        onEnded={handleVideoEnded}
+                        playsInline
+                        muted
+                      />
+                    ) : (
+                      <img
+                        key={mediaItems[currentMediaIndex].src}
+                        src={`${import.meta.env.BASE_URL}${mediaItems[currentMediaIndex].src}`}
+                        alt={mediaItems[currentMediaIndex].title}
+                        className="h-full w-full object-contain"
+                      />
+                    )}
+
+                    {/* Navigation Arrows */}
+                    <button
+                      onClick={goToPrevMedia}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/75"
+                      aria-label="Previous media"
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </button>
+                    <button
+                      onClick={goToNextMedia}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/75"
+                      aria-label="Next media"
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </button>
+
+                    {/* Play/Pause Button */}
+                    <button
+                      onClick={togglePlayPause}
+                      className="absolute bottom-4 right-4 rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/75"
+                      aria-label={isPlaying ? 'Pause' : 'Play'}
+                    >
+                      {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                    </button>
+
+                    {/* Media Info Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <h3 className="mb-1 text-lg font-semibold text-white">
+                        {mediaItems[currentMediaIndex].title}
+                      </h3>
+                      <p className="text-sm text-gray-200">
+                        {mediaItems[currentMediaIndex].description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Indicators */}
+                  <div className="flex items-center justify-center gap-2 bg-black/30 py-3">
+                    {mediaItems.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToMedia(index)}
+                        className={`h-2 rounded-full transition-all ${
+                          index === currentMediaIndex
+                            ? 'w-8 bg-primary'
+                            : 'w-2 bg-white/50 hover:bg-white/75'
+                        }`}
+                        aria-label={`Go to media ${index + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
