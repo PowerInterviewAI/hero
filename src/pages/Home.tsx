@@ -1751,6 +1751,16 @@ const Home: React.FC = () => {
                   </a>
                 </li>
                 <li>
+                  <a
+                    href="https://discord.gg/HZ9sHsh2U7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    Discord Server
+                  </a>
+                </li>
+                <li>
                   <button
                     onClick={() => scrollToSection('contact')}
                     className="text-muted-foreground transition-colors hover:text-primary"
