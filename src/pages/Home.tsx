@@ -522,11 +522,11 @@ const Home: React.FC = () => {
                     </button>
 
                     {/* Media Info Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                      <h3 className="mb-1 text-lg font-semibold text-white">
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent px-6 py-6">
+                      <h3 className="mb-2 text-2xl font-bold text-white drop-shadow-lg md:text-3xl">
                         {mediaItems[currentMediaIndex].title}
                       </h3>
-                      <p className="text-sm text-gray-200">
+                      <p className="text-base leading-relaxed text-gray-100 drop-shadow-md md:text-lg">
                         {mediaItems[currentMediaIndex].description}
                       </p>
                     </div>
