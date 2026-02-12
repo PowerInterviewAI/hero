@@ -29,24 +29,6 @@ export const WhyChooseSection: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <SiCheckmarx className="h-6 w-6 text-primary" />
-                  Unmatched Face Swap Technology
-                </CardTitle>
-                <CardDescription className="text-base">
-                  Unlike basic screen recording tools or simple overlay assistants (like Interview
-                  Copilot, Final Round AI), Power Interview offers{' '}
-                  <span className="font-semibold text-foreground">
-                    real-time face swap with OBS integration
-                  </span>
-                  . Other tools can't modify your video feed - we can. No complex setup required -
-                  just install OBS and VB-Cable and you're ready!
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
                   True Privacy Protection
                 </CardTitle>
                 <CardDescription className="text-base">
@@ -118,6 +100,24 @@ export const WhyChooseSection: React.FC = () => {
                   Our AI understands patterns in how you communicate, enabling more relevant
                   suggestions. Other tools like LeetCode Premium or HackerRank only cover coding -
                   we cover the entire interview.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="border-primary/50 bg-primary/5">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <SiCheckmarx className="h-6 w-6 text-primary" />
+                  Unmatched Face Swap Technology
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Unlike basic screen recording tools or simple overlay assistants (like Interview
+                  Copilot, Final Round AI), Power Interview offers{' '}
+                  <span className="font-semibold text-foreground">
+                    real-time face swap with OBS integration
+                  </span>
+                  . Other tools can't modify your video feed - we can. No complex setup required -
+                  just install OBS and VB-Cable and you're ready!
                 </CardDescription>
               </CardHeader>
             </Card>
