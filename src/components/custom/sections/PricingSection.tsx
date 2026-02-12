@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { SiCheckmarx } from '@icons-pack/react-simple-icons';
 
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-export const PricingSection = () => {
+export const PricingSection: React.FC = () => {
   return (
     <section id="pricing" className="py-16 md:py-24" aria-labelledby="pricing-heading">
       <Container>

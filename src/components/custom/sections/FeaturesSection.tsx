@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { SiSuperuser } from '@icons-pack/react-simple-icons';
 import {
   Captions,
@@ -12,7 +14,7 @@ import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-export const FeaturesSection = () => {
+export const FeaturesSection: React.FC = () => {
   return (
     <section
       id="features"

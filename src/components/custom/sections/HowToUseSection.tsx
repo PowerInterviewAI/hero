@@ -1,7 +1,9 @@
+import React from 'react';
+
 import Container from '@/components/custom/Container';
 import { Card, CardContent } from '@/components/ui/card';
 
-export const HowToUseSection = () => {
+export const HowToUseSection: React.FC = () => {
   return (
     <section
       id="how-to-use"
