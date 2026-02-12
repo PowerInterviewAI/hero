@@ -178,7 +178,7 @@ const PrivacyPolicy: React.FC = () => {
                 </p>
                 <div className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Email:</strong> privacy@powerinterview.ai
+                    <strong>Email:</strong> power-interview@protonmail.com
                   </p>
                   <p className="text-gray-700 dark:text-gray-300">
                     <strong>Website:</strong> https://powerinterviewai.github.io/hero/
