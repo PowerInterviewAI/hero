@@ -21,9 +21,9 @@ const mediaItems = [
   {
     src: 'media/live.interview.assistant.mp4',
     type: 'video',
-    title: 'Live Interview Assistant',
+    title: 'Live Interview Assistant & Smart Export',
     description:
-      'Real-time AI-powered interview assistance with instant suggestions and transcription',
+      'Real-time AI-powered interview assistance with instant suggestions and smart export of interview summaries and insights',
   },
   {
     src: 'media/code.test.mp4',
