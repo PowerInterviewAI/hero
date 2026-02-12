@@ -22,6 +22,7 @@ import {
   Play,
   UserLock,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import Container from '@/components/custom/Container';
 import { Button } from '@/components/ui/button';
@@ -1973,24 +1974,26 @@ const Home: React.FC = () => {
               <h3 className="mb-4 font-semibold">Legal</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/privacy"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/terms"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     Terms of Service
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="https://github.com/PowerInterviewAI/client/blob/main/LICENSE"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-muted-foreground transition-colors hover:text-primary"
                   >
                     License
