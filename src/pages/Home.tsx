@@ -1161,8 +1161,8 @@ const Home: React.FC = () => {
                         <li className="flex items-start">
                           <span className="mr-2">•</span>
                           <span>
-                            <strong>Personal Info:</strong> Upload your photo, name, and
-                            professional details
+                            <strong>Personal Info:</strong> Upload photo (will be used for{' '}
+                            <strong>Face Swap</strong>), set name
                           </span>
                         </li>
                         <li className="flex items-start">
