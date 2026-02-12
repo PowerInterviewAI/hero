@@ -1878,7 +1878,7 @@ const Home: React.FC = () => {
 
                 {/* Discord Card */}
                 <a
-                  href="https://discord.gg/HZ9sHsh2U7"
+                  href="https://discord.gg/pkKAqMsETH"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block transition-transform hover:scale-105"
@@ -2073,7 +2073,7 @@ const Home: React.FC = () => {
                   <SiTelegram className="h-5 w-5" />
                 </a>
                 <a
-                  href="https://discord.gg/HZ9sHsh2U7"
+                  href="https://discord.gg/pkKAqMsETH"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground transition-colors hover:text-primary"
@@ -2174,7 +2174,7 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="https://discord.gg/HZ9sHsh2U7"
+                    href="https://discord.gg/pkKAqMsETH"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground transition-colors hover:text-primary"
