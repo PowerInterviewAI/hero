@@ -1337,7 +1337,7 @@ const Home: React.FC = () => {
                   <CardTitle className="text-2xl">Starter</CardTitle>
                   <CardDescription>Perfect for trying out the platform</CardDescription>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">$10</span>
+                    <span className="text-4xl font-bold">$9</span>
                     <span className="text-muted-foreground"> / 600 credits</span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">~60 minutes of AI assistance</p>
@@ -1389,11 +1389,11 @@ const Home: React.FC = () => {
                   <CardDescription>Best value for serious job seekers</CardDescription>
                   <div className="mt-4 flex flex-wrap items-baseline gap-3">
                     <div>
-                      <span className="text-4xl font-bold">$50</span>
+                      <span className="text-4xl font-bold">$70</span>
                       <span className="text-muted-foreground"> / 6,000 credits</span>
                     </div>
                     <span className="animate-pulse rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-green-400/50">
-                      💰 Best Value
+                      💰 Save 22%
                     </span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
@@ -1446,11 +1446,11 @@ const Home: React.FC = () => {
                   <CardDescription>For heavy users and teams</CardDescription>
                   <div className="mt-4 flex flex-wrap items-baseline gap-3">
                     <div>
-                      <span className="text-4xl font-bold">$250</span>
+                      <span className="text-4xl font-bold">$500</span>
                       <span className="text-muted-foreground"> / 60,000 credits</span>
                     </div>
                     <span className="animate-pulse rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-orange-400/50">
-                      🔥 Maximum Value
+                      🔥 Save 45%
                     </span>
                   </div>
                   <p className="mt-2 text-sm text-muted-foreground">
@@ -1727,7 +1727,7 @@ const Home: React.FC = () => {
                 {
                   question: 'How do credits work?',
                   answer:
-                    'Credits are consumed at a rate of 10 credits per minute when using AI-powered features like reply suggestions, code analysis, transcription, and face swap processing. For example, a 30-minute interview session would use approximately 300 credits. You can purchase credit packs starting from 600 credits ($20 for ~60 minutes) up to 60,000 credits ($500 for ~6,000 minutes).',
+                    'Credits are consumed at a rate of 10 credits per minute when using AI-powered features like reply suggestions, code analysis, transcription, and face swap processing. For example, a 30-minute interview session would use approximately 300 credits. You can purchase credit packs starting from 600 credits ($9 for ~60 minutes) up to 60,000 credits ($500 for ~6,000 minutes).',
                 },
                 {
                   question: 'What payment methods do you accept?',
