@@ -37,36 +37,6 @@ export const FeaturesSection: React.FC = () => {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Card className="transition-shadow hover:shadow-lg">
             <CardHeader>
-              <SiSuperuser className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Real-Time Face Swap</CardTitle>
-              <CardDescription>
-                Transform your video appearance during live interviews with advanced face swap
-                technology. <span className="font-semibold text-foreground">Simple setup:</span>{' '}
-                Just install{' '}
-                <a
-                  href="https://obsproject.com/download"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  OBS Studio
-                </a>{' '}
-                and{' '}
-                <a
-                  href="https://vb-audio.com/Cable/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  VB-Cable
-                </a>{' '}
-                - no configuration needed!
-              </CardDescription>
-            </CardHeader>
-          </Card>
-
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
               <Captions className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
               <CardTitle>Live Transcription</CardTitle>
               <CardDescription>
@@ -92,15 +62,11 @@ export const FeaturesSection: React.FC = () => {
 
           <Card className="transition-shadow hover:shadow-lg">
             <CardHeader>
-              <FileDown className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Export Transcript</CardTitle>
+              <Ghost className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+              <CardTitle>Stealth Mode</CardTitle>
               <CardDescription>
-                <span className="font-semibold text-foreground">Smart transcript export</span> with
-                AI-powered summarization, analysis, and insights. Review your conversations to
-                identify communication patterns, understand your strengths, and improve for future
-                interviews. Exports to{' '}
-                <span className="font-semibold text-foreground">DOCX format</span> - widely
-                compatible with all word processing software.
+                Operate discreetly with hotkeys, opacity control, and smart window positioning.
+                Window is not capturable and invisible during full screen share.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -118,11 +84,45 @@ export const FeaturesSection: React.FC = () => {
 
           <Card className="transition-shadow hover:shadow-lg">
             <CardHeader>
-              <Ghost className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Stealth Mode</CardTitle>
+              <FileDown className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+              <CardTitle>Export Transcript</CardTitle>
               <CardDescription>
-                Operate discreetly with hotkeys, opacity control, and smart window positioning.
-                Window is not capturable and invisible during full screen share.
+                <span className="font-semibold text-foreground">Smart transcript export</span> with
+                AI-powered summarization, analysis, and insights. Review your conversations to
+                identify communication patterns, understand your strengths, and improve for future
+                interviews. Exports to{' '}
+                <span className="font-semibold text-foreground">DOCX format</span> - widely
+                compatible with all word processing software.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="transition-shadow hover:shadow-lg">
+            <CardHeader>
+              <SiSuperuser className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+              <CardTitle>Real-Time Face Swap</CardTitle>
+              <CardDescription>
+                Transform your video appearance during live interviews with advanced face swap
+                technology. <span className="font-semibold text-foreground">Simple setup:</span>{' '}
+                Just install{' '}
+                <a
+                  href="https://obsproject.com/download"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  OBS Studio
+                </a>{' '}
+                and{' '}
+                <a
+                  href="https://vb-audio.com/Cable/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  VB-Cable
+                </a>{' '}
+                - no configuration needed!
               </CardDescription>
             </CardHeader>
           </Card>
