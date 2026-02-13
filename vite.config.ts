@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/hero/',
+  base: process.env.VERCEL ? '/' : '/hero/',
   resolve: {
     alias: {
       '@': '/src',
