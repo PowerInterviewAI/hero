@@ -92,6 +92,48 @@ const Home: React.FC = () => {
     }
   };
 
+  // Reset meta tags to default when returning to home
+  useEffect(() => {
+    document.title = 'Power Interview - Privacy-First AI Interview Assistant | Ace Your Interviews';
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        'content',
+        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Start with 30 free credits! Pay with coins only - no credit card, PayPal, or bank required. Privacy-first desktop application.'
+      );
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Power Interview - Privacy-First AI Interview Assistant');
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute(
+        'content',
+        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Get 30 free credits to start - pay with coins only, no credit card required!'
+      );
+    }
+
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute(
+        'content',
+        'Power Interview - Privacy-First AI Interview Assistant'
+      );
+    }
+
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute(
+        'content',
+        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Get 30 free credits to start - pay with coins only, no credit card required!'
+      );
+    }
+  }, []);
+
   // Carousel navigation functions with fade effect
   const goToNextMedia = () => {
     setIsFading(true);
