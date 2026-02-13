@@ -274,7 +274,7 @@ const TermsOfService: React.FC = () => {
                     <strong>Email:</strong> power-interview@protonmail.com
                   </p>
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>Website:</strong> https://powerinterviewai.github.io/hero/
+                    <strong>Website:</strong> https://powerinterview.vercel.app/
                   </p>
                 </div>
               </section>
