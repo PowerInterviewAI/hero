@@ -100,7 +100,7 @@ const Home: React.FC = () => {
     if (metaDescription) {
       metaDescription.setAttribute(
         'content',
-        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Start with 30 free credits! Pay with coins only - no credit card, PayPal, or bank required. Privacy-first desktop application.'
+        'Transform your interview performance with Power Interview - the ultimate AI-powered interview assistant featuring advanced face-swap technology for privacy, live coding challenge assistance with real-time transcription and intelligent code suggestions, smart export functionality to save your sessions, and flexible cryptocurrency payment options. Get 30 free credits to start! No credit card, PayPal, or bank account required - pay securely with crypto. Perfect for technical interviews, coding assessments, and behavioral interviews with AI-driven real-time guidance.'
       );
     }
 
@@ -113,7 +113,7 @@ const Home: React.FC = () => {
     if (ogDescription) {
       ogDescription.setAttribute(
         'content',
-        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Get 30 free credits to start - pay with coins only, no credit card required!'
+        'Transform your interview performance with Power Interview - the ultimate AI-powered interview assistant featuring advanced face-swap technology for privacy, live coding challenge assistance with real-time transcription and intelligent code suggestions, smart export functionality to save your sessions, and flexible cryptocurrency payment options. Get 30 free credits to start! No credit card, PayPal, or bank account required - pay securely with crypto. Perfect for technical interviews, coding assessments, and behavioral interviews with AI-driven real-time guidance.'
       );
     }
 
@@ -129,7 +129,7 @@ const Home: React.FC = () => {
     if (twitterDescription) {
       twitterDescription.setAttribute(
         'content',
-        'Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology. Get 30 free credits to start - pay with coins only, no credit card required!'
+        'Transform your interview performance with Power Interview - the ultimate AI-powered interview assistant featuring advanced face-swap technology for privacy, live coding challenge assistance with real-time transcription and intelligent code suggestions, smart export functionality to save your sessions, and flexible cryptocurrency payment options. Get 30 free credits to start! No credit card, PayPal, or bank account required - pay securely with crypto. Perfect for technical interviews, coding assessments, and behavioral interviews with AI-driven real-time guidance.'
       );
     }
   }, []);

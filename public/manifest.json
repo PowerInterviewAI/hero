@@ -1,7 +1,7 @@
 {
     "name": "Power Interview - Privacy-First AI Interview Assistant",
     "short_name": "Power Interview",
-    "description": "Ace technical and behavioral interviews with real-time AI transcription, intelligent suggestions, and face swap technology.",
+    "description": "Transform your interview performance with Power Interview - the ultimate AI-powered interview assistant featuring advanced face-swap technology for privacy, live coding challenge assistance with real-time transcription and intelligent code suggestions, smart export functionality to save your sessions, and flexible cryptocurrency payment options. Get 30 free credits to start! No credit card, PayPal, or bank account required - pay securely with crypto. Perfect for technical interviews, coding assessments, and behavioral interviews with AI-driven real-time guidance.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#000000",
