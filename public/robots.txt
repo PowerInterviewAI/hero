@@ -6,4 +6,4 @@ Allow: /
 # Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://powerinterview.vercel.app/sitemap.xml
+Sitemap: https://www.powerinterviewai.com/sitemap.xml

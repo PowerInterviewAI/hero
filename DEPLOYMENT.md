@@ -36,7 +36,7 @@ This project is configured for automatic deployment to GitHub Pages using GitHub
 4. **Automatic Deployment:**
    - The GitHub Actions workflow will automatically trigger on pushes to the `main` branch
    - Check the "Actions" tab in your GitHub repository to monitor deployment progress
-   - Once complete, your site will be available at: `https://powerinterview.vercel.app/`
+   - Once complete, your site will be available at: `https://www.powerinterviewai.com/`
 
 ### Manual Deployment
 
