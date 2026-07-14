@@ -126,9 +126,11 @@ Access your settings by clicking the **profile icon** in the app's control panel
 
 | Field        | Description                                                          |
 | ------------ | -------------------------------------------------------------------- |
-| Name         | Your name (required) - used as the speaker label and in AI responses |
+| Full Name    | Your name (required) - used as the speaker label and in AI responses |
 | Profile / CV | Your resume, bio, or portfolio content (required)                    |
 | Context      | Job description or role requirements for the interview (recommended) |
+
+This is your interview configuration, not general account info (like your email or credits) - it's saved under your account so signing in on another device restores the same full name, profile, and context automatically.
 
 ### Device Settings
 
