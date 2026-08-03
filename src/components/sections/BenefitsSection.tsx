@@ -149,8 +149,9 @@ export const BenefitsSection: React.FC = () => {
               <CardTitle>Master Interview Privacy</CardTitle>
               <CardDescription className="text-base">
                 Maintain professionalism while getting the help you need. Stealth mode keeps your AI
-                assistance completely invisible during screen sharing, while all your sensitive data
-                stays securely on your device. Interview with confidence and peace of mind.
+                assistance completely invisible during screen sharing, and your interview
+                transcripts are never retained on our servers. Interview with confidence and peace
+                of mind.
               </CardDescription>
             </CardHeader>
           </Card>

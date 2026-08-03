@@ -12,7 +12,7 @@ Power Interview has three layers:
 2. **Local Runtime** - audio capture and OS-level integrations
 3. **Cloud Services** - transcription, LLM inference, and account/payment APIs
 
-Together these layers provide low-latency transcription, suggestion streaming, and export workflows while keeping local configuration on your device.
+Together these layers provide low-latency transcription, suggestion streaming, and export workflows. Device settings stay on your machine; your interview configuration is saved to your account so it follows you across devices.
 
 ---
 

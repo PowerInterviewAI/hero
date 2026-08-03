@@ -128,7 +128,7 @@ export const FeaturesSection: React.FC = () => {
               <UserLock className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
               <CardTitle>Privacy First</CardTitle>
               <CardDescription>
-                Your data stays with you. Secure local storage, no data mining, and full control
+                Transcripts are never retained after your session. No data mining, and full control
                 over your information
               </CardDescription>
             </CardHeader>

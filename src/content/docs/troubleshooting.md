@@ -164,7 +164,7 @@ Click the **Clear** button (trash icon) in the control panel toolbar. This remov
 
 ### I want to sign out and remove my account data
 
-Click your profile name in the control panel and select **Sign Out**. Local data such as tokens and configuration are managed by Electron Store in your user profile folder (`%AppData%\power-interview`). You can delete this folder manually after signing out to remove all locally stored data.
+Click your profile name in the control panel and select **Sign Out**. Local data such as session tokens and device settings are managed by Electron Store in your user profile folder (`%AppData%\power-interview`). You can delete this folder manually after signing out to remove all locally stored data. Your interview configuration (full name, profile/CV, context) is stored with your account rather than in that folder, so it will be restored the next time you sign in.
 
 ### The app is logging me out automatically
 

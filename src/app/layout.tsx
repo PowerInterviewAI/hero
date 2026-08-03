@@ -170,7 +170,7 @@ const faqPageJsonLd = {
       name: 'How does the privacy protection work?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Your data stays with you. All sensitive information is stored locally on your device using encrypted storage. Only necessary data (transcripts, screenshots) is sent to our AI services for suggestions. We never collect, sell, or share your personal information.',
+        text: 'Your interview configuration - full name, profile/CV, and context - is saved to your account so it follows you across devices. Transcripts and screenshots are sent to our AI services when you request a suggestion, and transcripts are never persisted on our servers: they exist only for the length of your session. Your session token and device settings stay on your machine. We never sell or share your personal information.',
       },
     },
     {
