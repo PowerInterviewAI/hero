@@ -33,10 +33,11 @@ export const WhyChooseSection: React.FC = () => {
                 </CardTitle>
                 <CardDescription className="text-base">
                   Most AI interview assistants (Interviewing.io, Pramp, even some "privacy-focused"
-                  tools) store your data on their servers.
-                  <span className="font-semibold text-foreground"> We don't.</span> All your
-                  sensitive information stays on your device with encrypted local storage. No data
-                  mining, no selling your information to third parties, no cloud storage risks.
+                  tools) keep a record of your interviews.
+                  <span className="font-semibold text-foreground"> We don't.</span> Transcripts
+                  exist only for the length of your session and are never written to disk on our
+                  side. Your profile and CV are saved to your account so they follow you across
+                  devices - and nothing is ever mined or sold to third parties.
                 </CardDescription>
               </CardHeader>
             </Card>

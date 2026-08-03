@@ -93,14 +93,14 @@ Power Interview consists of three layers running together on your machine:
 | Desktop Runtime  | Electron                       | UI, local audio capture, and system integration |
 | Backend Services | Cloud (separate)              | AI/LLM inference and ASR processing          |
 
-The desktop client communicates with local services and with cloud services over secure channels. Transcripts, screenshots, and profile data are sent to the backend only when you actively request a suggestion. Nothing is stored remotely in a persistent way.
+The desktop client communicates with local services and with cloud services over secure channels. Transcripts and screenshots are sent to the backend only when you actively request a suggestion, and are not retained afterwards. Your interview configuration (full name, profile/CV, context) is stored with your account so it is available on every device you sign in to.
 
 ---
 
 ## Privacy at a Glance
 
-- All credentials, session tokens, and profile data are stored locally using Electron Store
-- Your CV, job descriptions, and configurations never leave your device unless you explicitly trigger a suggestion
+- Your interview configuration (full name, profile/CV, and context) is saved to your account, so signing in on another device restores it
+- Session tokens and device settings (audio device, window layout, scroll preferences) are stored on your machine by Electron Store, in your user profile folder
 - Transcripts are not stored on external servers after a session ends
 
 ---
