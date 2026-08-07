@@ -121,12 +121,14 @@ The interviewer's voice is captured via system audio loopback - whatever is play
 ### Code suggestion is incorrect or does not address the problem
 
 - Capture additional screenshots that include edge cases, constraints, or sample I/O (`Ctrl+Shift+F9` for each).
-- Clear the previous set of screenshots (`Ctrl+Shift+F11`) before capturing images for a new problem.
+- Clear the previous set of screenshots (`Ctrl+Shift+F10`) before capturing images for a new problem.
 - Zoom into the relevant portion of the problem before capturing so the model receives higher-resolution text.
 
 ---
 
 ## Hotkeys
+
+Shortcuts on this page are written in their Windows and Linux form. On macOS the base modifier is **Control+Option** (`⌃⌥`) instead of `Ctrl+Shift`, so `Ctrl+Shift+Q` is `⌃⌥Q`, and so on. See the [complete hotkey reference](/docs/usage) for both columns side by side.
 
 ### Hotkeys are not working
 

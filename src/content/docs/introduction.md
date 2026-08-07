@@ -65,21 +65,24 @@ You can connect your own LLM provider (OpenAI, Anthropic, Google, etc.) using AP
 
 Every function in Power Interview is accessible from any window via keyboard shortcuts:
 
-| Action                                      | Shortcut                        |
-| ------------------------------------------- | ------------------------------- |
-| Stop all & exit stealth                     | `Ctrl+Shift+Q`                  |
-| Toggle stealth mode                         | `Ctrl+Shift+M`                  |
-| Toggle window opacity                       | `Ctrl+Shift+N`                  |
-| Place window (numpad layout)                | `Ctrl+Shift+1` – `Ctrl+Shift+9` |
-| Move window                                 | `Ctrl+Alt+Shift+Arrow`          |
-| Resize window                               | `Ctrl+Win+Shift+Arrow`          |
-| Zoom in/out or reset zoom                   | `Ctrl+Shift+[=, -, 0]`          |
-| Scroll live suggestions panel (down/up/end) | `Ctrl+Shift+[J, K, L]`          |
-| Scroll triggered suggestions panel          | `Ctrl+Shift+[U, I, O]`          |
-| Capture screen                              | `Ctrl+Shift+F9`                 |
-| Clear captures                              | `Ctrl+Shift+F10`                |
-| Trigger without captures                    | `Ctrl+Shift+F11`                |
-| Trigger with captures                       | `Ctrl+Shift+F12`                |
+| Action                                      | Windows / Linux                 | macOS         |
+| ------------------------------------------- | ------------------------------- | ------------- |
+| Stop all & exit stealth                     | `Ctrl+Shift+Q`                  | `⌃⌥Q`         |
+| Toggle stealth mode                         | `Ctrl+Shift+M`                  | `⌃⌥M`         |
+| Toggle window opacity                       | `Ctrl+Shift+N`                  | `⌃⌥N`         |
+| Toggle transcription dock                   | `Ctrl+Shift+F8`                 | `⌃⌥F8`        |
+| Place window (numpad layout)                | `Ctrl+Shift+1` – `Ctrl+Shift+9` | `⌃⌥1` – `⌃⌥9` |
+| Move window                                 | `Ctrl+Alt+Shift+Arrow`          | `⌃⌥⇧Arrow`    |
+| Resize window                               | `Ctrl+Win+Shift+Arrow`          | `⌃⌥⌘Arrow`    |
+| Zoom in/out or reset zoom                   | `Ctrl+Shift+[=, -, 0]`          | `⌃⌥[=, -, 0]` |
+| Scroll live suggestions panel (down/up/end) | `Ctrl+Shift+[J, K, L]`          | `⌃⌥[J, K, L]` |
+| Scroll triggered suggestions panel          | `Ctrl+Shift+[U, I, O]`          | `⌃⌥[U, I, O]` |
+| Capture screen                              | `Ctrl+Shift+F9`                 | `⌃⌥F9`        |
+| Clear captures                              | `Ctrl+Shift+F10`                | `⌃⌥F10`       |
+| Trigger without captures                    | `Ctrl+Shift+F11`                | `⌃⌥F11`       |
+| Trigger with captures                       | `Ctrl+Shift+F12`                | `⌃⌥F12`       |
+
+On macOS the base modifier is **Control+Option** (`⌃⌥`) rather than `Ctrl+Shift`, because `Ctrl+Shift` combinations collide with system shortcuts there. `⇧` is Shift and `⌘` is Command.
 
 ---
 
@@ -87,11 +90,11 @@ Every function in Power Interview is accessible from any window via keyboard sho
 
 Power Interview consists of three layers running together on your machine:
 
-| Layer            | Technology                    | Purpose                                      |
-| ---------------- | ----------------------------- | -------------------------------------------- |
-| Desktop UI       | Electron + React + TypeScript | User interface and configuration             |
-| Desktop Runtime  | Electron                       | UI, local audio capture, and system integration |
-| Backend Services | Cloud (separate)              | AI/LLM inference and ASR processing          |
+| Layer            | Technology                    | Purpose                                         |
+| ---------------- | ----------------------------- | ----------------------------------------------- |
+| Desktop UI       | Electron + React + TypeScript | User interface and configuration                |
+| Desktop Runtime  | Electron                      | UI, local audio capture, and system integration |
+| Backend Services | Cloud (separate)              | AI/LLM inference and ASR processing             |
 
 The desktop client communicates with local services and with cloud services over secure channels. Transcripts and screenshots are sent to the backend only when you actively request a suggestion, and are not retained afterwards. Your interview configuration (full name, profile/CV, context) is stored with your account so it is available on every device you sign in to.
 

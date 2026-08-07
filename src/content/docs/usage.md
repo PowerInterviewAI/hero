@@ -28,6 +28,7 @@ To stop the session at any time, click **Stop** in the UI or press `Ctrl+Shift+Q
 - The interviewer's voice is captured automatically via system audio loopback (whatever is playing through your speakers from the video call). No additional device configuration is needed.
 - Both streams are sent to the transcription service and returned as live transcription.
 - Each line is labeled by speaker name: your configured name or "Interviewer", with a timestamp.
+- Press `Ctrl+Shift+F8` to show or hide the transcription dock. This works in stealth mode too, where the control panel carrying the toggle button is hidden.
 
 ---
 
@@ -45,11 +46,11 @@ Suggestions are triggered automatically as the AI determines a response is usefu
 
 You can use the keyboard to scroll through reply suggestion content without leaving your video call window (use J/K for line‑by‑line movement or L to jump to the end):
 
-| Action        | Shortcut       |
-| ------------- | -------------- |
-| Scroll up     | `Ctrl+Shift+K` |
-| Scroll down   | `Ctrl+Shift+J` |
-| Scroll to end | `Ctrl+Shift+L` |
+| Action        | Windows / Linux | macOS |
+| ------------- | --------------- | ----- |
+| Scroll up     | `Ctrl+Shift+K`  | `⌃⌥K` |
+| Scroll down   | `Ctrl+Shift+J`  | `⌃⌥J` |
+| Scroll to end | `Ctrl+Shift+L`  | `⌃⌥L` |
 
 ---
 
@@ -61,9 +62,9 @@ For technical interviews with coding problems, Power Interview can analyze your 
 
 1. When a coding problem appears on screen (in your browser, IDE, or shared screen), press `Ctrl+Shift+F9` to take a screenshot. You can also skip the queue and automatically submit in one step by using `Ctrl+Shift+F12` (capture + submit).
 2. You can capture up to **4 screenshots** to provide more context (e.g., multiple parts of the problem due overflowed content or different tabs).
-3. Press `Ctrl+Shift+F10` to submit the screenshots for analysis (not needed if you used F12).
+3. Press `Ctrl+Shift+F11` to submit the screenshots for analysis (not needed if you used F12).
 4. The AI processes the images and streams a suggested solution with syntax-highlighted code into the code suggestion panel.
-5. To clear the captured screenshots (e.g., mistakes), press `Ctrl+Shift+F11` to clear all captured screenshots.
+5. To clear the captured screenshots (e.g., mistakes), press `Ctrl+Shift+F10` to clear all captured screenshots.
 
 ![Code Suggestions panel - syntax-highlighted solution streamed in real time](/media/docs/code-suggestions.mp4)
 
@@ -71,11 +72,11 @@ For technical interviews with coding problems, Power Interview can analyze your 
 
 You can also jump to the end of the code panel using the third shortcut (O).
 
-| Action        | Shortcut       |
-| ------------- | -------------- |
-| Scroll up     | `Ctrl+Shift+I` |
-| Scroll down   | `Ctrl+Shift+U` |
-| Scroll to end | `Ctrl+Shift+O` |
+| Action        | Windows / Linux | macOS |
+| ------------- | --------------- | ----- |
+| Scroll up     | `Ctrl+Shift+I`  | `⌃⌥I` |
+| Scroll down   | `Ctrl+Shift+U`  | `⌃⌥U` |
+| Scroll to end | `Ctrl+Shift+O`  | `⌃⌥O` |
 
 ---
 
@@ -111,10 +112,10 @@ Use a numpad-style layout to snap the window to any screen position:
 
 ### Fine-Tuning Position and Size
 
-| Action        | Shortcut               |
-| ------------- | ---------------------- |
-| Move window   | `Ctrl+Alt+Shift+Arrow` |
-| Resize window | `Ctrl+Win+Shift+Arrow` |
+| Action        | Windows / Linux        | macOS      |
+| ------------- | ---------------------- | ---------- |
+| Move window   | `Ctrl+Alt+Shift+Arrow` | `⌃⌥⇧Arrow` |
+| Resize window | `Ctrl+Win+Shift+Arrow` | `⌃⌥⌘Arrow` |
 
 ---
 
@@ -134,9 +135,9 @@ This is your interview configuration, not general account info (like your email 
 
 ### Device Settings
 
-| Setting    | Where to configure            | Description                              |
-| ---------- | ----------------------------- | ---------------------------------------- |
-| Microphone | Audio Options (mic icon)      | Physical microphone for your voice       |
+| Setting    | Where to configure       | Description                        |
+| ---------- | ------------------------ | ---------------------------------- |
+| Microphone | Audio Options (mic icon) | Physical microphone for your voice |
 
 ### Account Menu
 
@@ -190,20 +191,23 @@ You can also view your payment history and check pending payment status from the
 
 ## Complete Hotkey Reference
 
-| Action                                      | Shortcut                        |
-| ------------------------------------------- | ------------------------------- |
-| Stop all & exit stealth                     | `Ctrl+Shift+Q`                  |
-| Toggle stealth mode                         | `Ctrl+Shift+M`                  |
-| Toggle window opacity                       | `Ctrl+Shift+N`                  |
-| Position window (numpad)                    | `Ctrl+Shift+1` – `Ctrl+Shift+9` |
-| Move window                                 | `Ctrl+Alt+Shift+Arrow`          |
-| Resize window                               | `Ctrl+Win+Shift+Arrow`          |
-| Zoom in/out or reset zoom                   | `Ctrl+Shift+[=, -, 0]`          |
-| Scroll live suggestions panel (down/up/end) | `Ctrl+Shift+[J, K, L]`          |
-| Scroll triggered suggestions panel          | `Ctrl+Shift+[U, I, O]`          |
-| Capture screen                              | `Ctrl+Shift+F9`                 |
-| Clear captures                              | `Ctrl+Shift+F10`                |
-| Trigger without captures                    | `Ctrl+Shift+F11`                |
-| Trigger with captures                       | `Ctrl+Shift+F12`                |
+On macOS the base modifier is **Control+Option** (`⌃⌥`) rather than `Ctrl+Shift`, because `Ctrl+Shift` combinations collide with system shortcuts there. `⇧` is Shift and `⌘` is Command. Every `Ctrl+Shift+…` shortcut mentioned elsewhere on this page follows the same mapping.
+
+| Action                                      | Windows / Linux                 | macOS         |
+| ------------------------------------------- | ------------------------------- | ------------- |
+| Stop all & exit stealth                     | `Ctrl+Shift+Q`                  | `⌃⌥Q`         |
+| Toggle stealth mode                         | `Ctrl+Shift+M`                  | `⌃⌥M`         |
+| Toggle window opacity                       | `Ctrl+Shift+N`                  | `⌃⌥N`         |
+| Toggle transcription dock                   | `Ctrl+Shift+F8`                 | `⌃⌥F8`        |
+| Position window (numpad)                    | `Ctrl+Shift+1` – `Ctrl+Shift+9` | `⌃⌥1` – `⌃⌥9` |
+| Move window                                 | `Ctrl+Alt+Shift+Arrow`          | `⌃⌥⇧Arrow`    |
+| Resize window                               | `Ctrl+Win+Shift+Arrow`          | `⌃⌥⌘Arrow`    |
+| Zoom in/out or reset zoom                   | `Ctrl+Shift+[=, -, 0]`          | `⌃⌥[=, -, 0]` |
+| Scroll live suggestions panel (down/up/end) | `Ctrl+Shift+[J, K, L]`          | `⌃⌥[J, K, L]` |
+| Scroll triggered suggestions panel          | `Ctrl+Shift+[U, I, O]`          | `⌃⌥[U, I, O]` |
+| Capture screen                              | `Ctrl+Shift+F9`                 | `⌃⌥F9`        |
+| Clear captures                              | `Ctrl+Shift+F10`                | `⌃⌥F10`       |
+| Trigger without captures                    | `Ctrl+Shift+F11`                | `⌃⌥F11`       |
+| Trigger with captures                       | `Ctrl+Shift+F12`                | `⌃⌥F12`       |
 
 > The canonical list of hotkeys is maintained in `src/config/hotkeys.ts` for the application; update both the code and documentation when making changes.

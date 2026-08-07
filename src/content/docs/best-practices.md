@@ -5,6 +5,8 @@
 > Always start the Power Interview Assistant **before** joining the call so transcription and suggestions are ready from the first question.
 >
 > Getting the most from Power Interview requires more than just turning it on. The following practices will help you achieve accurate transcription, relevant AI suggestions, and a seamless interview experience.
+>
+> Shortcuts below are written in their Windows and Linux form. On macOS the base modifier is **Control+Option** (`⌃⌥`) instead of `Ctrl+Shift`, so `Ctrl+Shift+M` is `⌃⌥M`. See the [complete hotkey reference](/docs/usage) for both columns side by side.
 
 ---
 
@@ -68,7 +70,7 @@ A single screenshot of a long problem statement often misses important details. 
 - Sample inputs and expected outputs
 - Any relevant constraints or examples below the fold
 
-Press `Ctrl+Shift+F9` for each capture, then `Ctrl+Shift+F10` to submit (use `Ctrl+Shift+F11` to clear captures if you make a mistake).
+Press `Ctrl+Shift+F9` for each capture, then `Ctrl+Shift+F11` to submit (use `Ctrl+Shift+F10` to clear captures if you make a mistake).
 
 ---
 
