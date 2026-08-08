@@ -19,7 +19,7 @@ This page covers the most common issues users encounter with Power Interview and
 This typically means the renderer process failed to load.
 
 - Restart the app.
-- If running from source, ensure the Vite dev server started correctly on port 5173 before Electron attempted to connect to it.
+- If running from source, ensure the Vite dev server started correctly on port 15173 before Electron attempted to connect to it.
 - Check for Node.js version compatibility - Node.js 18 or higher is required.
 
 ---
@@ -166,7 +166,7 @@ Click the **Clear** button (trash icon) in the control panel toolbar. This remov
 
 ### I want to sign out and remove my account data
 
-Click your profile name in the control panel and select **Sign Out**. Local data such as session tokens and device settings are managed by Electron Store in your user profile folder (`%AppData%\power-interview`). You can delete this folder manually after signing out to remove all locally stored data. Your interview configuration (full name, profile/CV, context) is stored with your account rather than in that folder, so it will be restored the next time you sign in.
+Click the menu icon (☰) in the titlebar and select **Sign out**. Local data such as session tokens and device settings are managed by Electron Store in your user profile folder (`%AppData%\power-interview`). You can delete this folder manually after signing out to remove all locally stored data. Your interview configuration (full name, profile/CV, context) is stored with your account rather than in that folder, so it will be restored the next time you sign in.
 
 ### The app is logging me out automatically
 
@@ -180,7 +180,7 @@ If none of the above resolves your issue:
 
 - **Email**: [team@vectorleappulse.xyz](mailto:team@vectorleappulse.xyz)
 - **Discord**: [discord.gg/TJJp5azK7Z](https://discord.gg/TJJp5azK7Z)
-- **Telegram**: [t.me/+uQuuBdrsIYBjY2Qx](https://t.me/power_interview_ai)
+- **Telegram**: [t.me/power_interview_ai](https://t.me/power_interview_ai)
 - **GitHub Issues**: Open an issue at [github.com/PowerInterviewAI/client-app](https://github.com/PowerInterviewAI/client-app)
 
 When reporting a bug, include:

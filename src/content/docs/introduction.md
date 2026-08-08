@@ -12,7 +12,7 @@ Power Interview is a privacy-first AI assistant that helps you perform confident
 
 Power Interview listens to your interview conversation, transcribes it in real time, and surfaces contextual suggestions so you can respond with clarity. For technical roles, it can analyze coding problems on your screen and generate solution. For behavioral rounds, it draws on your profile - your name, CV, and the job description - to generate personalized, natural-sounding responses.
 
-You can connect your own LLM provider (OpenAI, Anthropic, Google, etc.) using API keys you control. Depending on your plan, a default model is also included so you can get started instantly.
+You can connect your own LLM provider (OpenAI, Anthropic, Groq, Google) using API keys you control. Depending on your plan, a default model is also included so you can get started instantly.
 
 ---
 

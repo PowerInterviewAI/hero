@@ -32,7 +32,7 @@ The quality of AI reply suggestions depends directly on the detail in your profi
 
 The **Context** field (job description / role requirements) directly shapes the tone and subject matter of reply suggestions. Before each interview:
 
-1. Click your profile name in the control panel and select **Configuration**.
+1. Click the menu icon (☰) in the titlebar and select **Configuration**.
 2. Replace the previous job description with the one from the current role.
 3. Highlight the key skills the role requires - the AI will weight those more heavily.
 

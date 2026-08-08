@@ -121,7 +121,7 @@ Use a numpad-style layout to snap the window to any screen position:
 
 ## Profile & Settings
 
-Access your settings by clicking the **profile icon** in the app's control panel.
+Access your settings from the **menu icon** (☰) in the top-right of the titlebar.
 
 ### Profile Settings
 
@@ -139,24 +139,32 @@ This is your interview configuration, not general account info (like your email 
 | ---------- | ------------------------ | ---------------------------------- |
 | Microphone | Audio Options (mic icon) | Physical microphone for your voice |
 
-### Account Menu
+### LLM Options
 
-Click your name/avatar in the bottom-left of the control panel to access:
+Click the **brain icon** in the control panel toolbar to connect your own LLM provider - OpenAI, Anthropic, Groq, or Google - with an API key you control. Enter the API key and pick a model; the app validates the key against the selected provider and model before letting you save. Turn "Use my own API key" off to fall back to Power Interview's hosted models: the **SOTA model** while you have a credit balance, switching to the **free model** once credits are exhausted.
 
+### Menu
+
+Click the **menu icon** (☰) in the titlebar to access:
+
+- Your account email
 - **Configuration** - open the profile/settings dialog
-- **Change Password** - update your account password
+- **Change password** - update your account password
 - **Buy Credits** - go to the payments page
-- **Sign Out** - log out of your account
+- **Stealth mode** - toggle stealth mode on or off
+- **Light mode / Dark mode** - toggle the app theme
+- **Documentation** - open this documentation in-app
+- **Sign out** - log out of your account
 
 ---
 
 ## Session Tools
 
-The control panel toolbar includes two utility buttons (at the right edge):
+The control panel toolbar includes three utility buttons (at the right edge): toggle transcription, Clear, and Export.
 
 ### Export Interview
 
-The **Export** button generates a Word document (`.docx`) containing:
+The **Export** button offers a choice of two formats - **Word Document (.docx)** or **Markdown (.md)** - each containing:
 
 - An AI-generated summary of the interview
 - Full timestamped transcript with speaker labels
@@ -177,11 +185,11 @@ The **Clear** button removes all transcripts, reply suggestions, and code sugges
 
 ## Credits & Payments
 
-Credits are consumed while the assistant is running - covering AI reply suggestions and transcription. Your remaining credit balance is shown live in the status bar (stealth mode).
+Credits are consumed while the assistant is running - covering AI reply suggestions and transcription. Your remaining credit balance is shown live in the titlebar, and in the status bar while in stealth mode.
 
 To buy credits:
 
-1. Click your name/avatar in the control panel.
+1. Click the **menu icon** (☰) in the titlebar.
 2. Select **Buy Credits**.
 3. Choose a credit package, complete payment, and your balance updates automatically.
 
