@@ -386,11 +386,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                     macOS
                   </TabButton>
                 </div>
-                {installPlatform === 'macos' && (
-                  <div className="mb-3 rounded-md border border-yellow-400/50 bg-yellow-400/10 px-3 py-2 text-center text-xs text-yellow-600 dark:text-yellow-400">
-                    macOS support is currently unavailable - coming back soon.
-                  </div>
-                )}
                 <pre className="mr-8 overflow-x-auto">
                   <code className="text-md font-mono text-foreground">
                     {version
@@ -444,39 +439,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                       : 'Download Latest Installer'}{' '}
                     (Windows)
                   </a>
-                  <div className="flex w-full max-w-[30rem] flex-col items-center gap-1.5">
-                    <a
-                      href={
-                        version
-                          ? `https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-${version}-arm64.dmg`
-                          : 'https://github.com/PowerInterviewAI/client-app/releases/latest'
-                      }
-                      aria-disabled="true"
-                      onClick={(e) => e.preventDefault()}
-                      className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground opacity-50"
-                    >
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                        />
-                      </svg>
-                      {version
-                        ? `Download Power.Interview.AI-${version}-arm64.dmg`
-                        : 'Open Latest Release Assets (macOS)'}{' '}
-                      (MacOS)
-                    </a>
-                    <span className="text-xs text-yellow-600 dark:text-yellow-400">
-                      macOS support is currently unavailable - coming back soon.
-                    </span>
-                  </div>
+                  <a
+                    href={
+                      version
+                        ? `https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-${version}-arm64.dmg`
+                        : 'https://github.com/PowerInterviewAI/client-app/releases/latest'
+                    }
+                    download
+                    className="inline-flex w-full max-w-[30rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                  >
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      />
+                    </svg>
+                    {version
+                      ? `Download Power.Interview.AI-${version}-arm64.dmg`
+                      : 'Open Latest Release Assets (macOS)'}{' '}
+                    (macOS)
+                  </a>
                   <a
                     href="https://github.com/PowerInterviewAI/client-app/releases"
                     target="_blank"

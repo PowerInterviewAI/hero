@@ -186,7 +186,7 @@ const faqPageJsonLd = {
       name: 'What platforms are supported?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Power Interview AI supports both Windows and macOS. macOS builds are temporarily unavailable while we work on bringing them back online - Windows downloads are unaffected. Follow our GitHub repository or join our Telegram channel to be notified when macOS returns.',
+        text: 'Power Interview AI supports both Windows and macOS.',
       },
     },
     {
@@ -194,7 +194,7 @@ const faqPageJsonLd = {
       name: 'Do I need special hardware to run Power Interview AI?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Power Interview AI runs on most modern Windows computers without special hardware requirements. A stable internet connection improves streaming performance, but you do not need a dedicated GPU.',
+        text: 'Power Interview AI runs on most modern Windows and macOS computers without special hardware requirements. A stable internet connection improves streaming performance, but you do not need a dedicated GPU.',
       },
     },
     {

@@ -2,8 +2,6 @@
 
 This page covers how to install and run Power Interview on Windows and macOS.
 
-> **macOS builds are temporarily unavailable** while we work on bringing them back online - Windows downloads are unaffected. Follow our GitHub repository or join our Telegram channel to be notified when macOS returns. The macOS steps below are kept for reference and will resume working once builds are republished.
-
 ---
 
 ## Option A - Install via Command Line
@@ -17,7 +15,7 @@ Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name
 Start-Process ".\$($asset.name)"
 ```
 
-### macOS (Terminal) - currently unavailable, see note above
+### macOS (Terminal)
 
 ```bash
 DMG_URL=$(curl -s https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest | grep -Eo 'https://[^"]+\.dmg' | head -n 1)
@@ -34,7 +32,7 @@ These commands download the latest installer and open it immediately.
 Use the latest release binaries from GitHub:
 
 - [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.5.6.exe)
-- [macOS installer (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.5.6-arm64.dmg) - currently unavailable, see note above
+- [macOS installer (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.5.6-arm64.dmg)
 - [All release assets (latest)](https://github.com/PowerInterviewAI/client-app/releases/latest)
 
 After installation, launch **Power Interview**, sign in, and proceed to first-run setup.

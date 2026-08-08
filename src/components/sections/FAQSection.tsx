@@ -29,8 +29,7 @@ const faqData = [
   },
   {
     question: 'What platforms are supported?',
-    answer:
-      'Power Interview AI supports both Windows and macOS. macOS builds are temporarily unavailable while we work on bringing them back online - Windows downloads are unaffected.',
+    answer: 'Power Interview AI supports both Windows and macOS.',
   },
   {
     question: 'Do I need special hardware to run Power Interview AI?',
