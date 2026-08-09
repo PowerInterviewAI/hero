@@ -114,7 +114,33 @@ const TabButton: React.FC<TabButtonProps> = ({ active, onClick, size = 'md', chi
   </button>
 );
 
+interface DownloadLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+const DownloadLink: React.FC<DownloadLinkProps> = ({ href, children }) => (
+  <a
+    href={href}
+    download
+    className="inline-flex w-full max-w-[30rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+  >
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+      />
+    </svg>
+    {children}
+  </a>
+);
+
 type InstallPlatform = 'windows' | 'macos';
+
+const RELEASES_LATEST_URL = 'https://github.com/PowerInterviewAI/client-app/releases/latest';
+const DOWNLOAD_BASE_URL = `${RELEASES_LATEST_URL}/download`;
 
 // Generate install command by platform
 const getInstallCommand = (version: string | null, platform: InstallPlatform): string => {
@@ -125,10 +151,11 @@ const getInstallCommand = (version: string | null, platform: InstallPlatform): s
     return `curl -L -o PowerInterviewAI-Setup-${version}.exe https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-${version}.exe && start "" "PowerInterviewAI-Setup-${version}.exe"`;
   }
 
+  // electron-builder only suffixes the non-default arch, so the Intel DMG carries no arch token.
   if (version) {
-    return `curl -L -o Power.Interview.AI-${version}-arm64.dmg https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-${version}-arm64.dmg && open "Power.Interview.AI-${version}-arm64.dmg"`;
+    return `SUF=""; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"; DMG="Power.Interview.AI-${version}$SUF.dmg"; curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG" && open "$DMG"`;
   }
-  return 'DMG_URL=$(curl -s https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest | grep -Eo \'https://[^"]+\\.dmg\' | head -n 1) && curl -L "$DMG_URL" -o Power.Interview.AI.dmg && open "Power.Interview.AI.dmg"';
+  return 'DMGS=$(curl -s https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest | grep -Eo \'https://[^"]+\\.dmg\'); if [ "$(uname -m)" = "arm64" ]; then DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -- \'-arm64\\.dmg\' | head -n 1); else DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -v -- \'-arm64\\.dmg\' | head -n 1); fi; curl -L "$DMG_URL" -o Power.Interview.AI.dmg && open "Power.Interview.AI.dmg"';
 };
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => {
@@ -417,50 +444,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                   Download the installer for your OS and run it. No additional setup required.
                 </p>
                 <div className="flex flex-col items-center gap-3">
-                  <a
+                  <DownloadLink
                     href={
                       version
-                        ? `https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-${version}.exe`
-                        : 'https://github.com/PowerInterviewAI/client-app/releases/latest'
+                        ? `${DOWNLOAD_BASE_URL}/PowerInterviewAI-Setup-${version}.exe`
+                        : RELEASES_LATEST_URL
                     }
-                    download
-                    className="inline-flex w-full max-w-[30rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                   >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                      />
-                    </svg>
                     {version
                       ? `Download PowerInterviewAI-Setup-${version}.exe`
                       : 'Download Latest Installer'}{' '}
                     (Windows)
-                  </a>
-                  <a
+                  </DownloadLink>
+                  <DownloadLink
                     href={
                       version
-                        ? `https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-${version}-arm64.dmg`
-                        : 'https://github.com/PowerInterviewAI/client-app/releases/latest'
+                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-arm64.dmg`
+                        : RELEASES_LATEST_URL
                     }
-                    download
-                    className="inline-flex w-full max-w-[30rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                   >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                      />
-                    </svg>
                     {version
                       ? `Download Power.Interview.AI-${version}-arm64.dmg`
-                      : 'Open Latest Release Assets (macOS)'}{' '}
-                    (macOS)
-                  </a>
+                      : 'Open Latest Release Assets'}{' '}
+                    (macOS Apple Silicon)
+                  </DownloadLink>
+                  <DownloadLink
+                    href={
+                      version
+                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}.dmg`
+                        : RELEASES_LATEST_URL
+                    }
+                  >
+                    {version
+                      ? `Download Power.Interview.AI-${version}.dmg`
+                      : 'Open Latest Release Assets'}{' '}
+                    (macOS Intel)
+                  </DownloadLink>
                   <a
                     href="https://github.com/PowerInterviewAI/client-app/releases"
                     target="_blank"
