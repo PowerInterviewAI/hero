@@ -123,7 +123,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ href, children }) => (
   <a
     href={href}
     download
-    className="inline-flex w-full max-w-[30rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+    className="inline-flex w-full max-w-[40rem] items-center justify-center gap-2 rounded-md border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
   >
     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
