@@ -24,6 +24,33 @@ This typically means the renderer process failed to load.
 
 ---
 
+## macOS Permissions
+
+### Screen Recording stops working after updating the app on macOS
+
+Each new build of Power Interview AI is signed independently, so macOS treats an updated app as a different app for permission purposes. After updating, the **Screen Recording** grant from the previous version no longer applies to the new one, and the app will show a **Permissions Required** dialog with Screen Recording marked as denied.
+
+![Permissions Required dialog showing Screen Recording access denied](/media/docs/macos-update-permission-issue.png)
+
+Re-opening **System Settings** and toggling the existing entry back on is not enough — macOS still associates that entry with the old build. You need to remove the old entry and add the updated app fresh:
+
+1. Open **System Settings → Privacy & Security → Screen & System Audio Recording**.
+2. Select the existing **Power Interview AI** entry and click the **-** button to remove it.
+
+   ![Removing the old Power Interview AI entry from Screen & System Audio Recording](/media/docs/macos-update-remove-old-app.png)
+
+3. Click the **+** button to add the app again.
+
+   ![Clicking the + button to add the app again](/media/docs/macos-update-add-new-app-1.png)
+
+4. In the file picker, navigate to **Applications**, select **Power Interview AI**, and click **Open**.
+
+   ![Selecting Power Interview AI from the Applications folder](/media/docs/macos-update-add-new-app-2.png)
+
+5. Restart Power Interview AI. The Screen Recording permission should now show as granted.
+
+---
+
 ## Authentication
 
 ### Cannot log in - "Invalid credentials" error
