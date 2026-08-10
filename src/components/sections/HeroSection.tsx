@@ -151,9 +151,9 @@ const getInstallCommand = (version: string | null, platform: InstallPlatform): s
     return `curl -L -o PowerInterviewAI-Setup-${version}.exe https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-${version}.exe && start "" "PowerInterviewAI-Setup-${version}.exe"`;
   }
 
-  // electron-builder only suffixes the non-default arch, so the Intel DMG carries no arch token.
+  // electron-builder tags every mac artifact with its arch as of v1.6.3.
   if (version) {
-    return `SUF=""; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"; DMG="Power.Interview.AI-${version}$SUF.dmg"; curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG" && open "$DMG"`;
+    return `SUF="-x64"; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"; DMG="Power.Interview.AI-${version}$SUF.dmg"; curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG" && open "$DMG"`;
   }
   return 'DMGS=$(curl -s https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest | grep -Eo \'https://[^"]+\\.dmg\'); if [ "$(uname -m)" = "arm64" ]; then DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -- \'-arm64\\.dmg\' | head -n 1); else DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -v -- \'-arm64\\.dmg\' | head -n 1); fi; curl -L "$DMG_URL" -o Power.Interview.AI.dmg && open "Power.Interview.AI.dmg"';
 };

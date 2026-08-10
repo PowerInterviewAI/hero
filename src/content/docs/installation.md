@@ -30,13 +30,13 @@ curl -L "$DMG_URL" -o Power.Interview.AI.dmg
 open "Power.Interview.AI.dmg"
 ```
 
-Only the Apple Silicon build carries an `-arm64` tag in its filename; the Intel build has no architecture tag, which is why the Intel branch filters `-arm64` out instead of matching on `x86_64`.
+As of v1.6.3, both builds carry an arch tag (`-arm64` or `-x64`) in their filename, which is why the Intel branch filters `-arm64` out instead of matching on `x86_64`.
 
 If you already know the version you want, the download URL can be built directly:
 
 ```bash
-SUF=""; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"
-DMG="Power.Interview.AI-1.6.0$SUF.dmg"
+SUF="-x64"; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"
+DMG="Power.Interview.AI-1.6.3$SUF.dmg"
 curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG"
 open "$DMG"
 ```
@@ -51,9 +51,9 @@ Release builds are ad-hoc signed but not notarized, so macOS may report the app 
 
 Use the latest release binaries from GitHub:
 
-- [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.6.0.exe)
-- [macOS installer - Apple Silicon (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.0-arm64.dmg)
-- [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.0.dmg)
+- [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.6.3.exe)
+- [macOS installer - Apple Silicon (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.3-arm64.dmg)
+- [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.3-x64.dmg)
 - [All release assets (latest)](https://github.com/PowerInterviewAI/client-app/releases/latest)
 
 Not sure which Mac you have? Run `uname -m` in Terminal: `arm64` is Apple Silicon, `x86_64` is Intel.
