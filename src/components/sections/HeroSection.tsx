@@ -138,15 +138,29 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ href, children }) => (
 );
 
 type InstallPlatform = 'windows' | 'macos';
+type WindowsShell = 'cmd' | 'powershell';
 
 const RELEASES_LATEST_URL = 'https://github.com/PowerInterviewAI/client-app/releases/latest';
 const DOWNLOAD_BASE_URL = `${RELEASES_LATEST_URL}/download`;
 
-// Generate install command by platform
-const getInstallCommand = (version: string | null, platform: InstallPlatform): string => {
+// Generate install command by platform (and, for Windows, by shell)
+const getInstallCommand = (
+  version: string | null,
+  platform: InstallPlatform,
+  windowsShell: WindowsShell
+): string => {
   if (platform === 'windows') {
+    if (windowsShell === 'powershell') {
+      if (!version) {
+        return '$release = Invoke-RestMethod -Uri "https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest"; $asset = $release.assets | Where-Object { $_.name -like "*Setup*.exe" } | Select-Object -First 1; Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name; Start-Process ".\\$($asset.name)"';
+      }
+      return `Invoke-WebRequest -Uri "https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-${version}.exe" -OutFile "PowerInterviewAI-Setup-${version}.exe"; Start-Process ".\\PowerInterviewAI-Setup-${version}.exe"`;
+    }
+
+    // cmd.exe: curl.exe ships built-in since Windows 10, but there's no
+    // built-in JSON parser - shell out to PowerShell for the unknown-version case.
     if (!version) {
-      return '$release = Invoke-RestMethod -Uri "https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest"; $asset = $release.assets | Where-Object { $_.name -like "*Setup*.exe" } | Select-Object -First 1; Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name; Start-Process ".\\$($asset.name)"';
+      return "powershell -Command \"$release = Invoke-RestMethod -Uri 'https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest'; $asset = $release.assets | Where-Object { $_.name -like '*Setup*.exe' } | Select-Object -First 1; Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name; Start-Process -FilePath ('.\\' + $asset.name)\"";
     }
     return `curl -L -o PowerInterviewAI-Setup-${version}.exe https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-${version}.exe && start "" "PowerInterviewAI-Setup-${version}.exe"`;
   }
@@ -166,6 +180,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
   const [copied, setCopied] = useState(false);
   const [activeInstallTab, setActiveInstallTab] = useState<'cli' | 'binary' | 'source'>('cli');
   const [installPlatform, setInstallPlatform] = useState<InstallPlatform>('windows');
+  const [windowsShell, setWindowsShell] = useState<WindowsShell>('cmd');
   const [interviewCount, setInterviewCount] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -227,7 +242,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
 
   // Copy install command to clipboard
   const copyInstallCommand = async () => {
-    const command = getInstallCommand(version, installPlatform);
+    const command = getInstallCommand(version, installPlatform, windowsShell);
 
     try {
       await navigator.clipboard.writeText(command);
@@ -413,10 +428,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                     macOS
                   </TabButton>
                 </div>
+                {installPlatform === 'windows' && (
+                  <div className="mb-3 flex justify-center gap-2">
+                    <TabButton
+                      size="sm"
+                      active={windowsShell === 'cmd'}
+                      onClick={() => setWindowsShell('cmd')}
+                    >
+                      Command Prompt
+                    </TabButton>
+                    <TabButton
+                      size="sm"
+                      active={windowsShell === 'powershell'}
+                      onClick={() => setWindowsShell('powershell')}
+                    >
+                      PowerShell
+                    </TabButton>
+                  </div>
+                )}
                 <pre className="mr-8 overflow-x-auto">
                   <code className="text-md font-mono text-foreground">
                     {version
-                      ? getInstallCommand(version, installPlatform)
+                      ? getInstallCommand(version, installPlatform, windowsShell)
                       : 'Loading installation command...'}
                   </code>
                 </pre>

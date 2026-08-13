@@ -15,6 +15,14 @@ Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name
 Start-Process ".\$($asset.name)"
 ```
 
+### Windows (Command Prompt)
+
+`curl.exe` ships built into Windows 10/11, but cmd.exe has no built-in JSON parser, so this shells out to PowerShell to read the release info:
+
+```bat
+powershell -Command "$release = Invoke-RestMethod -Uri 'https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest'; $asset = $release.assets | Where-Object { $_.name -like '*Setup*.exe' } | Select-Object -First 1; Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $asset.name; Start-Process -FilePath ('.\' + $asset.name)"
+```
+
 ### macOS (Terminal)
 
 Works on both Apple Silicon (arm64) and Intel (x86_64) - the command picks the matching build from `uname -m`:
