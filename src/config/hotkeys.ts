@@ -3,6 +3,7 @@ export enum Hotkey {
   ToggleStealth = 'ToggleStealth',
   Opacity = 'Opacity',
   ToggleTranscript = 'ToggleTranscript',
+  ToggleProfessionalMode = 'ToggleProfessionalMode',
   PlaceWin = 'PlaceWin',
   MoveWin = 'MoveWin',
   ResizeWin = 'ResizeWin',
@@ -29,7 +30,13 @@ export type HotkeyGroup = {
 export const HOTKEY_GROUPS: HotkeyGroup[] = [
   {
     label: 'General',
-    keys: [Hotkey.StopAll, Hotkey.ToggleStealth, Hotkey.Opacity, Hotkey.ToggleTranscript],
+    keys: [
+      Hotkey.StopAll,
+      Hotkey.ToggleStealth,
+      Hotkey.Opacity,
+      Hotkey.ToggleTranscript,
+      Hotkey.ToggleProfessionalMode,
+    ],
   },
   {
     label: 'Window Management',
@@ -76,6 +83,12 @@ export const HOTKEYS: Record<Hotkey, HotkeyInfo> = {
     combo: 'Ctrl+Shift+F8',
     title: 'Toggle Transcription',
     description: 'Show or hide the transcription dock - works in stealth mode too',
+  },
+  [Hotkey.ToggleProfessionalMode]: {
+    combo: 'Ctrl+Shift+F7',
+    title: 'Toggle Professional Mode',
+    description:
+      'Switch suggestions between full sentences and short hints - a headline plus keyword bullets you can read at a glance. Works in stealth mode too.',
   },
   [Hotkey.PlaceWin]: {
     combo: 'Ctrl+Shift+1-9',

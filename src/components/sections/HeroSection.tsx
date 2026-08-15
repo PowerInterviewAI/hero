@@ -504,12 +504,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                   <DownloadLink
                     href={
                       version
-                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}.dmg`
+                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-x64.dmg`
                         : RELEASES_LATEST_URL
                     }
                   >
                     {version
-                      ? `Download Power.Interview.AI-${version}.dmg`
+                      ? `Download Power.Interview.AI-${version}-x64.dmg`
                       : 'Open Latest Release Assets'}{' '}
                     (macOS Intel)
                   </DownloadLink>
@@ -529,7 +529,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
             {activeInstallTab === 'source' && (
               <div className="rounded-lg border bg-muted/50 p-6 text-center">
                 <p className="mb-4 text-sm text-muted-foreground">
-                  Clone the repository and run from source. Requires Node.js&nbsp;18+.
+                  Clone the repository and run from source. Requires Node.js&nbsp;22.15+.
                 </p>
                 <a
                   href="/docs/installation#option-c---build-from-source"

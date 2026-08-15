@@ -12,7 +12,7 @@ This page covers the most common issues users encounter with Power Interview and
 
 - **Missing runtime**: Ensure you are on a supported OS version (Windows 10/11 or macOS 13+).
 - **Antivirus blocking**: Some antivirus programs quarantine desktop app binaries. Add the Power Interview installation folder to your antivirus exclusion list and try launching again.
-- **Corrupted install**: Uninstall the app, delete any leftover files from `%AppData%\power-interview`, and reinstall.
+- **Corrupted install**: Uninstall the app, delete any leftover files from `%AppData%\Power Interview AI`, and reinstall.
 
 ### The app opens but shows a blank white screen
 
@@ -20,7 +20,7 @@ This typically means the renderer process failed to load.
 
 - Restart the app.
 - If running from source, ensure the Vite dev server started correctly on port 15173 before Electron attempted to connect to it.
-- Check for Node.js version compatibility - Node.js 18 or higher is required.
+- Check for Node.js version compatibility - Node.js 22.15 or higher is required.
 
 ---
 
@@ -193,7 +193,7 @@ Click the **Clear** button (trash icon) in the control panel toolbar. This remov
 
 ### I want to sign out and remove my account data
 
-Click the menu icon (☰) in the titlebar and select **Sign out**. Local data such as session tokens and device settings are managed by Electron Store in your user profile folder (`%AppData%\power-interview`). You can delete this folder manually after signing out to remove all locally stored data. Your interview configuration (full name, profile/CV, context) is stored with your account rather than in that folder, so it will be restored the next time you sign in.
+Click the menu icon (☰) in the titlebar and select **Sign out**. Local data such as session tokens and device settings are managed by Electron Store in your user profile folder (`%AppData%\Power Interview AI`). You can delete this folder manually after signing out to remove all locally stored data. Your interview configuration (full name, profile/CV, context) is stored with your account rather than in that folder, so it will be restored the next time you sign in.
 
 ### The app is logging me out automatically
 
@@ -215,4 +215,4 @@ When reporting a bug, include:
 - Your operating system and version
 - Power Interview version (shown in the app title bar or About screen)
 - A description of what you expected vs. what happened
-- Relevant logs from `%AppData%\power-interview\logs\` if available
+- Steps to reproduce the issue

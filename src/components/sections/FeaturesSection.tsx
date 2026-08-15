@@ -56,7 +56,9 @@ export const FeaturesSection: React.FC = () => {
                 CV, job description, and{' '}
                 <span className="font-semibold text-foreground">full conversation history</span>.
                 Our AI analyzes patterns in your communication style and adapts to provide more
-                relevant, accurate suggestions that help you articulate your thoughts better.
+                relevant, accurate suggestions that help you articulate your thoughts better. Toggle{' '}
+                <span className="font-semibold text-foreground">Professional Mode</span> for
+                at-a-glance hints - a headline plus keyword bullets - instead of full sentences.
               </CardDescription>
             </CardHeader>
           </Card>

@@ -44,7 +44,7 @@ If you already know the version you want, the download URL can be built directly
 
 ```bash
 SUF="-x64"; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"
-DMG="Power.Interview.AI-1.6.3$SUF.dmg"
+DMG="Power.Interview.AI-1.6.6$SUF.dmg"
 curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG"
 open "$DMG"
 ```
@@ -59,9 +59,9 @@ Release builds are ad-hoc signed but not notarized, so macOS may report the app 
 
 Use the latest release binaries from GitHub:
 
-- [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.6.3.exe)
-- [macOS installer - Apple Silicon (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.3-arm64.dmg)
-- [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.3-x64.dmg)
+- [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.6.6.exe)
+- [macOS installer - Apple Silicon (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.6-arm64.dmg)
+- [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.6-x64.dmg)
 - [All release assets (latest)](https://github.com/PowerInterviewAI/client-app/releases/latest)
 
 Not sure which Mac you have? Run `uname -m` in Terminal: `arm64` is Apple Silicon, `x86_64` is Intel.

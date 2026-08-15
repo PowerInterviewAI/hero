@@ -31,6 +31,7 @@ You can connect your own LLM provider (OpenAI, Anthropic, Groq, Google) using AP
 - Streams suggestions in real time as the conversation progresses
 - Considers the full conversation context, not just the last question
 - Produces human-like responses based on your profile
+- Optional **Professional Mode** switches suggestions to short hints - a headline plus keyword bullets - instead of full sentences, for a quick glance mid-interview
 
 ### AI Code Suggestions
 
@@ -71,6 +72,7 @@ Every function in Power Interview is accessible from any window via keyboard sho
 | Toggle stealth mode                         | `Ctrl+Shift+M`                  | `⌃⌥M`         |
 | Toggle window opacity                       | `Ctrl+Shift+N`                  | `⌃⌥N`         |
 | Toggle transcription dock                   | `Ctrl+Shift+F8`                 | `⌃⌥F8`        |
+| Toggle professional mode                    | `Ctrl+Shift+F7`                 | `⌃⌥F7`        |
 | Place window (numpad layout)                | `Ctrl+Shift+1` – `Ctrl+Shift+9` | `⌃⌥1` – `⌃⌥9` |
 | Move window                                 | `Ctrl+Alt+Shift+Arrow`          | `⌃⌥⇧Arrow`    |
 | Resize window                               | `Ctrl+Win+Shift+Arrow`          | `⌃⌥⌘Arrow`    |

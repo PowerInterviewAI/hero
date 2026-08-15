@@ -98,6 +98,10 @@ When active, the window collapses to a minimal status bar showing running state,
 
 Press `Ctrl+Shift+N` to toggle a low-opacity overlay, letting you glance at suggestions through a semi-transparent window without switching focus away from your active window.
 
+### Professional Mode
+
+Press `Ctrl+Shift+F7` (or click the toggle in the control panel toolbar, next to the transcription/Clear/Export buttons) to switch AI reply suggestions between full sentences and short hints - a headline plus keyword bullets you can read at a glance. This works in stealth mode too.
+
 ---
 
 ## Window Management
@@ -207,6 +211,7 @@ On macOS the base modifier is **Control+Option** (`⌃⌥`) rather than `Ctrl+Sh
 | Toggle stealth mode                         | `Ctrl+Shift+M`                  | `⌃⌥M`         |
 | Toggle window opacity                       | `Ctrl+Shift+N`                  | `⌃⌥N`         |
 | Toggle transcription dock                   | `Ctrl+Shift+F8`                 | `⌃⌥F8`        |
+| Toggle professional mode                    | `Ctrl+Shift+F7`                 | `⌃⌥F7`        |
 | Position window (numpad)                    | `Ctrl+Shift+1` – `Ctrl+Shift+9` | `⌃⌥1` – `⌃⌥9` |
 | Move window                                 | `Ctrl+Alt+Shift+Arrow`          | `⌃⌥⇧Arrow`    |
 | Resize window                               | `Ctrl+Win+Shift+Arrow`          | `⌃⌥⌘Arrow`    |
