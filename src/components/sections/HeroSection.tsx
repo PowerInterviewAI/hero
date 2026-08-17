@@ -43,20 +43,31 @@ function writeCachedVersion(version: string | null): void {
   }
 }
 
-// Media carousel data
+// Media carousel data - every item is an .mp4 under public/media/
 const mediaItems = [
   {
-    src: 'media/live.interview.assistant.mp4',
-    type: 'video',
+    src: '/media/live-interview-assistant.mp4',
     title: 'Live Interview Assistant & Smart Export',
     description:
       'Real-time AI-powered interview assistance with instant suggestions and smart export of interview summaries and insights',
   },
   {
-    src: 'media/code.test.mp4',
-    type: 'video',
-    title: 'Code Test Assistance',
-    description: 'AI-powered code suggestions and solutions for technical interviews',
+    src: '/media/coding-challenge-1.mp4',
+    title: 'Coding Challenge - Graph Traversal',
+    description:
+      'Capture the problem from your screen and read a syntax-highlighted solution streamed into the stealth overlay while you type',
+  },
+  {
+    src: '/media/coding-challenge-2.mp4',
+    title: 'Coding Challenge - Connected Components',
+    description:
+      'Multi-screenshot context lets the AI pick up the full problem statement, constraints, and starter signature before it answers',
+  },
+  {
+    src: '/media/coding-challenge-3.mp4',
+    title: 'Coding Challenge - Binary Tree Recursion',
+    description:
+      'Scroll the code panel with hotkeys alone - the overlay stays hidden from screen share and never steals focus from your editor',
   },
 ];
 
@@ -183,7 +194,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
   const [windowsShell, setWindowsShell] = useState<WindowsShell>('cmd');
   const [interviewCount, setInterviewCount] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const imageTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const interviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -289,23 +299,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
     goToNextMedia();
   };
 
-  // Handle image timer - show for 5 seconds then advance
-  useEffect(() => {
-    const currentMedia = mediaItems[currentMediaIndex];
-
-    if (currentMedia.type === 'image' && isPlaying) {
-      imageTimerRef.current = setTimeout(() => {
-        goToNextMedia();
-      }, 5000); // 5 seconds for images
-    }
-
-    return () => {
-      if (imageTimerRef.current) {
-        clearTimeout(imageTimerRef.current);
-      }
-    };
-  }, [currentMediaIndex, isPlaying]);
-
   // Handle video play/pause
   useEffect(() => {
     if (videoRef.current) {
@@ -316,6 +309,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
       }
     }
   }, [isPlaying, currentMediaIndex]);
+
+  const currentMedia = mediaItems[currentMediaIndex];
+
   return (
     <section id="home" className="md:pt-22 pb-16 pt-10 md:pb-24" aria-labelledby="hero-heading">
       <Container>
@@ -581,25 +577,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
                   isFading ? 'opacity-0' : 'opacity-100'
                 }`}
               >
-                {mediaItems[currentMediaIndex].type === 'video' ? (
-                  <video
-                    ref={videoRef}
-                    key={mediaItems[currentMediaIndex].src}
-                    className="h-full w-full object-contain"
-                    src={`/${mediaItems[currentMediaIndex].src}`}
-                    autoPlay={isPlaying}
-                    onEnded={handleVideoEnded}
-                    playsInline
-                    muted
-                  />
-                ) : (
-                  <img
-                    key={mediaItems[currentMediaIndex].src}
-                    src={`/${mediaItems[currentMediaIndex].src}`}
-                    alt={mediaItems[currentMediaIndex].title}
-                    className="h-full w-full object-contain"
-                  />
-                )}
+                <video
+                  ref={videoRef}
+                  key={currentMedia.src}
+                  className="h-full w-full object-contain"
+                  src={currentMedia.src}
+                  title={currentMedia.title}
+                  autoPlay={isPlaying}
+                  onEnded={handleVideoEnded}
+                  playsInline
+                  muted
+                />
 
                 <button
                   onClick={goToPrevMedia}
@@ -626,10 +614,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
 
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent px-6 py-6">
                   <h3 className="mb-2 text-2xl font-bold text-white drop-shadow-lg md:text-3xl">
-                    {mediaItems[currentMediaIndex].title}
+                    {currentMedia.title}
                   </h3>
                   <p className="text-base leading-relaxed text-gray-100 drop-shadow-md md:text-lg">
-                    {mediaItems[currentMediaIndex].description}
+                    {currentMedia.description}
                   </p>
                 </div>
               </div>

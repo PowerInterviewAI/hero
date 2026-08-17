@@ -36,7 +36,9 @@ Most pages use a shared `PageChrome` client component (`src/components/PageChrom
 
 Markdown files live in `src/content/docs/`. `src/lib/docs.ts` reads them via Node `fs` (there's no `import.meta.glob` equivalent in Next.js) and holds the **single canonical `ORDER` array** used by both the docs index and the sidebar — don't add a second one. Adding a new doc: drop the `.md` file in `src/content/docs/` and add its slug to `ORDER` in `src/lib/docs.ts`.
 
-The markdown render pipeline (`src/app/docs/[slug]/page.tsx`) uses `react-markdown` + `remark-gfm` server-side; only the image renderer (`src/components/docs/MarkdownImage.tsx`) is a client component, since it's the only genuinely interactive piece (click-to-preview lightbox; `.mp4` sources render as `<video>` instead).
+The markdown render pipeline (`src/app/docs/[slug]/page.tsx`) uses `react-markdown` + `remark-gfm` server-side; only the image renderer (`src/components/docs/MarkdownImage.tsx`) is a client component, since it's the only genuinely interactive piece (click-to-preview lightbox; `.mp4` sources render as a `<video>` with `controls` + `preload="metadata"` instead).
+
+Demo videos live in `public/media/` (kebab-case, no tooling suffixes like `_compressed`); `public/media/docs/` holds the smaller screenshots/diagrams. Docs markdown references the shared clips in `public/media/` directly rather than keeping a second copy under `public/media/docs/`.
 
 ### Component Architecture
 

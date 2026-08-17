@@ -40,7 +40,7 @@ Reply suggestions are generated based on the current transcript, your profile (n
 
 Suggestions are triggered automatically as the AI determines a response is useful, or you can request one manually through the UI. The suggestion streams into the reply panel word by word in real time.
 
-![Reply Suggestions panel - streamed in real time](/media/docs/reply-suggestions.mp4)
+![Reply Suggestions panel - streamed in real time during a live interview](/media/live-interview-assistant.mp4)
 
 ### Scrolling Suggestions
 
@@ -66,7 +66,7 @@ For technical interviews with coding problems, Power Interview can analyze your 
 4. The AI processes the images and streams a suggested solution with syntax-highlighted code into the code suggestion panel.
 5. To clear the captured screenshots (e.g., mistakes), press `Ctrl+Shift+F10` to clear all captured screenshots.
 
-![Code Suggestions panel - syntax-highlighted solution streamed in real time](/media/docs/code-suggestions.mp4)
+![Code Suggestions panel - syntax-highlighted solution streamed in real time](/media/coding-challenge-1.mp4)
 
 ### Scrolling Code Suggestions
 

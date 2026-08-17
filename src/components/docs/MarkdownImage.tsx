@@ -7,8 +7,11 @@ interface MarkdownImageProps {
   alt?: string;
 }
 
-// Renders markdown images: .mp4 sources become an autoplaying muted video,
-// everything else becomes a clickable image that opens a fullscreen preview.
+// Renders markdown images: .mp4 sources become a muted video the reader starts
+// themselves, everything else becomes a clickable image that opens a fullscreen
+// preview. The demo clips run 1-3 minutes at ~15-20 MB each, so they're
+// preload="metadata" rather than autoplaying - a docs page carrying several of
+// them would otherwise pull tens of megabytes on load.
 export function MarkdownImage({ src, alt }: MarkdownImageProps) {
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
 
@@ -19,10 +22,10 @@ export function MarkdownImage({ src, alt }: MarkdownImageProps) {
       <video
         src={src}
         title={alt}
-        autoPlay
+        controls
         muted
-        loop
         playsInline
+        preload="metadata"
         className="my-4 w-full rounded-lg shadow"
       />
     );
