@@ -24,6 +24,14 @@ You can connect your own LLM provider (OpenAI, Anthropic, Groq, Google) using AP
 - Streams transcription live via WebSocket with low latency
 - Each line is labeled by speaker (your name or "Interviewer") with a timestamp
 - Auto-scroll keeps up with new lines; a toggle lets you pause and scroll back
+- Change your microphone **mid-interview** without stopping the session - the swap is instant, with no gap in the transcript and nothing to reconnect
+
+### Interview Language
+
+- **28 languages**, selectable from the control bar
+- One setting drives all three: the speech model that transcribes the call, the language your suggestions come back in, and the language of your exported report
+- Changeable **mid-interview** - suggestions follow immediately, transcription reconnects on the new language
+- Arabic and Hebrew render right-to-left throughout, including mixed-script technical answers
 
 ### AI Reply Suggestions
 

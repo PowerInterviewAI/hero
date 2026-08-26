@@ -58,6 +58,14 @@ Run a short test session a few minutes before the interview starts:
 - Play a short audio clip through your speakers and verify the loopback channel picks it up.
 - If the microphone channel is missing, re-check that your physical microphone is selected in **Audio Options**.
 
+### A Dead Headset is Recoverable
+
+If your microphone fails mid-interview, you do not have to stop the session to fix it. Open **Audio Options** and pick another device - the swap is instant, the transcript is unbroken, and your suggestion history stays where it is. If the replacement cannot be opened, the session stays on the device it already had rather than dropping to silence.
+
+### Set the Interview Language Before You Start
+
+Pick your language from the **language button** on the control panel as part of your setup, not once the interview is underway. It can be changed mid-session, but transcription has to reconnect on the new language, which costs a second or two and can orphan whatever was being said at that moment. Setting it up front avoids paying that during a question.
+
 ---
 
 ## Code Suggestion Workflow
@@ -115,6 +123,7 @@ Before every interview, run through this checklist:
 - [ ] Context field has the correct job description for this role
 - [ ] **Power Interview is started before joining the meeting**
 - [ ] Microphone is selected and producing transcript output (test session run)
+- [ ] Interview language is set to the language the interview will actually be conducted in
 - [ ] Power Interview window is positioned and hotkeys tested
 
 ---

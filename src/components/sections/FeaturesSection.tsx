@@ -6,6 +6,7 @@ import {
   FileDown,
   Ghost,
   KeyRound,
+  Languages,
   MessageSquareCode,
   MessageSquareText,
   UserLock,
@@ -42,7 +43,9 @@ export const FeaturesSection: React.FC = () => {
               <CardTitle>Live Transcription</CardTitle>
               <CardDescription>
                 Dual-channel transcription with automatic speaker detection and full conversation
-                history
+                history. Change your microphone{' '}
+                <span className="font-semibold text-foreground">mid-interview</span> without
+                stopping the session - no gap in the transcript, nothing to restart.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -59,6 +62,21 @@ export const FeaturesSection: React.FC = () => {
                 relevant, accurate suggestions that help you articulate your thoughts better. Toggle{' '}
                 <span className="font-semibold text-foreground">Professional Mode</span> for
                 at-a-glance hints - a headline plus keyword bullets - instead of full sentences.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="transition-shadow hover:shadow-lg">
+            <CardHeader>
+              <Languages className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
+              <CardTitle>28 Interview Languages</CardTitle>
+              <CardDescription>
+                Interview in{' '}
+                <span className="font-semibold text-foreground">your own language</span> - one
+                setting drives all three: which speech model transcribes the call, the language your
+                suggestions come back in, and the language of your exported report. Switch it{' '}
+                <span className="font-semibold text-foreground">mid-interview</span>, not just
+                before you start. Full right-to-left support for Arabic and Hebrew.
               </CardDescription>
             </CardHeader>
           </Card>

@@ -113,6 +113,29 @@ The interviewer's voice is captured via system audio loopback - whatever is play
 - Check your upload bandwidth. The transcription stream sends audio data continuously to the backend.
 - If using a VPN, try disabling it or switching to a VPN server with lower latency.
 
+### The language button is red and says "Suggestions only"
+
+You changed the interview language mid-session, and only half of it applied: suggestions are being generated in the new language, but transcription could not reconnect and is still arriving in the old one.
+
+The setting itself is saved, so:
+
+1. Try picking the language again - the reconnect may simply have hit a momentary network problem.
+2. If it fails again, **Stop** and **Start** the assistant. The next session opens both audio channels on the stored language, and the warning clears.
+
+The setting is deliberately kept rather than rolled back on failure. Reverting it would leave you with no route to the language you picked.
+
+### My transcript is in one language and my answers are in another
+
+Same cause as above - see the previous entry. This is what the red language button is telling you, and stopping and restarting the assistant resolves it.
+
+### I switched microphone mid-interview and nothing changed
+
+If the device you picked could not be opened - unplugged, held by another application, or blocked by permissions - the session deliberately stays on the microphone it was already using rather than dropping to no audio at all. The control bar flags the device that failed, and the Audio Options dialog names it.
+
+1. Check that the device is connected and not in use by another call app.
+2. On macOS, confirm the app still has Microphone permission (see **macOS Permissions** above).
+3. Pick the device again once it is free.
+
 ---
 
 ## AI Suggestions

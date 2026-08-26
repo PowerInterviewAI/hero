@@ -32,6 +32,43 @@ To stop the session at any time, click **Stop** in the UI or press `Ctrl+Shift+Q
 
 ---
 
+## Interview Language
+
+Click the **language button** in the control panel to choose the language of your interview. The button shows the current code (`EN`, `ES`, `JA`) so you can read the setting without opening the menu.
+
+One setting decides three things:
+
+- Which speech model transcribes the call
+- The language your reply suggestions come back in
+- The language of your exported report, including the headings the summary writes for itself
+
+### Available Languages
+
+English, Spanish, German, French, Portuguese, Italian, Dutch, Polish, Russian, Ukrainian, Czech, Romanian, Greek, Hungarian, Swedish, Danish, Norwegian, Finnish, Turkish, Hindi, Japanese, Korean, Chinese, Vietnamese, Thai, Indonesian, Arabic, and Hebrew.
+
+Each entry shows its own name alongside the English one, so you can find your language whichever of the two you are looking for. Typing in the open menu jumps to a language by its **English** name.
+
+### Changing Language Mid-Interview
+
+The picker stays live while a session is running, because an interview that switches language is exactly the case you cannot prepare for by restarting.
+
+The two halves move at different speeds:
+
+- **Suggestions** follow immediately - the next one is generated in the new language.
+- **Transcription** carries its language as a connection setting, so both audio channels reconnect. Expect a second or two of gap, and whatever was being spoken at that moment may be lost.
+
+The button shows a spinner while the reconnect is in progress. If transcription cannot reconnect, the button turns red and reads **"Suggestions only"** - your answers are in the new language but the transcript is still arriving in the old one. Stopping and starting the assistant clears it, since the next session opens both channels on the stored language.
+
+### Right-to-Left Languages
+
+Arabic and Hebrew render right-to-left throughout the transcript, suggestions, and exported report. Punctuation lands at the correct end of the sentence, and answers that mix scripts - a Hebrew explanation around a Latin product name, for example - keep their order. Code blocks stay left-to-right, since code is left-to-right in every language.
+
+### The App's Own Interface
+
+Buttons, menus, and dialogs stay in English regardless of the interview language. This is deliberate: an English button on a Spanish interview is a small inconvenience, while an English transcript of Spanish speech would be a wrong answer read out loud.
+
+---
+
 ## AI Reply Suggestions
 
 Reply suggestions are generated based on the current transcript, your profile (name, CV), and the job context you configured.
@@ -139,9 +176,14 @@ This is your interview configuration, not general account info (like your email 
 
 ### Device Settings
 
-| Setting    | Where to configure       | Description                        |
-| ---------- | ------------------------ | ---------------------------------- |
-| Microphone | Audio Options (mic icon) | Physical microphone for your voice |
+| Setting            | Where to configure           | Description                                             |
+| ------------------ | ---------------------------- | ------------------------------------------------------- |
+| Microphone         | Audio Options (mic icon)     | Physical microphone for your voice                      |
+| Interview language | Language button (`EN`, `ES`) | Transcription, suggestion, and exported report language |
+
+Both can be changed **while a session is running**. The microphone swap is instant and leaves the transcript unbroken; the language switch reconnects transcription and costs a second or two. See [Interview Language](#interview-language) for what happens on each half.
+
+If a microphone you pick cannot be opened - unplugged, held by another app, or refused by permissions - the session stays on the one it was already using, and the control bar flags the device that failed rather than leaving you to work it out from silence.
 
 ### LLM Options
 

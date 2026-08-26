@@ -198,6 +198,14 @@ const faqPageJsonLd = {
     },
     {
       '@type': 'Question',
+      name: 'What languages can I interview in?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Twenty-eight: English, Spanish, German, French, Portuguese, Italian, Dutch, Polish, Russian, Ukrainian, Czech, Romanian, Greek, Hungarian, Swedish, Danish, Norwegian, Finnish, Turkish, Hindi, Japanese, Korean, Chinese, Vietnamese, Thai, Indonesian, Arabic, and Hebrew. One setting decides which speech model transcribes the call, the language your suggestions come back in, and the language of your exported report. You can change it mid-interview - transcription reconnects on the new language while suggestions follow immediately. Arabic and Hebrew render right-to-left throughout.',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'Do I need special hardware to run Power Interview AI?',
       acceptedAnswer: {
         '@type': 'Answer',

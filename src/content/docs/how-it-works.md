@@ -43,13 +43,19 @@ During a session, the app captures:
 
 Both streams are sent for real-time transcription. Partial and final transcript updates are reflected in the UI as they arrive.
 
+The interview language is a property of these two connections, not of the audio device, which is why the two settings behave differently while a session is running. Changing the **microphone** replaces the audio source feeding an existing connection, so nothing reconnects and the transcript is unbroken. Changing the **language** requires both channels to be re-opened against the speech model for that language, which costs a second or two.
+
+Your microphone is only ever the source for your own channel. The interviewer's channel is loopback audio captured from the call and has no device to change.
+
 ---
 
 ## Suggestion Flow
 
 ### Reply Suggestions
 
-When new transcript context is available, the app sends relevant context (transcript + profile + job context) to the LLM service and streams suggestions back to the UI.
+When new transcript context is available, the app sends relevant context (transcript + profile + job context + interview language) to the LLM service and streams suggestions back to the UI.
+
+Not every interviewer turn needs an answer. Before a request is made, the app classifies the turn locally: a plain acknowledgement ("mm-hm", "right, okay") is dropped without a request and without a card ever appearing, a complete question is answered immediately, and anything ambiguous waits briefly in case the speech recognizer split one question across two lines. This is why short filler from the interviewer does not produce a suggestion card that flashes up and disappears.
 
 ### Code Suggestions
 
@@ -83,4 +89,3 @@ Session transcript/suggestion content is retained in memory for the active app s
 ## Credits System
 
 Credits are consumed while AI-assisted features are active (including transcription and suggestion generation). Credit balance is refreshed periodically during a running session and updates after successful payments.
-
