@@ -79,7 +79,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Power Interview AI - Interview Coach & Meeting Note Taker',
     description: DEFAULT_DESCRIPTION,
-    images: [{ url: '/logo.png' }],
+    images: [
+      {
+        url: '/open-graph.png',
+        width: 1235,
+        height: 647,
+        alt: 'Power Interview AI - AI interview coach and meeting note taker',
+      },
+    ],
     siteName: SITE_NAME,
     locale: 'en_US',
   },
@@ -88,7 +95,7 @@ export const metadata: Metadata = {
     title: 'Power Interview AI - Interview Coach & AI Note Taker',
     description:
       'New users get a full 1-hour free trial with our free model - no rate limits, no interruptions. Privacy-first AI interview coach for Zoom, Google Meet, Teams. Real-time transcription, AI suggestions, mock interviews, and smart exports.',
-    images: ['/logo.png'],
+    images: ['/open-graph.png'],
   },
   other: {
     'theme-color': '#1a0f0a',

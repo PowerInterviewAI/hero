@@ -23,13 +23,20 @@ export function buildMetadata({ title, description, path }: PageMetadataInput): 
       title: fullTitle,
       description,
       url,
-      images: [{ url: '/logo.png' }],
+      images: [
+        {
+          url: '/open-graph.png',
+          width: 1235,
+          height: 647,
+          alt: SITE_NAME,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: ['/logo.png'],
+      images: ['/open-graph.png'],
     },
   };
 }
