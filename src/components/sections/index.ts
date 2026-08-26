@@ -1,6 +1,6 @@
 export * from './BenefitsSection';
 export * from './ContactSection';
-export * from './CoFoundersSection';
+// export * from './CoFoundersSection';
 export * from './FAQSection';
 export * from './FeaturesSection';
 export * from './FooterSection';

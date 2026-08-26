@@ -11,7 +11,7 @@ interface HomeContentProps {
   whyChooseSection: ReactNode;
   pricingSection: ReactNode;
   contactSection: ReactNode;
-  coFoundersSection: ReactNode;
+  // coFoundersSection: ReactNode;
 }
 
 // Header/HeroSection/FAQSection/FooterSection stay directly imported here
@@ -27,7 +27,7 @@ export function HomeContent({
   whyChooseSection,
   pricingSection,
   contactSection,
-  coFoundersSection,
+  // coFoundersSection,
 }: HomeContentProps) {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -62,7 +62,7 @@ export function HomeContent({
         {pricingSection}
         <FAQSection scrollToSection={scrollToSection} />
         {contactSection}
-        {coFoundersSection}
+        {/* {coFoundersSection} */}
       </main>
 
       <FooterSection scrollToSection={scrollToSection} />

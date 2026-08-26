@@ -30,7 +30,7 @@ const NAV_LINKS = [
 
 const NAV_LINKS_TAIL = [
   { label: 'Contact', sectionId: 'contact', to: '/contact' },
-  { label: 'Our Team', sectionId: 'co-founders', to: '/#co-founders' },
+  // { label: 'Our Team', sectionId: 'co-founders', to: '/#co-founders' },
 ] as const;
 
 export const Header: React.FC<HeaderProps> = ({

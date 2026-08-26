@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 
 import { HomeContent } from '@/components/HomeContent';
 import {
-  BenefitsSection,
-  CoFoundersSection,
+  BenefitsSection, // CoFoundersSection,
   ContactSection,
   FeaturesSection,
   PricingSection,
@@ -26,7 +25,7 @@ export default function Home() {
       whyChooseSection={<WhyChooseSection />}
       pricingSection={<PricingSection />}
       contactSection={<ContactSection />}
-      coFoundersSection={<CoFoundersSection />}
+      // coFoundersSection={<CoFoundersSection />}
     />
   );
 }
