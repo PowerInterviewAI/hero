@@ -40,12 +40,14 @@ open "Power.Interview.AI.dmg"
 
 As of v1.6.3, both builds carry an arch tag (`-arm64` or `-x64`) in their filename, which is why the Intel branch filters `-arm64` out instead of matching on `x86_64`.
 
-If you already know the version you want, the download URL can be built directly:
+If you want a specific version rather than the newest one, set `VERSION` and the
+download URL can be built directly (it is seeded below with the current release):
 
 ```bash
+VERSION={{version}}
 SUF="-x64"; [ "$(uname -m)" = "arm64" ] && SUF="-arm64"
-DMG="Power.Interview.AI-1.6.6$SUF.dmg"
-curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/latest/download/$DMG"
+DMG="Power.Interview.AI-$VERSION$SUF.dmg"
+curl -L -o "$DMG" "https://github.com/PowerInterviewAI/client-app/releases/download/v$VERSION/$DMG"
 open "$DMG"
 ```
 
@@ -59,9 +61,9 @@ Release builds are ad-hoc signed but not notarized, so macOS may report the app 
 
 Use the latest release binaries from GitHub:
 
-- [Windows installer (.exe)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/PowerInterviewAI-Setup-1.6.6.exe)
-- [macOS installer - Apple Silicon (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.6-arm64.dmg)
-- [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.6-x64.dmg)
+- [Windows installer (.exe)]({{downloadWindows}})
+- [macOS installer - Apple Silicon (.dmg)]({{downloadMacArm}})
+- [macOS installer - Intel (.dmg)]({{downloadMacIntel}})
 - [All release assets (latest)](https://github.com/PowerInterviewAI/client-app/releases/latest)
 
 | Windows                                                                     | macOS                                                                       |

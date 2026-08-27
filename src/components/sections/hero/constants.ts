@@ -80,19 +80,25 @@ export const getInstallCommand = (
   return 'DMGS=$(curl -s https://api.github.com/repos/PowerInterviewAI/client-app/releases/latest | grep -Eo \'https://[^"]+\\.dmg\'); if [ "$(uname -m)" = "arm64" ]; then DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -- \'-arm64\\.dmg\' | head -n 1); else DMG_URL=$(printf \'%s\\n\' "$DMGS" | grep -v -- \'-arm64\\.dmg\' | head -n 1); fi; curl -L "$DMG_URL" -o Power.Interview.AI.dmg && open "Power.Interview.AI.dmg"';
 };
 
-/** Direct asset URL for a platform, falling back to the releases page. */
-export const getDownloadUrl = (
-  version: string | null,
-  target: 'windows' | 'macos-arm64' | 'macos-x64'
-): string => {
-  if (!version) return RELEASES_LATEST_URL;
+export type DownloadTarget = 'windows' | 'macos-arm64' | 'macos-x64';
 
+/**
+ * Release asset filename for a platform. electron-builder puts the version in
+ * every artifact name, so any URL pointing at one has to be built from a known
+ * version - there is no version-less alias on GitHub. Single source of truth
+ * for these names; src/lib/release.ts builds per-tag URLs from the same map.
+ */
+export const getAssetName = (version: string, target: DownloadTarget): string => {
   switch (target) {
     case 'windows':
-      return `${DOWNLOAD_BASE_URL}/PowerInterviewAI-Setup-${version}.exe`;
+      return `PowerInterviewAI-Setup-${version}.exe`;
     case 'macos-arm64':
-      return `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-arm64.dmg`;
+      return `Power.Interview.AI-${version}-arm64.dmg`;
     case 'macos-x64':
-      return `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-x64.dmg`;
+      return `Power.Interview.AI-${version}-x64.dmg`;
   }
 };
+
+/** Direct asset URL for a platform, falling back to the releases page. */
+export const getDownloadUrl = (version: string | null, target: DownloadTarget): string =>
+  version ? `${DOWNLOAD_BASE_URL}/${getAssetName(version, target)}` : RELEASES_LATEST_URL;

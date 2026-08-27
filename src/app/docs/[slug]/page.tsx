@@ -17,6 +17,7 @@ import {
 } from '@/lib/docs';
 import { getMediaSize, getVideoPoster } from '@/lib/media';
 import { buildMetadata } from '@/lib/metadata';
+import { applyReleaseTokens, getLatestVersion } from '@/lib/release';
 
 interface DocPageProps {
   params: Promise<{ slug: string }>;
@@ -171,6 +172,10 @@ export default async function DocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  // Docs are static markdown but the download links can't be - a pinned version
+  // 404s the day the next release ships. See src/lib/release.ts.
+  const rendered = applyReleaseTokens(content, await getLatestVersion());
+
   const { previous, next } = getDocNeighbours(slug);
 
   return (
@@ -180,7 +185,7 @@ export default async function DocPage({ params }: DocPageProps) {
 
         <article className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-            {content}
+            {rendered}
           </ReactMarkdown>
         </article>
 
