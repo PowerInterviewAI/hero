@@ -109,8 +109,14 @@ export const InstallPanel: React.FC<{ id?: string }> = ({ id = 'install' }) => {
                 )}
               </div>
 
-              <div className="relative rounded-md border border-border bg-surface-1">
-                <pre className="overflow-x-auto p-4 pr-14">
+              {/* The button sits BESIDE the scroll area, not on top of it. It used
+                  to be absolutely positioned over the <pre>, and since it's a
+                  ghost button - no background - the command scrolled visibly
+                  underneath the icon and neither could be read. The pr-14 that
+                  was meant to reserve room only padded the end of the scrolling
+                  content, so it did nothing at the right edge of the box. */}
+              <div className="flex items-start gap-2 rounded-md border border-border bg-surface-1">
+                <pre className="min-w-0 flex-1 overflow-x-auto p-4">
                   <code className="font-mono text-xs leading-relaxed text-foreground">
                     {command}
                   </code>
@@ -118,9 +124,10 @@ export const InstallPanel: React.FC<{ id?: string }> = ({ id = 'install' }) => {
                 <Button
                   size="icon"
                   variant="ghost"
-                  className="absolute right-2 top-2"
+                  className="m-2 shrink-0"
                   onClick={copyCommand}
                   aria-label={copied ? 'Copied' : 'Copy install command'}
+                  title={copied ? 'Copied' : 'Copy install command'}
                 >
                   {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
                 </Button>
