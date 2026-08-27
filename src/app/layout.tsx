@@ -1,10 +1,37 @@
 import React from 'react';
 
 import 'github-markdown-css/github-markdown.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 
+import { cn } from '@/lib/utils';
 import '@/styles/index.css';
+
+// next/font self-hosts these at build time, so there's no request to Google and
+// no swap-in flash. Each is exposed as a CSS variable that tailwind.config.js
+// maps to font-sans / font-display / font-mono.
+const fontSans = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const fontDisplay = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+// Mono carries real weight on this site: install commands, version strings and
+// hotkey chips all render in it.
+const fontMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 const SITE_URL = 'https://www.powerinterviewai.com';
 const SITE_NAME = 'Power Interview AI';
@@ -97,9 +124,15 @@ export const metadata: Metadata = {
       'New users get a full 1-hour free trial with our free model - no rate limits, no interruptions. Privacy-first AI interview coach for Zoom, Google Meet, Teams. Real-time transcription, AI suggestions, mock interviews, and smart exports.',
     images: ['/open-graph.png'],
   },
-  other: {
-    'theme-color': '#1a0f0a',
-  },
+};
+
+// Kept in sync with --background in src/styles/index.css and with
+// public/manifest.json - all three used to disagree.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fff8f0' },
+    { media: '(prefers-color-scheme: dark)', color: '#110f0e' },
+  ],
 };
 
 const softwareApplicationJsonLd = {
@@ -285,7 +318,11 @@ const themeInitScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(fontSans.variable, fontDisplay.variable, fontMono.variable)}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script

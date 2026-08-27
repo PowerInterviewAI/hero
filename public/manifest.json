@@ -4,8 +4,8 @@
     "description": "Transform your interview performance with Power Interview AI - a privacy-first AI interview assistant with real-time transcription, intelligent reply and code suggestions, and exportable session reports. Use your own LLM provider (OpenAI, Anthropic, Google, etc.) and get started instantly with included models based on your plan.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
+    "background_color": "#110f0e",
+    "theme_color": "#110f0e",
     "orientation": "portrait-primary",
     "icons": [
         {
