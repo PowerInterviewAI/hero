@@ -2,170 +2,232 @@ import React from 'react';
 
 import { SiSuperuser } from '@icons-pack/react-simple-icons';
 import {
+  ArrowRight,
   Captions,
   FileDown,
   Ghost,
   KeyRound,
   Languages,
+  type LucideIcon,
   MessageSquareCode,
   MessageSquareText,
   UserLock,
 } from 'lucide-react';
 
-import Container from '@/components/Container';
 import { GoHomeButton } from '@/components/GoHomeButton';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Kbd } from '@/components/ui/kbd';
+import { Reveal } from '@/components/ui/reveal';
+import { Section, SectionHeading } from '@/components/ui/section';
+import { HOTKEYS, Hotkey } from '@/config/hotkeys';
+import { cn } from '@/lib/utils';
 
-export const FeaturesSection: React.FC = () => {
-  return (
-    <section
-      id="features"
-      className="bg-muted/30 py-16 md:py-24"
-      aria-labelledby="features-heading"
-    >
-      <Container>
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2
-            id="features-heading"
-            className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
-          >
-            Powerful Features
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Everything you need to ace your interviews and capture meeting insights with AI
-          </p>
-        </div>
+interface Feature {
+  id: string;
+  icon: LucideIcon | typeof SiSuperuser;
+  title: string;
+  description: React.ReactNode;
+  /** Column span at lg and up - drives the bento rhythm. */
+  wide?: boolean;
+  /** Optional screenshot, rendered under the copy in wide tiles. */
+  image?: { src: string; alt: string };
+  footer?: React.ReactNode;
+}
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <Captions className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Live Transcription</CardTitle>
-              <CardDescription>
-                Dual-channel transcription with automatic speaker detection and full conversation
-                history. Change your microphone{' '}
-                <span className="font-semibold text-foreground">mid-interview</span> without
-                stopping the session - no gap in the transcript, nothing to restart.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+const Em: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="font-medium text-foreground">{children}</span>
+);
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <MessageSquareText className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>AI Reply Suggestions</CardTitle>
-              <CardDescription>
-                Get personalized, context-aware responses powered by comprehensive awareness of your
-                CV, job description, and{' '}
-                <span className="font-semibold text-foreground">full conversation history</span>.
-                Our AI analyzes patterns in your communication style and adapts to provide more
-                relevant, accurate suggestions that help you articulate your thoughts better. Toggle{' '}
-                <span className="font-semibold text-foreground">Professional Mode</span> for
-                at-a-glance hints - a headline plus keyword bullets - instead of full sentences.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+const FEATURES: Feature[] = [
+  {
+    id: 'stealth',
+    icon: Ghost,
+    title: 'Stealth mode',
+    description: (
+      <>
+        Operate discreetly with hotkeys, opacity control, and smart window positioning. The window
+        is <Em>not capturable in screenshots</Em> and stays invisible during full screen share.
+      </>
+    ),
+    wide: true,
+    image: { src: '/media/docs/stealth-mode.png', alt: 'The stealth overlay during a call' },
+    footer: (
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <Kbd combo={HOTKEYS[Hotkey.ToggleStealth].combo} />
+        <span className="text-xs text-muted-foreground">{HOTKEYS[Hotkey.ToggleStealth].title}</span>
+      </div>
+    ),
+  },
+  {
+    id: 'transcription',
+    icon: Captions,
+    title: 'Live transcription',
+    description: (
+      <>
+        Dual-channel transcription with automatic speaker detection and full conversation history.
+        Change your microphone <Em>mid-interview</Em> without stopping the session - no gap in the
+        transcript, nothing to restart.
+      </>
+    ),
+  },
+  {
+    id: 'suggestions',
+    icon: MessageSquareText,
+    title: 'AI reply suggestions',
+    description: (
+      <>
+        Personalised, context-aware responses grounded in your CV, the job description, and your{' '}
+        <Em>full conversation history</Em>. Suggestions adapt to your communication style so you
+        articulate your own experience rather than reading generic advice. Toggle{' '}
+        <Em>Professional Mode</Em> for at-a-glance hints - a headline plus keyword bullets - instead
+        of full sentences.
+      </>
+    ),
+    wide: true,
+    footer: (
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <Kbd combo={HOTKEYS[Hotkey.ToggleProfessionalMode].combo} />
+        <span className="text-xs text-muted-foreground">
+          {HOTKEYS[Hotkey.ToggleProfessionalMode].title}
+        </span>
+      </div>
+    ),
+  },
+  {
+    id: 'languages',
+    icon: Languages,
+    title: '28 interview languages',
+    description: (
+      <>
+        One setting drives all three: which speech model transcribes the call, the language your
+        suggestions come back in, and the language of your exported report. Switch it{' '}
+        <Em>mid-interview</Em>, not just before you start. Full right-to-left support for Arabic and
+        Hebrew.
+      </>
+    ),
+  },
+  {
+    id: 'code',
+    icon: MessageSquareCode,
+    title: 'Code suggestions',
+    description: (
+      <>
+        Screenshot analysis with LLM-powered solutions for coding problems, complete with syntax
+        highlighting.
+      </>
+    ),
+  },
+  {
+    id: 'export',
+    icon: FileDown,
+    title: 'AI note taker export',
+    description: (
+      <>
+        <Em>Smart meeting export</Em> for interviews, mock interviews, and video calls. AI-generated
+        summaries, action items, speaker-labelled transcripts, and follow-up notes. Exports to{' '}
+        <Em>DOCX</Em> for easy sharing across individuals and enterprise teams.
+      </>
+    ),
+    wide: true,
+    image: { src: '/media/docs/export-example.png', alt: 'An exported interview report' },
+  },
+  {
+    id: 'mock',
+    icon: SiSuperuser,
+    title: 'Mock interview',
+    description: (
+      <>
+        Practice with AI-guided mock interviews and get exportable performance notes. Learn more in
+        the{' '}
+        <a
+          className="font-medium text-primary underline-offset-4 hover:underline"
+          href="/docs/mock-interview"
+        >
+          mock interview guide
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    id: 'plans',
+    icon: KeyRound,
+    title: 'Plan-based access',
+    description: (
+      <>
+        Trial users get live suggestions free under rate limit (5 suggestions per hour). Paid users
+        unlock no limit, triggered suggestions, and provided SOTA models.
+      </>
+    ),
+  },
+  {
+    id: 'privacy',
+    icon: UserLock,
+    title: 'Privacy first',
+    description: (
+      <>
+        Transcripts are never retained after your session. No data mining, and full control over
+        your information.
+      </>
+    ),
+  },
+];
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <Languages className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>28 Interview Languages</CardTitle>
-              <CardDescription>
-                Interview in{' '}
-                <span className="font-semibold text-foreground">your own language</span> - one
-                setting drives all three: which speech model transcribes the call, the language your
-                suggestions come back in, and the language of your exported report. Switch it{' '}
-                <span className="font-semibold text-foreground">mid-interview</span>, not just
-                before you start. Full right-to-left support for Arabic and Hebrew.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+interface FeaturesSectionProps {
+  /** Set on the standalone /features route so the section owns the h1. */
+  standalone?: boolean;
+}
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <Ghost className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Stealth Mode</CardTitle>
-              <CardDescription>
-                Operate discreetly with hotkeys, opacity control, and smart window positioning.
-                Window is not capturable and invisible during full screen share.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ standalone = false }) => (
+  <Section id="features" tone="muted" aria-labelledby="features-heading">
+    <SectionHeading
+      id="features-heading"
+      as={standalone ? 'h1' : 'h2'}
+      eyebrow="Features"
+      title="Everything the call needs, nothing it can see"
+      description="Built for live interviews, mock practice, and meeting notes alike."
+    />
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <MessageSquareCode className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Code Suggestions</CardTitle>
-              <CardDescription>
-                Screenshot analysis with LLM-powered solutions for coding problems, complete with
-                syntax highlighting
-              </CardDescription>
-            </CardHeader>
-          </Card>
+    <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {FEATURES.map((feature, index) => (
+        <Reveal
+          key={feature.id}
+          delay={Math.min(index, 5) * 60}
+          className={cn(feature.wide && 'lg:col-span-2')}
+        >
+          <article className="group flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/40">
+            <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+              <feature.icon className="size-5" aria-hidden="true" />
+            </span>
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <FileDown className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>AI Note Taker Export</CardTitle>
-              <CardDescription>
-                <span className="font-semibold text-foreground">Smart meeting export</span> for
-                interviews, mock interviews, and video calls. AI-generated summaries, action items,
-                speaker-labeled transcripts, and follow-up notes. Exports to{' '}
-                <span className="font-semibold text-foreground">DOCX format</span> for easy sharing
-                across individuals and enterprise teams.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+            <h3 className="text-lg font-semibold">{feature.title}</h3>
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <SiSuperuser className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Mock Interview</CardTitle>
-              <CardDescription>
-                Practice with AI-guided mock interviews and get exportable performance notes. Learn
-                more in the{' '}
-                <a className="font-semibold text-primary underline" href="/docs/mock-interview">
-                  mock interview guide
-                </a>
-                .
-              </CardDescription>
-            </CardHeader>
-          </Card>
+            <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <KeyRound className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Plan-Based Access</CardTitle>
-              <CardDescription>
-                Trial users get live suggestions free under rate limit (5 suggestions per hour).
-                Paid users unlock no limit, triggered suggestions, and provided SOTA models.
-              </CardDescription>
-            </CardHeader>
-          </Card>
+            {feature.footer && <div className="mt-auto pt-2">{feature.footer}</div>}
 
-          <Card className="transition-shadow hover:shadow-lg">
-            <CardHeader>
-              <UserLock className="mb-2 h-10 w-10 text-primary" aria-hidden="true" />
-              <CardTitle>Privacy First</CardTitle>
-              <CardDescription>
-                Transcripts are never retained after your session. No data mining, and full control
-                over your information
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
+            {feature.image && (
+              <div className="mt-auto overflow-hidden rounded-lg border border-border bg-surface-1">
+                <img
+                  src={feature.image.src}
+                  alt={feature.image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            )}
+          </article>
+        </Reveal>
+      ))}
+    </div>
 
-        <div className="mt-16 text-center">
-          <GoHomeButton size="lg">
-            Get Started Now
-            <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </GoHomeButton>
-        </div>
-      </Container>
-    </section>
-  );
-};
+    <div className="mt-14 flex justify-center">
+      <GoHomeButton size="lg">
+        Download for free
+        <ArrowRight />
+      </GoHomeButton>
+    </div>
+  </Section>
+);
 
 export default FeaturesSection;

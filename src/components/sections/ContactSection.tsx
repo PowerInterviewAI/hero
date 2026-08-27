@@ -1,145 +1,108 @@
 import React from 'react';
 
 import { SiDiscord, SiGithub, SiProtonmail, SiTelegram, SiX } from '@icons-pack/react-simple-icons';
+import { ArrowUpRight } from 'lucide-react';
 
-import Container from '@/components/Container';
-import { Card, CardContent } from '@/components/ui/card';
+import { Reveal } from '@/components/ui/reveal';
+import { Section, SectionHeading } from '@/components/ui/section';
 
-export const ContactSection: React.FC = () => {
-  return (
-    <section id="contact" className="bg-muted/30 py-16 md:py-24" aria-labelledby="contact-heading">
-      <Container>
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-12 text-center">
-            <h2
-              id="contact-heading"
-              className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
-            >
-              Get In Touch
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Have questions or need support? We're here to help!
-            </p>
-          </div>
+interface Channel {
+  icon: typeof SiGithub;
+  name: string;
+  handle: string;
+  blurb: string;
+  href: string;
+  external?: boolean;
+}
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Email Card */}
-            <a
-              href="mailto:team@vectorleappulse.xyz"
-              className="group block transition-transform hover:scale-105"
-            >
-              <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <SiProtonmail className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">Email</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-primary">
-                    team@vectorleappulse.xyz
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Send us an email for detailed inquiries
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
+const CHANNELS: Channel[] = [
+  {
+    icon: SiProtonmail,
+    name: 'Email',
+    handle: 'team@vectorleappulse.xyz',
+    blurb: 'Detailed enquiries, billing, and refunds',
+    href: 'mailto:team@vectorleappulse.xyz',
+  },
+  {
+    icon: SiGithub,
+    name: 'GitHub',
+    handle: 'PowerInterviewAI/client-app',
+    blurb: 'Releases, issues, and source',
+    href: 'https://github.com/PowerInterviewAI/client-app',
+    external: true,
+  },
+  {
+    icon: SiTelegram,
+    name: 'Telegram',
+    handle: '@power_interview_ai',
+    blurb: 'Announcements and quick questions',
+    href: 'https://t.me/power_interview_ai',
+    external: true,
+  },
+  {
+    icon: SiDiscord,
+    name: 'Discord',
+    handle: 'Community server',
+    blurb: 'Chat with other candidates and the team',
+    href: 'https://discord.gg/TJJp5azK7Z',
+    external: true,
+  },
+  {
+    icon: SiX,
+    name: 'X',
+    handle: '@power_interview',
+    blurb: 'Product updates',
+    href: 'https://x.com/power_interview',
+    external: true,
+  },
+];
 
-            {/* GitHub Card */}
-            <a
-              href="https://github.com/PowerInterviewAI/client-app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:scale-105"
-            >
-              <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <SiGithub className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">GitHub</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-primary">
-                    PowerInterviewAI/client-app
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    View source code, report issues, and contribute
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
+interface ContactSectionProps {
+  /** Set on the standalone /contact route so the section owns the h1. */
+  standalone?: boolean;
+}
 
-            {/* Telegram Card */}
-            <a
-              href="https://t.me/power_interview_ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:scale-105"
-            >
-              <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <SiTelegram className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">Telegram</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-primary">
-                    @power_interview_ai
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Join our Telegram community for updates
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
+export const ContactSection: React.FC<ContactSectionProps> = ({ standalone = false }) => (
+  <Section id="contact" tone="muted" aria-labelledby="contact-heading">
+    <SectionHeading
+      id="contact-heading"
+      as={standalone ? 'h1' : 'h2'}
+      eyebrow="Contact"
+      title="Get in touch"
+      description="Questions, billing, or a bug during a call - pick whichever channel suits you."
+    />
 
-            {/* X Card */}
-            <a
-              href="https://x.com/power_interview"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:scale-105"
-            >
-              <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <SiX className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">X</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-primary">
-                    @power_interview
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Follow us on X (formerly Twitter)
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
+    <div className="mx-auto mt-14 grid max-w-4xl gap-3 sm:grid-cols-2">
+      {CHANNELS.map((channel, index) => (
+        <Reveal key={channel.name} delay={Math.min(index, 4) * 60}>
+          <a
+            href={channel.href}
+            target={channel.external ? '_blank' : undefined}
+            rel={channel.external ? 'noopener noreferrer' : undefined}
+            className="group flex h-full items-start gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+              <channel.icon className="size-5" />
+            </span>
 
-            {/* Discord Card */}
-            <a
-              href="https://discord.gg/TJJp5azK7Z"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block transition-transform hover:scale-105"
-            >
-              <Card className="h-full border-2 transition-colors hover:border-primary hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <SiDiscord className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold">Discord</h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-primary">
-                    Power Interview AI
-                  </p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Chat with us and other users on Discord
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-};
+            <span className="min-w-0 flex-1">
+              <span className="flex items-center gap-1.5">
+                <span className="font-medium text-foreground">{channel.name}</span>
+                <ArrowUpRight
+                  className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+              </span>
+              <span className="mt-0.5 block truncate font-mono text-xs text-primary">
+                {channel.handle}
+              </span>
+              <span className="mt-1.5 block text-sm text-muted-foreground">{channel.blurb}</span>
+            </span>
+          </a>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+);
 
 export default ContactSection;

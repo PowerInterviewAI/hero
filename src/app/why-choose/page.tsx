@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function WhyChoosePage() {
   return (
     <PageChrome>
-      <WhyChooseSection />
+      <WhyChooseSection standalone />
     </PageChrome>
   );
 }

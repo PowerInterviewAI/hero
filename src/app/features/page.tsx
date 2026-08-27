@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function FeaturesPage() {
   return (
     <PageChrome>
-      <FeaturesSection />
+      <FeaturesSection standalone />
     </PageChrome>
   );
 }

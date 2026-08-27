@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import type { Metadata } from 'next';
 
 import { HomeContent } from '@/components/HomeContent';
@@ -7,6 +9,7 @@ import {
   FeaturesSection,
   HowItWorksSection,
   PricingSection,
+  PricingSkeleton,
   TestimonialsSection,
   WhyChooseSection,
 } from '@/components/sections';
@@ -26,7 +29,11 @@ export default function Home() {
       featuresSection={<FeaturesSection />}
       benefitsSection={<BenefitsSection />}
       whyChooseSection={<WhyChooseSection />}
-      pricingSection={<PricingSection />}
+      pricingSection={
+        <Suspense fallback={<PricingSkeleton />}>
+          <PricingSection />
+        </Suspense>
+      }
       testimonialsSection={<TestimonialsSection />}
       contactSection={<ContactSection />}
     />

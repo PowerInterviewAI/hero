@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function BenefitsPage() {
   return (
     <PageChrome>
-      <BenefitsSection />
+      <BenefitsSection standalone />
     </PageChrome>
   );
 }

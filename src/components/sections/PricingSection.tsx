@@ -1,6 +1,11 @@
-import Container from '@/components/Container';
+import React from 'react';
+
+import { Check, Coins, Minus } from 'lucide-react';
+
 import { GoHomeButton } from '@/components/GoHomeButton';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Reveal } from '@/components/ui/reveal';
+import { Section, SectionHeading } from '@/components/ui/section';
 import { ENV } from '@/config/constants';
 import { cn } from '@/lib/utils';
 import { Plan } from '@/types';
@@ -30,23 +35,68 @@ async function getPlans(): Promise<Plan[] | null> {
   }
 }
 
-export const PricingSection = async () => {
+/** Trial vs paid, so the difference is visible before the credit packs. */
+const TIER_ROWS: { label: string; trial: string | true; paid: string | true }[] = [
+  { label: 'Duration', trial: '1 hour, new accounts', paid: 'As long as your credits last' },
+  { label: 'Provided model', trial: 'Free model', paid: 'SOTA model' },
+  { label: 'Live suggestions', trial: true, paid: true },
+  { label: 'Triggered suggestions', trial: 'Not included', paid: true },
+  { label: 'Rate limit', trial: 'None during trial', paid: 'None' },
+  { label: 'Bring your own provider', trial: true, paid: true },
+];
+
+const TierValue: React.FC<{ value: string | true }> = ({ value }) =>
+  value === true ? (
+    <>
+      <Check className="size-4 text-success" aria-hidden="true" />
+      <span className="sr-only">Included</span>
+    </>
+  ) : (
+    <span className="text-muted-foreground">{value}</span>
+  );
+
+/** Rendered by the /pricing route and the home page while the fetch resolves. */
+export const PricingSkeleton: React.FC = () => (
+  <Section id="pricing" aria-label="Loading pricing">
+    <SectionHeading eyebrow="Pricing" title="Simple, transparent pricing" />
+    <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="h-72 animate-pulse rounded-xl border border-border bg-card" />
+      ))}
+    </div>
+  </Section>
+);
+
+interface PricingSectionProps {
+  /** Set on the standalone /pricing route so the section owns the h1. */
+  standalone?: boolean;
+}
+
+export const PricingSection = async ({ standalone = false }: PricingSectionProps) => {
   const plans = await getPlans();
+
+  const heading = (
+    <SectionHeading
+      id="pricing-heading"
+      as={standalone ? 'h1' : 'h2'}
+      eyebrow="Pricing"
+      title="Simple, transparent pricing"
+      description="Credits are consumed at 10 per minute of AI assistance, so 600 credits is about an hour. Buy what you need - there is no subscription."
+    />
+  );
 
   if (!plans) {
     return (
-      <section id="pricing" className="py-16 md:py-24" aria-labelledby="pricing-heading">
-        <Container>
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="text-lg text-destructive">
-              Failed to load plans. Please try again later.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <Section id="pricing" aria-labelledby="pricing-heading">
+        {heading}
+        <div className="mx-auto mt-10 max-w-md rounded-xl border border-border bg-card p-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            Live plan pricing is temporarily unavailable. Credit packs are listed in the app, and
+            the 1-hour free trial is unaffected.
+          </p>
+          <GoHomeButton className="mt-4">Download and start free</GoHomeButton>
+        </div>
+      </Section>
     );
   }
 
@@ -54,170 +104,141 @@ export const PricingSection = async () => {
   const starterPricePerCredit = starterPlan ? starterPlan.price_usd / starterPlan.credits : 0;
 
   return (
-    <section id="pricing" className="py-16 md:py-24" aria-labelledby="pricing-heading">
-      <Container>
-        <div className="mx-auto mb-4 max-w-2xl text-center">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Simple, Transparent Pricing
-          </h2>
-          <div className="mt-6 inline-flex flex-col gap-2">
-            <p className="text-sm text-muted-foreground">
-              Credit usage: 10 credits per minute of AI assistance
-            </p>
-            <div className="mt-2 rounded-lg border border-primary/20 bg-background px-4 py-2 text-center">
-              <p className="text-xs font-medium text-foreground">
-                💰 Payment: Coins only - No credit card, PayPal, or bank required
-              </p>
-            </div>
-          </div>
+    <Section id="pricing" aria-labelledby="pricing-heading">
+      {heading}
+
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Badge variant="success" size="lg" dot>
+          New accounts: 1-hour free trial
+        </Badge>
+        <Badge variant="outline" size="lg">
+          <Coins aria-hidden="true" />
+          Coins only - no card, PayPal, or bank details
+        </Badge>
+      </div>
+
+      {/* Trial vs paid */}
+      <Reveal className="mx-auto mt-12 max-w-3xl">
+        <div className="overflow-x-auto rounded-xl border border-border bg-card">
+          <table className="w-full min-w-[34rem] border-collapse text-sm">
+            <caption className="sr-only">Free trial compared with paid plans</caption>
+            <thead>
+              <tr className="border-b border-border">
+                <th scope="col" className="px-5 py-4 text-left font-medium text-muted-foreground">
+                  What you get
+                </th>
+                <th scope="col" className="w-48 px-4 py-4 text-left font-semibold text-foreground">
+                  Free trial
+                </th>
+                <th
+                  scope="col"
+                  className="w-48 bg-primary/5 px-4 py-4 text-left font-semibold text-foreground"
+                >
+                  Paid
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {TIER_ROWS.map((row) => (
+                <tr key={row.label} className="border-b border-border-subtle last:border-b-0">
+                  <th scope="row" className="px-5 py-3 text-left font-normal text-foreground">
+                    {row.label}
+                  </th>
+                  <td className="px-4 py-3">
+                    <TierValue value={row.trial} />
+                  </td>
+                  <td className="bg-primary/5 px-4 py-3">
+                    <TierValue value={row.paid} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </Reveal>
 
-        <div className="mx-auto mb-4 flex justify-center">
-          <div className="flex items-center gap-2 rounded-xl border border-green-500/30 bg-green-500/10 px-5 py-2.5 text-sm font-medium text-foreground">
-            <span className="rounded-full bg-green-500 px-2 py-0.5 text-xs font-bold text-white">
-              NEW USERS
-            </span>
-            Full{' '}
-            <span className="mx-1 font-semibold text-green-600 dark:text-green-400">
-              1-hour free trial
-            </span>{' '}
-            with our free model -
-            <span className="text-green-600 dark:text-green-400">
-              no rate limits, no interruptions
-            </span>
-          </div>
-        </div>
+      {/* Credit packs */}
+      <div className="mx-auto mt-14 grid max-w-5xl items-start gap-6 md:grid-cols-3">
+        {plans.map((plan, index) => {
+          const planName = plan.plan.charAt(0).toUpperCase() + plan.plan.slice(1);
+          const minutes = plan.credits / 10;
+          const description = planDescriptions[plan.plan.toLowerCase()] || '';
+          const discount =
+            starterPricePerCredit > 0 ? calculateDiscount(plan, starterPricePerCredit) : 0;
 
-        <div className="mx-auto mb-10 grid max-w-5xl gap-6 md:grid-cols-2">
-          <Card className="border-primary/30 bg-primary/5">
-            <CardHeader>
-              <CardTitle className="text-2xl">Free Trial</CardTitle>
-              <CardDescription>
-                Full 1-hour trial experience - no rate limits, no interruptions.
-              </CardDescription>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <span className="font-semibold text-foreground">Trial duration:</span> 1 hour for
-                  new users
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Rate Limit:</span>{' '}
-                  <span className="font-medium text-green-600 dark:text-green-400">
-                    None during trial
-                  </span>
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Provided model:</span> our free
-                  model
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Live suggestions:</span>{' '}
-                  <span className="font-medium text-green-600 dark:text-green-400">Included</span>
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Triggered suggestions:</span>{' '}
-                  <span className="font-medium">Not included in trial</span>
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Bring your own:</span> OpenAI,
-                  Anthropic, Google, etc.
-                </li>
-              </ul>
-            </CardHeader>
-          </Card>
-
-          <Card className="border-primary shadow-sm">
-            <CardHeader>
-              <CardTitle className="text-2xl">Paid</CardTitle>
-              <CardDescription>Higher throughput plus provided SOTA models.</CardDescription>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <span className="font-semibold text-foreground">Rate Limit:</span> no limits
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Provided model:</span> our SOTA
-                  model
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Live suggestions:</span>{' '}
-                  <span className="font-medium text-green-600 dark:text-green-400">Included</span>
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Triggered suggestions:</span>{' '}
-                  <span className="font-medium text-green-600 dark:text-green-400">Included</span>
-                </li>
-                <li>
-                  <span className="font-semibold text-foreground">Bring your own:</span> OpenAI,
-                  Anthropic, Google, etc.
-                </li>
-              </ul>
-            </CardHeader>
-          </Card>
-        </div>
-
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
-          {plans.map((plan) => {
-            const planName = plan.plan.charAt(0).toUpperCase() + plan.plan.slice(1);
-            const minutes = plan.credits / 10;
-            const description = planDescriptions[plan.plan.toLowerCase()] || '';
-            const discount =
-              starterPricePerCredit > 0 ? calculateDiscount(plan, starterPricePerCredit) : 0;
-
-            return (
-              <Card
-                key={plan.plan}
+          return (
+            <Reveal key={plan.plan} delay={index * 80}>
+              <div
                 className={cn(
-                  'relative flex flex-col transition-shadow',
-                  plan.popular ? 'border-primary shadow-lg hover:shadow-xl' : 'hover:shadow-lg'
+                  'relative flex h-full flex-col gap-5 rounded-xl border bg-card p-6',
+                  plan.popular
+                    ? 'border-primary shadow-glow-sm md:-mt-4 md:pb-8 md:pt-10'
+                    : 'border-border'
                 )}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-0 right-0 flex justify-center">
-                    <span className="rounded-full bg-primary px-4 py-1 text-sm font-semibold text-primary-foreground">
-                      Most Popular
-                    </span>
-                  </div>
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <Badge variant="solid" size="md">
+                      Most popular
+                    </Badge>
+                  </span>
                 )}
-                <CardHeader className={cn('flex-1', plan.popular && 'pt-8')}>
-                  <CardTitle className="text-2xl">{planName}</CardTitle>
-                  <CardDescription>{description}</CardDescription>
-                  <div className="mt-4 flex flex-wrap items-baseline gap-3">
-                    <div>
-                      <span className="text-4xl font-bold">${plan.price_usd}</span>
-                      <span className="text-muted-foreground">
-                        {' '}
-                        / {plan.credits.toLocaleString()} credits
-                      </span>
-                    </div>
-                    {discount > 0 && plan.plan.toLowerCase() === 'pro' && (
-                      <span className="animate-pulse rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-green-400/50">
-                        💰 Save {discount}%
-                      </span>
-                    )}
-                    {discount > 0 && plan.plan.toLowerCase() === 'enterprise' && (
-                      <span className="animate-pulse rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 px-4 py-1.5 text-sm font-bold text-white shadow-lg ring-2 ring-orange-400/50">
-                        🔥 Save {discount}%
-                      </span>
+
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-lg font-semibold">{planName}</h3>
+                  <p className="text-sm text-muted-foreground">{description}</p>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-4xl font-semibold tracking-tight">
+                      ${plan.price_usd}
+                    </span>
+                    {discount > 0 && (
+                      <Badge variant="success" size="sm">
+                        Save {discount}%
+                      </Badge>
                     )}
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    ~{minutes.toLocaleString()} minutes of AI assistance
+                  <p className="font-mono text-xs text-muted-foreground">
+                    {plan.credits.toLocaleString()} credits · ~{minutes.toLocaleString()} minutes
                   </p>
-                </CardHeader>
-                <CardContent>
-                  <GoHomeButton
-                    className="mt-6 w-full"
-                    variant={plan.popular ? 'default' : 'outline'}
-                  >
-                    Get Started
-                  </GoHomeButton>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </Container>
-    </section>
+                </div>
+
+                <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                    Live and triggered suggestions
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                    Provided SOTA model, no rate limit
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+                    Bring your own provider key
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Minus
+                      className="mt-0.5 size-4 shrink-0 text-muted-foreground/60"
+                      aria-hidden="true"
+                    />
+                    One-off purchase - no recurring charge
+                  </li>
+                </ul>
+
+                <GoHomeButton
+                  className="mt-auto w-full"
+                  variant={plan.popular ? 'default' : 'outline'}
+                >
+                  Get started
+                </GoHomeButton>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
+    </Section>
   );
 };
 

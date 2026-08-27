@@ -1,157 +1,190 @@
 import React from 'react';
 
-import { SiCheckmarx } from '@icons-pack/react-simple-icons';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check, Minus, X } from 'lucide-react';
 
-import Container from '@/components/Container';
 import { GoHomeButton } from '@/components/GoHomeButton';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Glow } from '@/components/ui/glow';
+import { Reveal } from '@/components/ui/reveal';
+import { Section, SectionHeading } from '@/components/ui/section';
+import { cn } from '@/lib/utils';
 
-export const WhyChooseSection: React.FC = () => {
+/** true = yes, false = no, string = a qualified answer rendered as-is. */
+type Cell = boolean | string;
+
+interface ComparisonRow {
+  capability: string;
+  us: Cell;
+  practice: Cell;
+  coding: Cell;
+}
+
+/*
+ * Compared against categories rather than named products on purpose: a claim
+ * about what a specific competitor does or doesn't do today goes stale the
+ * moment they ship, and this table would then be wrong rather than merely
+ * dated. The named examples live in the column headers as examples only.
+ */
+const ROWS: ComparisonRow[] = [
+  { capability: 'Helps during a real, live interview', us: true, practice: false, coding: false },
+  {
+    capability: 'Hidden from screen share and screenshots',
+    us: true,
+    practice: false,
+    coding: false,
+  },
+  {
+    capability: 'Dual-channel transcription with speaker detection',
+    us: true,
+    practice: 'Practice only',
+    coding: false,
+  },
+  {
+    capability: 'Answers grounded in your CV and the job description',
+    us: true,
+    practice: 'Generic',
+    coding: false,
+  },
+  {
+    capability: 'Screenshot-based coding solutions in the moment',
+    us: true,
+    practice: false,
+    coding: 'Practice problems',
+  },
+  { capability: 'Bring your own LLM provider key', us: true, practice: false, coding: false },
+  {
+    capability: 'Runs as a desktop app - no extension, no meeting bot',
+    us: true,
+    practice: 'Varies',
+    coding: 'Varies',
+  },
+  {
+    capability: 'Transcripts never retained after the session',
+    us: true,
+    practice: 'Varies',
+    coding: 'Varies',
+  },
+  { capability: 'Pay per use - no subscription', us: true, practice: false, coding: false },
+  {
+    capability: 'Crypto-only payment, no card details stored',
+    us: true,
+    practice: false,
+    coding: false,
+  },
+];
+
+const CellValue: React.FC<{ value: Cell; emphasis?: boolean }> = ({ value, emphasis }) => {
+  if (value === true) {
+    return (
+      <>
+        <Check
+          className={cn('mx-auto size-5', emphasis ? 'text-primary' : 'text-success')}
+          aria-hidden="true"
+        />
+        <span className="sr-only">Yes</span>
+      </>
+    );
+  }
+
+  if (value === false) {
+    return (
+      <>
+        <X className="mx-auto size-5 text-muted-foreground/50" aria-hidden="true" />
+        <span className="sr-only">No</span>
+      </>
+    );
+  }
+
   return (
-    <section className="py-16 md:py-24" aria-labelledby="why-choose-heading">
-      <Container>
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h2
-            id="why-choose-heading"
-            className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
-          >
-            Why Power Interview AI Stands Out
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            The most advanced and privacy-focused AI interview assistant on the market
-          </p>
-        </div>
-
-        <div className="mx-auto max-w-4xl">
-          <div className="grid gap-6 md:gap-8">
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  True Privacy Protection
-                </CardTitle>
-                <CardDescription className="text-base">
-                  Most AI interview assistants (Interviewing.io, Pramp, even some "privacy-focused"
-                  tools) keep a record of your interviews.
-                  <span className="font-semibold text-foreground"> We don't.</span> Transcripts
-                  exist only for the length of your session and are never written to disk on our
-                  side. Your profile and CV are saved to your account so they follow you across
-                  devices - and nothing is ever mined or sold to third parties.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  Advanced Stealth Mode
-                </CardTitle>
-                <CardDescription className="text-base">
-                  While tools like Yoodli and Big Interview offer practice features, they don't help
-                  during <span className="font-semibold text-foreground">live interviews</span>. Our
-                  stealth mode makes the window{' '}
-                  <span className="font-semibold text-foreground">
-                    completely invisible during screen sharing
-                  </span>
-                  , won't show in screenshots, and can be controlled entirely via hotkeys. Perfect
-                  for real interview scenarios.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  Cryptocurrency Payment Only
-                </CardTitle>
-                <CardDescription className="text-base">
-                  No credit card required, no PayPal, no bank details. Pay with cryptocurrency coins
-                  for{' '}
-                  <span className="font-semibold text-foreground">
-                    maximum anonymity and privacy
-                  </span>
-                  . Unlike subscription-based competitors (HireVue, Karat), you only pay for what
-                  you need - no recurring charges, no account tracking.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  Comprehensive AI Features
-                </CardTitle>
-                <CardDescription className="text-base">
-                  Get everything in one tool: dual-channel transcription, AI reply suggestions based
-                  on YOUR CV, job description, and{' '}
-                  <span className="font-semibold text-foreground">
-                    complete conversation history
-                  </span>{' '}
-                  for accurate context-aware responses,{' '}
-                  <span className="font-semibold text-foreground">
-                    screenshot-based code analysis with syntax highlighting
-                  </span>
-                  , and{' '}
-                  <span className="font-semibold text-foreground">smart transcript export</span>{' '}
-                  with AI-powered analysis to help you review and improve your communication skills.
-                  Our AI understands patterns in how you communicate, enabling more relevant
-                  suggestions. Other tools like LeetCode Premium or HackerRank only cover coding -
-                  we cover the entire interview.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  Bring Your Own Model
-                </CardTitle>
-                <CardDescription className="text-base">
-                  Use your own LLM provider (OpenAI, Anthropic, Google, and more) with keys you
-                  control. Depending on your plan, a default model is also included so you can get
-                  started instantly.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-primary/50 bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <SiCheckmarx className="h-6 w-6 text-primary" />
-                  No Setup Complexity
-                </CardTitle>
-                <CardDescription className="text-base">
-                  Competitors often require complex API setups, browser extensions with permission
-                  risks, or cloud service configurations. Power Interview AI is a{' '}
-                  <span className="font-semibold text-foreground">
-                    standalone desktop application
-                  </span>{' '}
-                  - download, install, and start.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-
-          <div className="mt-12 rounded-lg border-2 border-primary bg-primary/5 p-6 text-center">
-            <p className="text-lg font-semibold text-foreground">
-              Power Interview AI isn't just another interview prep tool - it's the most advanced,
-              privacy-focused, and feature-rich AI assistant built specifically for real interview
-              scenarios.
-            </p>
-            <GoHomeButton size="lg" className="mt-6">
-              Experience the Difference
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </GoHomeButton>
-          </div>
-        </div>
-      </Container>
-    </section>
+    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+      <Minus className="size-3" aria-hidden="true" />
+      {value}
+    </span>
   );
 };
+
+interface WhyChooseSectionProps {
+  /** Set on the standalone /why-choose route so the section owns the h1. */
+  standalone?: boolean;
+}
+
+export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ standalone = false }) => (
+  <Section id="why-choose" tone="muted" aria-labelledby="why-choose-heading">
+    <SectionHeading
+      id="why-choose-heading"
+      as={standalone ? 'h1' : 'h2'}
+      eyebrow="Why us"
+      title="Built for the interview, not the rehearsal"
+      description="Practice platforms coach you beforehand and coding sites drill you on problems. Neither is there when the interviewer is actually on the call."
+    />
+
+    <Reveal className="mx-auto mt-14 max-w-5xl">
+      {/* Wide content scrolls inside its own container rather than the page. */}
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
+        <table className="w-full min-w-[44rem] border-collapse text-sm">
+          <caption className="sr-only">
+            Power Interview AI compared with interview practice tools and coding practice platforms
+          </caption>
+          <thead>
+            <tr className="border-b border-border">
+              <th scope="col" className="px-5 py-4 text-left font-medium text-muted-foreground">
+                Capability
+              </th>
+              <th scope="col" className="w-40 bg-primary/5 px-4 py-4 text-center">
+                <span className="font-semibold text-foreground">Power Interview AI</span>
+              </th>
+              <th scope="col" className="w-44 px-4 py-4 text-center">
+                <span className="font-medium text-foreground">Practice &amp; mock tools</span>
+                <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+                  Yoodli, Big Interview, Pramp
+                </span>
+              </th>
+              <th scope="col" className="w-44 px-4 py-4 text-center">
+                <span className="font-medium text-foreground">Coding platforms</span>
+                <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+                  LeetCode, HackerRank
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {ROWS.map((row) => (
+              <tr key={row.capability} className="border-b border-border-subtle last:border-b-0">
+                <th scope="row" className="px-5 py-3.5 text-left font-normal text-foreground">
+                  {row.capability}
+                </th>
+                <td className="bg-primary/5 px-4 py-3.5 text-center">
+                  <CellValue value={row.us} emphasis />
+                </td>
+                <td className="px-4 py-3.5 text-center">
+                  <CellValue value={row.practice} />
+                </td>
+                <td className="px-4 py-3.5 text-center">
+                  <CellValue value={row.coding} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-3 text-center text-xs text-muted-foreground">
+        Competitor names are examples of each category, not a claim about any specific
+        product&apos;s current feature set.
+      </p>
+    </Reveal>
+
+    <div className="relative isolate mx-auto mt-14 max-w-3xl overflow-hidden rounded-xl border border-border bg-card px-6 py-10 text-center">
+      <Glow position="center" intensity="subtle" />
+      <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+        A standalone desktop app built for the live interview - download, install, start. No API
+        wiring, no browser extension asking for permissions, no bot joining the call on your behalf.
+      </p>
+      <GoHomeButton size="lg" className="mt-6">
+        Experience the difference
+        <ArrowRight />
+      </GoHomeButton>
+    </div>
+  </Section>
+);
 
 export default WhyChooseSection;
