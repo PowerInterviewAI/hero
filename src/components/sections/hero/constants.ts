@@ -8,8 +8,11 @@ export type InstallPlatform = 'windows' | 'macos';
 export type WindowsShell = 'cmd' | 'powershell';
 
 // Media carousel data - every item is an .mp4 under public/media/, paired with
-// a still under public/media/docs/ used as the poster so the frame paints
-// before any video bytes arrive.
+// a poster so the frame paints before any video bytes arrive.
+//
+// All four clips are 2560x1440, so posters must be 16:9 or the frame
+// letterboxes. These are 1920x1080 placeholders - see
+// public/media/marketing/README.md for what to replace them with.
 export interface MediaItem {
   src: string;
   poster: string;
@@ -20,28 +23,28 @@ export interface MediaItem {
 export const MEDIA_ITEMS: MediaItem[] = [
   {
     src: '/media/live-interview-assistant.mp4',
-    poster: '/media/docs/app-overview.jpg',
+    poster: '/media/marketing/poster-live-interview.png',
     title: 'Live Interview Assistant & Smart Export',
     description:
       'Real-time AI-powered interview assistance with instant suggestions and smart export of interview summaries and insights',
   },
   {
     src: '/media/coding-challenge-1.mp4',
-    poster: '/media/docs/app-overview-stealth.jpg',
+    poster: '/media/marketing/poster-coding-1.png',
     title: 'Coding Challenge - Graph Traversal',
     description:
       'Capture the problem from your screen and read a syntax-highlighted solution streamed into the stealth overlay while you type',
   },
   {
     src: '/media/coding-challenge-2.mp4',
-    poster: '/media/docs/app-overview-stealth.jpg',
+    poster: '/media/marketing/poster-coding-2.png',
     title: 'Coding Challenge - Connected Components',
     description:
       'Multi-screenshot context lets the AI pick up the full problem statement, constraints, and starter signature before it answers',
   },
   {
     src: '/media/coding-challenge-3.mp4',
-    poster: '/media/docs/stealth-mode.png',
+    poster: '/media/marketing/poster-coding-3.png',
     title: 'Coding Challenge - Binary Tree Recursion',
     description:
       'Scroll the code panel with hotkeys alone - the overlay stays hidden from screen share and never steals focus from your editor',

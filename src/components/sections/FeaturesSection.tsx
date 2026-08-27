@@ -28,8 +28,8 @@ interface Feature {
   description: React.ReactNode;
   /** Column span at lg and up - drives the bento rhythm. */
   wide?: boolean;
-  /** Optional screenshot, rendered under the copy in wide tiles. */
-  image?: { src: string; alt: string };
+  /** Optional screenshot, rendered under the copy in wide tiles. 16:9. */
+  image?: { src: string; alt: string; width: number; height: number };
   footer?: React.ReactNode;
 }
 
@@ -49,7 +49,12 @@ const FEATURES: Feature[] = [
       </>
     ),
     wide: true,
-    image: { src: '/media/docs/stealth-mode.png', alt: 'The stealth overlay during a call' },
+    image: {
+      src: '/media/marketing/feature-stealth.png',
+      alt: 'The stealth overlay during a call',
+      width: 1600,
+      height: 900,
+    },
     footer: (
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <Kbd combo={HOTKEYS[Hotkey.ToggleStealth].combo} />
@@ -128,7 +133,12 @@ const FEATURES: Feature[] = [
       </>
     ),
     wide: true,
-    image: { src: '/media/docs/export-example.png', alt: 'An exported interview report' },
+    image: {
+      src: '/media/marketing/feature-export.png',
+      alt: 'An exported interview report',
+      width: 1600,
+      height: 900,
+    },
   },
   {
     id: 'mock',
@@ -204,6 +214,8 @@ export const FeaturesSection: React.FC = () => (
                 <img
                   src={feature.image.src}
                   alt={feature.image.alt}
+                  width={feature.image.width}
+                  height={feature.image.height}
                   loading="lazy"
                   decoding="async"
                   className="h-auto w-full object-cover"
