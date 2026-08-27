@@ -8,7 +8,7 @@ It's very simple! You can mock a realistic interview using **ChatGPT's voice mod
 
 | Enter Voice Mode                             | Voice Mode is Ready                          |
 | -------------------------------------------- | -------------------------------------------- |
-| ![Image](/media/docs/mock-interview-1.png) | ![Image](/media/docs/mock-interview-2.png) |
+| ![Opening ChatGPT voice mode](/media/docs/mock-interview-1.png) | ![ChatGPT voice mode ready to start](/media/docs/mock-interview-2.png) |
 
 2. **Submit the following prompt**:
 

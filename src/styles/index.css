@@ -2,50 +2,108 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/*
+ * Colour system.
+ *
+ * The accent is the brand orange (hue ~30, matching logo.png and open-graph.png).
+ * Everything around it is a near-neutral warm grey: a saturated brown ground
+ * competes with a saturated accent, so the surfaces stay close to neutral and
+ * let the orange be the only loud thing on the page.
+ *
+ * The brand orange sits at a mid luminance, which is the awkward zone: at its
+ * display brightness neither white nor black text clears 4.5:1 against it, and
+ * as `text-primary` it only manages ~2.8:1 on the cream background. So the two
+ * themes take the accent from opposite ends:
+ *   light - a darkened burnt orange (36% L), white label, 4.9:1 as a fill and
+ *           4.7:1 as text on the cream background;
+ *   dark  - the full-brightness orange, near-black label, 8.4:1 both ways.
+ * Both stay on the brand hue. Do not lighten the light-mode --primary back to
+ * the display orange; that is the 2.4:1 contrast bug this replaces.
+ */
 @layer base {
   :root {
     --background: 33 100% 98%;
-    --foreground: 30 20% 10%;
-    --card: 33 100% 99%;
-    --card-foreground: 30 20% 10%;
-    --popover: 33 100% 99%;
-    --popover-foreground: 30 20% 10%;
-    --primary: 30 95% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 33 90% 92%;
-    --secondary-foreground: 30 20% 10%;
-    --muted: 33 80% 94%;
-    --muted-foreground: 30 15% 45%;
-    --accent: 27 95% 65%;
-    --accent-foreground: 30 20% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 33 40% 88%;
-    --input: 33 40% 88%;
-    --ring: 30 95% 55%;
-    --radius: 0.5rem;
+    --foreground: 24 15% 10%;
+
+    /* Elevation ramp, lightest (page) to heaviest (popovers, raised cards) */
+    --surface-1: 33 60% 97%;
+    --surface-2: 30 40% 95%;
+    --surface-3: 30 30% 92%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 24 15% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 15% 10%;
+
+    --primary: 28 96% 36%;
+    --primary-foreground: 30 40% 99%;
+    --secondary: 30 40% 94%;
+    --secondary-foreground: 24 15% 14%;
+    --muted: 30 35% 95%;
+    --muted-foreground: 24 10% 40%;
+    --accent: 30 45% 93%;
+    --accent-foreground: 24 15% 14%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 60% 32%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 42%;
+    --warning-foreground: 0 0% 100%;
+    --info: 206 80% 42%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 30 25% 89%;
+    --border-subtle: 30 25% 93%;
+    --border-strong: 30 20% 80%;
+    --input: 30 25% 89%;
+    --ring: 28 96% 36%;
+
+    /* Hue used for ambient radial glows behind hero / CTA surfaces */
+    --glow: 28 96% 56%;
+
+    --radius: 0.75rem;
+    --radius-lg: 1rem;
   }
 
   .dark {
-    --background: 30 25% 8%;
-    --foreground: 33 90% 95%;
-    --card: 30 25% 10%;
-    --card-foreground: 33 90% 95%;
-    --popover: 30 25% 10%;
-    --popover-foreground: 33 90% 95%;
-    --primary: 30 95% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 30 30% 18%;
-    --secondary-foreground: 33 90% 95%;
-    --muted: 30 30% 18%;
-    --muted-foreground: 33 40% 65%;
-    --accent: 27 95% 65%;
-    --accent-foreground: 33 90% 95%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 30 30% 20%;
-    --input: 30 30% 20%;
-    --ring: 30 95% 55%;
+    --background: 24 10% 6%;
+    --foreground: 30 20% 96%;
+
+    --surface-1: 24 9% 8%;
+    --surface-2: 24 8% 11%;
+    --surface-3: 24 8% 15%;
+
+    --card: 24 9% 8%;
+    --card-foreground: 30 20% 96%;
+    --popover: 24 8% 11%;
+    --popover-foreground: 30 20% 96%;
+
+    --primary: 30 96% 58%;
+    --primary-foreground: 24 40% 8%;
+    --secondary: 24 8% 14%;
+    --secondary-foreground: 30 20% 96%;
+    --muted: 24 8% 13%;
+    --muted-foreground: 30 10% 66%;
+    --accent: 24 8% 16%;
+    --accent-foreground: 30 20% 96%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 24 40% 8%;
+    --success: 152 55% 50%;
+    --success-foreground: 24 40% 8%;
+    --warning: 38 95% 58%;
+    --warning-foreground: 24 40% 8%;
+    --info: 206 85% 62%;
+    --info-foreground: 24 40% 8%;
+
+    --border: 24 8% 16%;
+    --border-subtle: 24 8% 12%;
+    --border-strong: 24 8% 26%;
+    --input: 24 8% 16%;
+    --ring: 30 96% 58%;
+
+    --glow: 30 96% 55%;
   }
 }
 
@@ -53,11 +111,49 @@
   * {
     @apply border-border;
   }
+
+  /*
+   * Hash links (/#features, the header's Download, the legacy /features 308)
+   * are plain anchors now, so the browser does the scrolling. These two rules
+   * are what used to be hand-rolled in a `scrollToSection` callback threaded
+   * through four components - except that version also left every target
+   * tucked under the sticky header, because scrollIntoView aligns to the
+   * viewport top and the header is 4rem tall.
+   *
+   * The prefers-reduced-motion block below overrides scroll-behavior to auto.
+   */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :target {
+    scroll-margin-top: 5rem;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground antialiased;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+  }
+
+  /* Headings pick up the display face by default so sections don't each opt in */
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Every reveal/float/pulse in the design is decorative - respect the OS setting */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   /* Custom scrollbar styling */
@@ -85,6 +181,29 @@
   }
 }
 
+@layer components {
+  /*
+   * Ambient radial wash used behind the hero and the pre-footer CTA band.
+   * Two offset glows read as light falling across the surface rather than a
+   * single centred blob.
+   */
+  .glow-surface {
+    background-image:
+      radial-gradient(60% 50% at 50% 0%, hsl(var(--glow) / 0.16) 0%, transparent 70%),
+      radial-gradient(40% 40% at 85% 20%, hsl(var(--glow) / 0.08) 0%, transparent 70%);
+  }
+
+  /* Faint grid, masked to fade out toward the edges */
+  .grid-surface {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 0%, transparent 100%);
+  }
+}
+
 /* Markdown rendering tweaks to integrate github-markdown-css with site theme */
 .markdown-body {
   box-sizing: border-box;
@@ -95,40 +214,100 @@
   width: 100%;
 }
 
+/*
+ * Hand github-markdown-css our palette instead of the OS's.
+ *
+ * That stylesheet defines its whole colour palette inside
+ * `@media (prefers-color-scheme: dark|light)` blocks. It has a [data-theme]
+ * hook too, but that selector sits INSIDE those media queries, so it can only
+ * ever agree with the OS - it cannot override it. This site switches theme with
+ * a .light/.dark class on <html>, which that stylesheet knows nothing about, so
+ * the rendered markdown used to follow the OS and ignore the theme toggle
+ * completely: set the site to light on a dark-mode machine and every docs
+ * article stayed dark.
+ *
+ * Redefining the variables under our own class fixes the whole surface at once
+ * - links, borders, blockquotes, tables, code, headings - and replaced a
+ * growing pile of one-off `.dark .markdown-body table tr {...}` patches.
+ *
+ * These selectors are (0,2,0), so they outrank the stylesheet's own
+ * `.markdown-body` (0,1,0) regardless of import order. The site tokens already
+ * flip with the class, so one block covers both themes.
+ */
+.light .markdown-body,
 .dark .markdown-body {
-  background: hsl(var(--card) / 1);
-  color: hsl(var(--card-foreground) / 1);
+  --fgColor-default: hsl(var(--card-foreground));
+  --fgColor-muted: hsl(var(--muted-foreground));
+  --fgColor-accent: hsl(var(--primary));
+  --fgColor-danger: hsl(var(--destructive));
+  --fgColor-success: hsl(var(--success));
+  --fgColor-attention: hsl(var(--warning));
+  --fgColor-done: hsl(var(--info));
+
+  --bgColor-default: hsl(var(--card));
+  --bgColor-muted: hsl(var(--muted));
+  --bgColor-neutral-muted: hsl(var(--muted));
+  --bgColor-danger-muted: hsl(var(--destructive) / 0.15);
+  --bgColor-attention-muted: hsl(var(--warning) / 0.15);
+
+  --borderColor-default: hsl(var(--border));
+  --borderColor-muted: hsl(var(--border-subtle));
+  --borderColor-neutral-muted: hsl(var(--border-subtle));
+  --borderColor-accent-emphasis: hsl(var(--primary));
+  --borderColor-danger-emphasis: hsl(var(--destructive));
+  --borderColor-attention-emphasis: hsl(var(--warning));
+  --borderColor-success-emphasis: hsl(var(--success));
+  --borderColor-done-emphasis: hsl(var(--info));
+
+  --focus-outlineColor: hsl(var(--ring));
+
+  color-scheme: light dark;
 }
 
-/* Override github-markdown-css hardcoded table colors in dark mode */
-.dark .markdown-body table tr {
-  background-color: hsl(var(--card));
-  border-top-color: hsl(var(--border));
+/* Table stripes read as banding against a card that is already --bgColor-muted. */
+.markdown-body table tr:nth-child(2n) {
+  background-color: hsl(var(--muted) / 0.5);
 }
 
-.dark .markdown-body table tr:nth-child(2n) {
-  background-color: hsl(var(--muted));
-}
-
-.dark .markdown-body table td,
-.dark .markdown-body table th {
-  border-color: hsl(var(--border));
+/* Inline code sits in running prose; fenced blocks get the muted slab. */
+.markdown-body code {
+  background: hsl(var(--muted));
   color: hsl(var(--foreground));
 }
 
-.dark .markdown-body table th {
-  background-color: hsl(var(--muted));
+.markdown-body pre {
+  background: hsl(var(--muted));
 }
 
-.markdown-body pre,
-.markdown-body code {
+.markdown-body pre code {
   background: transparent;
 }
 
-.dark .markdown-body pre,
-.dark .markdown-body code {
-  background: hsl(var(--muted));
-  color: hsl(var(--foreground));
+/*
+ * Figures inside rendered markdown (src/components/docs/MarkdownImage.tsx).
+ *
+ * github-markdown-css doesn't reset <figure>, so it keeps the UA default
+ * margin-inline: 40px. In a two-up comparison table that took each screenshot
+ * from ~380px down to ~300px of an already narrow column.
+ */
+.markdown-body figure {
+  margin-inline: 0;
+}
+
+.markdown-body img,
+.markdown-body video {
+  box-sizing: border-box;
+}
+
+/* In a comparison table the column header already names the shot, so the
+   caption underneath it would only repeat the header. The alt text stays on
+   the image either way. */
+.markdown-body td figure {
+  margin-block: 0.5rem;
+}
+
+.markdown-body td figcaption {
+  display: none;
 }
 
 /* Restore list styles reset by Tailwind preflight */

@@ -1,12 +1,25 @@
+import { Download, ExternalLink } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+import { DocsBreadcrumb } from '@/components/docs/DocsBreadcrumb';
 import { DocsLayout } from '@/components/docs/DocsLayout';
+import { DocsPager } from '@/components/docs/DocsPager';
 import { MarkdownImage } from '@/components/docs/MarkdownImage';
-import { getDocContent, getDocNavItems, getDocSlugs, getDocTitle } from '@/lib/docs';
+import { docPath } from '@/config/routes';
+import {
+  getDocContent,
+  getDocDescription,
+  getDocNavItems,
+  getDocNeighbours,
+  getDocSlugs,
+  getDocTitle,
+} from '@/lib/docs';
+import { getMediaSize, getVideoPoster } from '@/lib/media';
 import { buildMetadata } from '@/lib/metadata';
+import { applyReleaseTokens, getLatestVersion } from '@/lib/release';
 
 interface DocPageProps {
   params: Promise<{ slug: string }>;
@@ -23,14 +36,14 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
     return buildMetadata({
       title: 'Not Found',
       description: 'No documentation found for this page.',
-      path: `/docs/${slug}`,
+      path: docPath(slug),
     });
   }
   const title = getDocTitle(slug, raw);
   return buildMetadata({
     title,
-    description: `Documentation: ${title}`,
-    path: `/docs/${slug}`,
+    description: getDocDescription(slug),
+    path: docPath(slug),
   });
 }
 
@@ -59,6 +72,16 @@ const heading =
       </Tag>
     );
   };
+
+// Downloadable sample assets linked from the docs (the exported DOCX report).
+// A bare link to a binary gives no hint that clicking it starts a download.
+const DOWNLOAD_EXTENSIONS = ['.docx', '.pdf', '.zip', '.md'];
+
+// The slice of the hast node react-markdown hands each component that we
+// actually read - enough to tell an image-only paragraph from a real one.
+interface MarkdownNode {
+  children?: { type: string; tagName?: string; value?: string }[];
+}
 
 const markdownComponents = {
   h1: heading('h1'),
@@ -89,9 +112,57 @@ const markdownComponents = {
   td: ({ children }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <td className="border border-border px-3 py-2 text-foreground">{children}</td>
   ),
-  img: ({ src, alt }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <MarkdownImage src={typeof src === 'string' ? src : undefined} alt={alt} />
-  ),
+  // A standalone markdown image parses as a paragraph containing an image, and
+  // MarkdownImage renders a <figure> - which is invalid inside <p> and throws a
+  // hydration error. Drop the paragraph when an image is all it holds; keep it
+  // when there's real prose alongside.
+  p: ({ children, node }: React.HTMLAttributes<HTMLParagraphElement> & { node?: MarkdownNode }) => {
+    const significant = (node?.children ?? []).filter(
+      (child) => child.type !== 'text' || (child.value ?? '').trim() !== ''
+    );
+    const imageOnly =
+      significant.length === 1 &&
+      significant[0].type === 'element' &&
+      significant[0].tagName === 'img';
+
+    return imageOnly ? <>{children}</> : <p>{children}</p>;
+  },
+  a: ({ href, children }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const external = Boolean(href && /^https?:\/\//.test(href));
+    const download = Boolean(
+      href && DOWNLOAD_EXTENSIONS.some((extension) => href.toLowerCase().endsWith(extension))
+    );
+
+    return (
+      <a
+        href={href}
+        download={download || undefined}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        className="inline-flex items-center gap-1"
+      >
+        {children}
+        {download && <Download className="size-3.5 shrink-0" aria-hidden="true" />}
+        {external && <ExternalLink className="size-3 shrink-0 opacity-60" aria-hidden="true" />}
+      </a>
+    );
+  },
+  // Markdown can't carry width/height, so they're resolved from the file on
+  // disk here (server side) and handed to the client component - without them
+  // every screenshot reflows the prose below it as it decodes.
+  img: ({ src, alt }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const source = typeof src === 'string' ? src : undefined;
+    const size = source ? getMediaSize(source) : null;
+    return (
+      <MarkdownImage
+        src={source}
+        alt={alt}
+        width={size?.width}
+        height={size?.height}
+        poster={source ? getVideoPoster(source) : undefined}
+      />
+    );
+  },
 };
 
 export default async function DocPage({ params }: DocPageProps) {
@@ -103,14 +174,24 @@ export default async function DocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  // Docs are static markdown but the download links can't be - a pinned version
+  // 404s the day the next release ships. See src/lib/release.ts.
+  const rendered = applyReleaseTokens(content, await getLatestVersion());
+
+  const { previous, next } = getDocNeighbours(slug);
+
   return (
     <DocsLayout docs={navItems}>
-      <main className="mx-auto max-w-4xl p-6">
-        <article>
+      <main className="mx-auto max-w-4xl px-2 py-4 sm:px-4">
+        <DocsBreadcrumb current={getDocTitle(slug, content)} />
+
+        <article className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-            {content}
+            {rendered}
           </ReactMarkdown>
         </article>
+
+        <DocsPager previous={previous} next={next} />
       </main>
     </DocsLayout>
   );

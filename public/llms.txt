@@ -7,12 +7,13 @@ Power Interview AI is a standalone desktop application, not a browser extension 
 ## Product pages
 
 - [Home](https://www.powerinterviewai.com/): overview, free trial offer, and product demo.
-- [Features](https://www.powerinterviewai.com/features): live transcription, AI reply suggestions, stealth mode, code suggestions, meeting note export, mock interviews.
+- [Features](https://www.powerinterviewai.com/#features): live transcription, AI reply suggestions, stealth mode, code suggestions, meeting note export, mock interviews.
+- [How it works](https://www.powerinterviewai.com/how-it-works): install, set up your CV and the job description, and run a live call.
 - [Pricing](https://www.powerinterviewai.com/pricing): free trial, credit-based paid plans, and cryptocurrency payment details.
-- [Why Choose](https://www.powerinterviewai.com/why-choose): privacy and stealth-mode differentiation versus other interview-assistant and interview-practice tools.
-- [Benefits](https://www.powerinterviewai.com/benefits): outcomes for job seekers using the product.
+- [Why Choose](https://www.powerinterviewai.com/#why-choose): privacy and stealth-mode differentiation versus other interview-assistant and interview-practice tools.
+- [Benefits](https://www.powerinterviewai.com/#benefits): outcomes for job seekers using the product.
 - [FAQ](https://www.powerinterviewai.com/faq): platform support, privacy model, billing, and usage questions.
-- [Contact](https://www.powerinterviewai.com/contact): support and community channels (email, GitHub, Telegram, X, Discord).
+- [Contact](https://www.powerinterviewai.com/#contact): support and community channels (email, GitHub, Telegram, X, Discord).
 
 ## Documentation
 

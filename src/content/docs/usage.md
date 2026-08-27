@@ -36,6 +36,8 @@ To stop the session at any time, click **Stop** in the UI or press `Ctrl+Shift+Q
 
 Click the **language button** in the control panel to choose the language of your interview. The button shows the current code (`EN`, `ES`, `JA`) so you can read the setting without opening the menu.
 
+![Interview language menu open on the control bar](/media/docs/language-menu.png)
+
 One setting decides three things:
 
 - Which speech model transcribes the call
@@ -172,6 +174,8 @@ Access your settings from the **menu icon** (☰) in the top-right of the titleb
 | Profile / CV | Your resume, bio, or portfolio content (required)                    |
 | Context      | Job description or role requirements for the interview (recommended) |
 
+![Configuration dialog - name, CV, and job context fields](/media/docs/configuration-dialog.png)
+
 This is your interview configuration, not general account info (like your email or credits) - it's saved under your account so signing in on another device restores the same full name, profile, and context automatically.
 
 ### Device Settings
@@ -188,6 +192,8 @@ If a microphone you pick cannot be opened - unplugged, held by another app, or r
 ### LLM Options
 
 Click the **brain icon** in the control panel toolbar to connect your own LLM provider - OpenAI, Anthropic, Groq, or Google - with an API key you control. Enter the API key and pick a model; the app validates the key against the selected provider and model before letting you save. Turn "Use my own API key" off to fall back to Power Interview's hosted models: the **SOTA model** while you have a credit balance, switching to the **free model** once credits are exhausted.
+
+![LLM Options - connect your own provider and API key](/media/docs/llm-options.png)
 
 ### Menu
 

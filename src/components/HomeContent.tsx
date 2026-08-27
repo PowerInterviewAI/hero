@@ -1,71 +1,61 @@
-'use client';
+import { type ReactNode } from 'react';
 
-import { type ReactNode, useState } from 'react';
-
-import { FAQSection, FooterSection, Header, HeroSection } from '@/components/sections';
-import { useTheme } from '@/hooks/useTheme';
+import { SkipToContent } from '@/components/SkipToContent';
+import {
+  FAQSection,
+  FooterSection,
+  Header,
+  HeroSection,
+  InstallPanel,
+} from '@/components/sections';
 
 interface HomeContentProps {
   featuresSection: ReactNode;
+  howItWorksSection: ReactNode;
   benefitsSection: ReactNode;
   whyChooseSection: ReactNode;
   pricingSection: ReactNode;
+  testimonialsSection: ReactNode;
   contactSection: ReactNode;
-  // coFoundersSection: ReactNode;
 }
 
-// Header/HeroSection/FAQSection/FooterSection stay directly imported here
-// since they're genuinely interactive (nav state, carousel, accordion) and
-// this whole component is already a client boundary. The rest are Server
-// Components rendered by the page (src/app/page.tsx) and passed in as
-// already-resolved elements - a Client Component can't import and
-// instantiate a Server Component itself (and two of these are async, which
-// flat out isn't supported outside a Server Component tree).
+// The sections that fetch data are async Server Components, so the page
+// (src/app/page.tsx) renders them and passes them in as already-resolved
+// elements. The rest are imported directly.
+//
+// This was a Client Component purely to own `scrollToSection`, a DOM helper
+// threaded down into Header, HeroSection, FAQSection and FooterSection so the
+// nav could scroll rather than navigate. Those are all ordinary links now, so
+// the callback - and the client boundary around the whole home page - is gone.
 export function HomeContent({
   featuresSection,
+  howItWorksSection,
   benefitsSection,
   whyChooseSection,
   pricingSection,
+  testimonialsSection,
   contactSection,
-  // coFoundersSection,
 }: HomeContentProps) {
-  const { theme, setTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background">
-      <Header
-        theme={theme}
-        mobileMenuOpen={mobileMenuOpen}
-        scrollToSection={scrollToSection}
-        toggleTheme={toggleTheme}
-        setMobileMenuOpen={setMobileMenuOpen}
-      />
+    <div className="flex min-h-screen flex-col bg-background">
+      <SkipToContent />
 
-      <main>
-        <HeroSection scrollToSection={scrollToSection} />
+      <Header />
+
+      <main id="main" className="flex-1 scroll-mt-20">
+        <HeroSection />
+        {howItWorksSection}
         {featuresSection}
         {benefitsSection}
         {whyChooseSection}
         {pricingSection}
-        <FAQSection scrollToSection={scrollToSection} />
+        {testimonialsSection}
+        <InstallPanel />
+        <FAQSection preview />
         {contactSection}
-        {/* {coFoundersSection} */}
       </main>
 
-      <FooterSection scrollToSection={scrollToSection} />
+      <FooterSection />
     </div>
   );
 }
