@@ -134,11 +134,6 @@ const PLACEHOLDERS = [
   ],
   ['media/marketing/feature-export.png', 1600, 900, 'Smart Export', 'Generated DOCX report'],
 
-  // --- How it works steps (16:9) ---
-  ['media/marketing/step-install.png', 800, 450, 'Step 1', 'Install and start the trial'],
-  ['media/marketing/step-context.png', 800, 450, 'Step 2', 'Add your CV and the job'],
-  ['media/marketing/step-live.png', 800, 450, 'Step 3', 'Join the call'],
-
   // --- Testimonial avatar ---
   ['media/marketing/avatar-placeholder.png', 96, 96, '', ''],
 

@@ -8,24 +8,19 @@ import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
 import { HOTKEYS, Hotkey } from '@/config/hotkeys';
 
-// Step images are 800x450 placeholders - see
-// public/media/marketing/README.md for what each should become.
 const STEPS = [
   {
     icon: Download,
-    image: { src: '/media/marketing/step-install.png', alt: '' },
     title: 'Install and start your trial',
     body: 'Download the desktop app for Windows or macOS and sign in. New accounts get a full hour on the free model - no rate limits, no interruptions.',
   },
   {
     icon: FileText,
-    image: { src: '/media/marketing/step-context.png', alt: '' },
     title: 'Add your CV and the job description',
     body: 'Paste your profile and the role you are interviewing for. Suggestions are grounded in that context, so answers come back in your own experience rather than generic advice. Your configuration follows you across devices.',
   },
   {
     icon: Radio,
-    image: { src: '/media/marketing/step-live.png', alt: '' },
     title: 'Join the call and let it listen',
     body: 'Dual-channel transcription with speaker detection runs alongside Zoom, Google Meet or Teams. Suggestions stream into an overlay that stays out of screen shares and screenshots, driven entirely by hotkeys.',
   },
@@ -49,19 +44,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ standalone
     <ol className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3">
       {STEPS.map((step, index) => (
         <Reveal as="li" key={step.title} delay={index * 90} className="relative">
-          <div className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-border-strong">
-            {/* alt="" - the image repeats the heading beside it, so it's
-                decorative and shouldn't be announced twice. */}
-            <img
-              src={step.image.src}
-              alt={step.image.alt}
-              width={800}
-              height={450}
-              loading="lazy"
-              decoding="async"
-              className="h-auto w-full border-b border-border object-cover"
-            />
-
+          <div className="flex h-full flex-col rounded-xl border border-border bg-card transition-colors hover:border-border-strong">
             <div className="flex flex-1 flex-col gap-4 p-6">
               <div className="flex items-center gap-3">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">

@@ -9,7 +9,7 @@ explicit `width`/`height` (or is a `<video poster>` inside a fixed-ratio frame),
 so a different aspect ratio will either letterbox or shift the layout.
 
 Regenerate any of them with `node scripts/generate-placeholders.mjs` (pass a
-path fragment to do just one, e.g. `… step-install`). That script is the source
+path fragment to do just one, e.g. `… feature-stealth`). That script is the source
 of truth for the sizes below — keep the two in step.
 
 ## Hero carousel posters — 1920×1080 (16:9)
@@ -54,18 +54,6 @@ the text-only tile sharing the row from stretching to a 290px-tall void).
 There are real screenshots at `media/docs/stealth-mode.png` (2544×1336) and
 `media/docs/export-example.png` (1280×887) that could be recropped to 16:9
 rather than shot fresh.
-
-## How it works steps — 800×450 (16:9)
-
-Referenced from `src/components/sections/HowItWorksSection.tsx`. Rendered at
-roughly 380 px wide, so 800 covers 2×. Marked `alt=""` — they repeat the heading
-next to them, so they're decorative.
-
-| File | Should show |
-|---|---|
-| `step-install.png` | The installer, or the app's first-run screen |
-| `step-context.png` | The CV / job-description configuration screen |
-| `step-live.png` | A live call with a suggestion arriving in the overlay |
 
 ## Testimonial avatar — 96×96
 
