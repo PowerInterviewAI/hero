@@ -4,19 +4,10 @@ import { getDocSlugs } from '@/lib/docs';
 
 const SITE_URL = 'https://www.powerinterviewai.com';
 
-const STATIC_ROUTES = [
-  '',
-  '/how-it-works',
-  '/features',
-  '/pricing',
-  '/faq',
-  '/contact',
-  '/why-choose',
-  '/benefits',
-  '/privacy',
-  '/terms',
-  '/docs',
-];
+// Only routes that are a page in their own right. /features, /benefits,
+// /why-choose and /contact are home-page anchors now and redirect there - a
+// sitemap should never list a URL that 3xx's.
+const STATIC_ROUTES = ['', '/how-it-works', '/pricing', '/faq', '/privacy', '/terms', '/docs'];
 
 // Generated from the real route list + the docs system's own slug list, so
 // it can't drift out of sync with actual routes the way the old

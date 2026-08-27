@@ -111,7 +111,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
                   <SectionNavLink
                     label="Features"
                     sectionId="features"
-                    to="/features"
+                    to="/#features"
                     isHome={isHome}
                     scrollToSection={scrollToSection}
                     className={LINK_CLASS}
@@ -176,7 +176,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
                   <SectionNavLink
                     label="Support"
                     sectionId="contact"
-                    to="/contact"
+                    to="/#contact"
                     isHome={isHome}
                     scrollToSection={scrollToSection}
                     className={LINK_CLASS}
@@ -214,7 +214,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
                   <SectionNavLink
                     label="Contact"
                     sectionId="contact"
-                    to="/contact"
+                    to="/#contact"
                     isHome={isHome}
                     scrollToSection={scrollToSection}
                     className={LINK_CLASS}

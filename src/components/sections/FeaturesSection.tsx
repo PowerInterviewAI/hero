@@ -172,16 +172,10 @@ const FEATURES: Feature[] = [
   },
 ];
 
-interface FeaturesSectionProps {
-  /** Set on the standalone /features route so the section owns the h1. */
-  standalone?: boolean;
-}
-
-export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ standalone = false }) => (
+export const FeaturesSection: React.FC = () => (
   <Section id="features" tone="muted" aria-labelledby="features-heading">
     <SectionHeading
       id="features-heading"
-      as={standalone ? 'h1' : 'h2'}
       eyebrow="Features"
       title="Everything the call needs, nothing it can see"
       description="Built for live interviews, mock practice, and meeting notes alike."

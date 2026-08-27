@@ -55,16 +55,10 @@ const BENEFITS: Benefit[] = [
   },
 ];
 
-interface BenefitsSectionProps {
-  /** Set on the standalone /benefits route so the section owns the h1. */
-  standalone?: boolean;
-}
-
-export const BenefitsSection: React.FC<BenefitsSectionProps> = ({ standalone = false }) => (
+export const BenefitsSection: React.FC = () => (
   <Section id="benefits" aria-labelledby="benefits-heading">
     <SectionHeading
       id="benefits-heading"
-      as={standalone ? 'h1' : 'h2'}
       eyebrow="Benefits"
       title="Transform your interview performance"
       description="What actually changes once the assistant is running alongside your calls."

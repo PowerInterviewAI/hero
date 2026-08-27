@@ -102,16 +102,10 @@ const CellValue: React.FC<{ value: Cell; emphasis?: boolean }> = ({ value, empha
   );
 };
 
-interface WhyChooseSectionProps {
-  /** Set on the standalone /why-choose route so the section owns the h1. */
-  standalone?: boolean;
-}
-
-export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ standalone = false }) => (
+export const WhyChooseSection: React.FC = () => (
   <Section id="why-choose" tone="muted" aria-labelledby="why-choose-heading">
     <SectionHeading
       id="why-choose-heading"
-      as={standalone ? 'h1' : 'h2'}
       eyebrow="Why us"
       title="Built for the interview, not the rehearsal"
       description="Practice platforms coach you beforehand and coding sites drill you on problems. Neither is there when the interviewer is actually on the call."

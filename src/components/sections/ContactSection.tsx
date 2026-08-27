@@ -57,16 +57,10 @@ const CHANNELS: Channel[] = [
   },
 ];
 
-interface ContactSectionProps {
-  /** Set on the standalone /contact route so the section owns the h1. */
-  standalone?: boolean;
-}
-
-export const ContactSection: React.FC<ContactSectionProps> = ({ standalone = false }) => (
+export const ContactSection: React.FC = () => (
   <Section id="contact" tone="muted" aria-labelledby="contact-heading">
     <SectionHeading
       id="contact-heading"
-      as={standalone ? 'h1' : 'h2'}
       eyebrow="Contact"
       title="Get in touch"
       description="Questions, billing, or a bug during a call - pick whichever channel suits you."

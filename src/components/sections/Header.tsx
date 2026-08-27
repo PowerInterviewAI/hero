@@ -25,11 +25,11 @@ interface HeaderProps {
 
 const NAV_LINKS = [
   { label: 'How it works', sectionId: 'how-it-works', to: '/how-it-works' },
-  { label: 'Features', sectionId: 'features', to: '/features' },
-  { label: 'Why Us', sectionId: 'why-choose-heading', to: '/why-choose' },
+  { label: 'Features', sectionId: 'features', to: '/#features' },
+  { label: 'Why Us', sectionId: 'why-choose', to: '/#why-choose' },
   { label: 'Pricing', sectionId: 'pricing', to: '/pricing' },
   { label: 'FAQ', sectionId: 'faq', to: '/faq' },
-  { label: 'Contact', sectionId: 'contact', to: '/contact' },
+  { label: 'Contact', sectionId: 'contact', to: '/#contact' },
 ] as const;
 
 const SPY_IDS = NAV_LINKS.map((link) => link.sectionId);
