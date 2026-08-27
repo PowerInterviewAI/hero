@@ -6,6 +6,7 @@ const SITE_URL = 'https://www.powerinterviewai.com';
 
 const STATIC_ROUTES = [
   '',
+  '/how-it-works',
   '/features',
   '/pricing',
   '/faq',

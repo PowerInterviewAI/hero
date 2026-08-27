@@ -192,7 +192,7 @@ export const BenefitsSection: React.FC = () => {
             jobs
           </p>
           <GoHomeButton size="lg">
-            Start for Free to try all features
+            Start free with live suggestions
             <ArrowRight className="ml-2 h-4 w-4" />
           </GoHomeButton>
         </div>

@@ -1,17 +1,23 @@
 'use client';
 
-import { type ReactNode, useState } from 'react';
+import { type ReactNode } from 'react';
 
-import { FAQSection, FooterSection, Header, HeroSection } from '@/components/sections';
-import { useTheme } from '@/hooks/useTheme';
+import {
+  FAQSection,
+  FooterSection,
+  Header,
+  HeroSection,
+  InstallPanel,
+} from '@/components/sections';
 
 interface HomeContentProps {
   featuresSection: ReactNode;
+  howItWorksSection: ReactNode;
   benefitsSection: ReactNode;
   whyChooseSection: ReactNode;
   pricingSection: ReactNode;
+  testimonialsSection: ReactNode;
   contactSection: ReactNode;
-  // coFoundersSection: ReactNode;
 }
 
 // Header/HeroSection/FAQSection/FooterSection stay directly imported here
@@ -23,46 +29,39 @@ interface HomeContentProps {
 // flat out isn't supported outside a Server Component tree).
 export function HomeContent({
   featuresSection,
+  howItWorksSection,
   benefitsSection,
   whyChooseSection,
   pricingSection,
+  testimonialsSection,
   contactSection,
-  // coFoundersSection,
 }: HomeContentProps) {
-  const { theme, setTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header
-        theme={theme}
-        mobileMenuOpen={mobileMenuOpen}
-        scrollToSection={scrollToSection}
-        toggleTheme={toggleTheme}
-        setMobileMenuOpen={setMobileMenuOpen}
-      />
+    <div className="flex min-h-screen flex-col bg-background">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
 
-      <main>
+      <Header scrollToSection={scrollToSection} />
+
+      <main id="main" className="flex-1">
         <HeroSection scrollToSection={scrollToSection} />
+        {howItWorksSection}
         {featuresSection}
         {benefitsSection}
         {whyChooseSection}
         {pricingSection}
+        {testimonialsSection}
+        <InstallPanel />
         <FAQSection scrollToSection={scrollToSection} />
         {contactSection}
-        {/* {coFoundersSection} */}
       </main>
 
       <FooterSection scrollToSection={scrollToSection} />

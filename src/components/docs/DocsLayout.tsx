@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import Container from '@/components/Container';
 import { FooterSection } from '@/components/sections/FooterSection';
 import { Header } from '@/components/sections/Header';
-import { useTheme } from '@/hooks/useTheme';
 
 import { DocNavItem, DocsSidebar } from './DocsSidebar';
 
@@ -15,8 +14,6 @@ interface DocsLayoutProps {
 }
 
 export const DocsLayout: React.FC<DocsLayoutProps> = ({ docs, children }) => {
-  const { theme, setTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // lock body scroll when sidebar is open on mobile
@@ -27,16 +24,9 @@ export const DocsLayout: React.FC<DocsLayoutProps> = ({ docs, children }) => {
     };
   }, [sidebarOpen]);
 
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
   return (
     <div className="flex min-h-screen flex-col">
-      <Header
-        theme={theme}
-        mobileMenuOpen={mobileMenuOpen}
-        toggleTheme={toggleTheme}
-        setMobileMenuOpen={setMobileMenuOpen}
-      />
+      <Header />
 
       <Container>
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 py-8">

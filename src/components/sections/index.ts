@@ -1,10 +1,11 @@
 export * from './BenefitsSection';
 export * from './ContactSection';
-// export * from './CoFoundersSection';
 export * from './FAQSection';
 export * from './FeaturesSection';
 export * from './FooterSection';
 export * from './Header';
-export * from './HeroSection';
+export * from './HowItWorksSection';
 export * from './PricingSection';
+export * from './TestimonialsSection';
 export * from './WhyChooseSection';
+export * from './hero';
