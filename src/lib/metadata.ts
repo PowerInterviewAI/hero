@@ -26,8 +26,8 @@ export function buildMetadata({ title, description, path }: PageMetadataInput): 
       images: [
         {
           url: '/open-graph.png',
-          width: 1235,
-          height: 647,
+          width: 1200,
+          height: 630,
           alt: SITE_NAME,
         },
       ],

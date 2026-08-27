@@ -110,8 +110,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/open-graph.png',
-        width: 1235,
-        height: 647,
+        width: 1200,
+        height: 630,
         alt: 'Power Interview AI - AI interview coach and meeting note taker',
       },
     ],
