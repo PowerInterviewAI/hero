@@ -17,6 +17,30 @@ interface Channel {
 
 const CHANNELS: Channel[] = [
   {
+    icon: SiDiscord,
+    name: 'Discord',
+    handle: 'Community server',
+    blurb: 'Chat with other candidates and the team',
+    href: 'https://discord.gg/TJJp5azK7Z',
+    external: true,
+  },
+  {
+    icon: SiTelegram,
+    name: 'Telegram',
+    handle: '@power_interview_ai',
+    blurb: 'Announcements and quick questions',
+    href: 'https://t.me/power_interview_ai',
+    external: true,
+  },
+  {
+    icon: SiX,
+    name: 'X',
+    handle: '@power_interview',
+    blurb: 'Product updates',
+    href: 'https://x.com/power_interview',
+    external: true,
+  },
+  {
     icon: SiProtonmail,
     name: 'Email',
     handle: 'team@vectorleappulse.xyz',
@@ -29,30 +53,6 @@ const CHANNELS: Channel[] = [
     handle: 'PowerInterviewAI/client-app',
     blurb: 'Releases, issues, and source',
     href: 'https://github.com/PowerInterviewAI/client-app',
-    external: true,
-  },
-  {
-    icon: SiTelegram,
-    name: 'Telegram',
-    handle: '@power_interview_ai',
-    blurb: 'Announcements and quick questions',
-    href: 'https://t.me/power_interview_ai',
-    external: true,
-  },
-  {
-    icon: SiDiscord,
-    name: 'Discord',
-    handle: 'Community server',
-    blurb: 'Chat with other candidates and the team',
-    href: 'https://discord.gg/TJJp5azK7Z',
-    external: true,
-  },
-  {
-    icon: SiX,
-    name: 'X',
-    handle: '@power_interview',
-    blurb: 'Product updates',
-    href: 'https://x.com/power_interview',
     external: true,
   },
 ];
