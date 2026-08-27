@@ -36,6 +36,8 @@ The **Context** field (job description / role requirements) directly shapes the 
 2. Replace the previous job description with the one from the current role.
 3. Highlight the key skills the role requires - the AI will weight those more heavily.
 
+![Configuration dialog - name, CV, and job context fields](/media/docs/configuration-dialog.png)
+
 The more aligned your context is to the actual interview, the more targeted and useful the suggestions will be.
 
 ---
@@ -57,6 +59,8 @@ Run a short test session a few minutes before the interview starts:
 - Speak a few sentences and verify your voice appears in the transcript.
 - Play a short audio clip through your speakers and verify the loopback channel picks it up.
 - If the microphone channel is missing, re-check that your physical microphone is selected in **Audio Options**.
+
+![Audio Options - verify the correct microphone is selected](/media/docs/audio-options.png)
 
 ### A Dead Headset is Recoverable
 

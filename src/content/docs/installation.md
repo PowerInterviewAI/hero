@@ -64,6 +64,10 @@ Use the latest release binaries from GitHub:
 - [macOS installer - Intel (.dmg)](https://github.com/PowerInterviewAI/client-app/releases/latest/download/Power.Interview.AI-1.6.6-x64.dmg)
 - [All release assets (latest)](https://github.com/PowerInterviewAI/client-app/releases/latest)
 
+| Windows                                                                     | macOS                                                                       |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![Running the Windows installer](/media/docs/install-windows.png) | ![Dragging Power Interview AI into the Applications folder](/media/docs/install-macos.png) |
+
 Not sure which Mac you have? Run `uname -m` in Terminal: `arm64` is Apple Silicon, `x86_64` is Intel.
 
 After installation, launch **Power Interview**, sign in, and proceed to first-run setup.
@@ -94,6 +98,8 @@ pnpm electron:dev-show
 ---
 
 ## First-Run Setup
+
+![First-run setup - sign in and complete your profile](/media/docs/first-run-setup.png)
 
 After launching the app for the first time:
 
