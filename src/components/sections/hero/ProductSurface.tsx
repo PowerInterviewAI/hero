@@ -25,6 +25,21 @@ export const ProductSurface: React.FC<{ className?: string }> = ({ className }) 
 
   const go = (next: number) => setIndex((next + MEDIA_ITEMS.length) % MEDIA_ITEMS.length);
 
+  // The clips are 16-20 MB each. Autoplaying one at anyone who opens the page
+  // ignores two preferences the browser already knows about: reduced motion,
+  // and Data Saver. Both leave the poster up with the play control live, so
+  // the demo is one click away rather than gone.
+  //
+  // Checked in an effect rather than a state initialiser - matchMedia doesn't
+  // exist during the server render that produces the initial HTML.
+  useEffect(() => {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection;
+
+    if (reducedMotion || connection?.saveData) setPlaying(false);
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -57,7 +72,7 @@ export const ProductSurface: React.FC<{ className?: string }> = ({ className }) 
             src={current.src}
             poster={current.poster}
             title={current.title}
-            preload="none"
+            preload={playing ? 'auto' : 'none'}
             autoPlay={playing}
             onEnded={() => go(index + 1)}
             playsInline

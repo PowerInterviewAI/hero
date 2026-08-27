@@ -88,6 +88,12 @@ const FEATURES: Feature[] = [
       </>
     ),
     wide: true,
+    image: {
+      src: '/media/marketing/feature-suggestions.png',
+      alt: 'A reply suggestion streaming into the suggestions panel',
+      width: 1600,
+      height: 900,
+    },
     footer: (
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <Kbd combo={HOTKEYS[Hotkey.ToggleProfessionalMode].combo} />
@@ -207,10 +213,16 @@ export const FeaturesSection: React.FC = () => (
 
             <p className="text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
 
-            {feature.footer && <div className="mt-auto pt-2">{feature.footer}</div>}
-
+            {/* The screenshot is the tile's floor and the hotkey line reads as
+                its caption, so the image comes first and carries the only
+                mt-auto. Two mt-auto siblings split the slack between them,
+                which left a gap between the hotkey chip and the image. */}
             {feature.image && (
-              <div className="mt-auto overflow-hidden rounded-lg border border-border bg-surface-1">
+              // max-h caps how tall the row can get on a wide viewport. Without
+              // it a 16:9 tile at ~520px wide is ~290px tall, and the text-only
+              // tile sharing the row stretches to match with nothing in the
+              // bottom third of it.
+              <div className="mt-auto aspect-video max-h-64 overflow-hidden rounded-lg border border-border bg-surface-1">
                 <img
                   src={feature.image.src}
                   alt={feature.image.alt}
@@ -218,9 +230,13 @@ export const FeaturesSection: React.FC = () => (
                   height={feature.image.height}
                   loading="lazy"
                   decoding="async"
-                  className="h-auto w-full object-cover"
+                  className="size-full object-cover"
                 />
               </div>
+            )}
+
+            {feature.footer && (
+              <div className={cn(!feature.image && 'mt-auto pt-2')}>{feature.footer}</div>
             )}
           </article>
         </Reveal>
