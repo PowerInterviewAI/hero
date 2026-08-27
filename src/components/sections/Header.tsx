@@ -23,16 +23,28 @@ interface HeaderProps {
   scrollToSection?: (sectionId: string) => void;
 }
 
+/**
+ * One rule, applied to every item: if the subject has a page of its own, the
+ * nav goes to that page from everywhere, and the home page carries a condensed
+ * version that links across. Everything else is a home-page anchor - it scrolls
+ * on the home page and deep-links to `/#id` from elsewhere.
+ *
+ * The nav used to mix the two silently: 'Pricing' scrolled on the home page but
+ * navigated to /pricing from anywhere else, so one label meant two things and
+ * the active state needed two different rules to describe it.
+ */
 const NAV_LINKS = [
-  { label: 'How it works', sectionId: 'how-it-works', to: '/how-it-works' },
-  { label: 'Features', sectionId: 'features', to: '/#features' },
-  { label: 'Why Us', sectionId: 'why-choose', to: '/#why-choose' },
-  { label: 'Pricing', sectionId: 'pricing', to: '/pricing' },
-  { label: 'FAQ', sectionId: 'faq', to: '/faq' },
-  { label: 'Contact', sectionId: 'contact', to: '/#contact' },
+  { label: 'How it works', sectionId: 'how-it-works', to: '/how-it-works', page: true },
+  { label: 'Features', sectionId: 'features', to: '/#features', page: false },
+  { label: 'Why Us', sectionId: 'why-choose', to: '/#why-choose', page: false },
+  { label: 'Pricing', sectionId: 'pricing', to: '/pricing', page: true },
+  { label: 'FAQ', sectionId: 'faq', to: '/faq', page: true },
+  { label: 'Contact', sectionId: 'contact', to: '/#contact', page: false },
 ] as const;
 
-const SPY_IDS = NAV_LINKS.map((link) => link.sectionId);
+// Only the anchors are spied on. A link that leaves the page shouldn't light up
+// as "you are here" just because you scrolled past its teaser.
+const SPY_IDS = NAV_LINKS.filter((link) => !link.page).map((link) => link.sectionId);
 
 const GITHUB_URL = 'https://github.com/PowerInterviewAI/client-app';
 
@@ -45,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
   const goHome = useGoHome();
 
   const isActive = (link: (typeof NAV_LINKS)[number]) =>
-    isHome ? activeSection === link.sectionId : pathname === link.to;
+    link.page ? pathname === link.to : isHome && activeSection === link.sectionId;
 
   const closeMenu = () => setMenuOpen(false);
 

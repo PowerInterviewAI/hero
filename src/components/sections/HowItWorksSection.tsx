@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Download, FileText, Radio } from 'lucide-react';
+import { ArrowRight, Download, FileText, Radio } from 'lucide-react';
+import Link from 'next/link';
 
 import { GoHomeButton } from '@/components/GoHomeButton';
+import { Button } from '@/components/ui/button';
 import { Kbd } from '@/components/ui/kbd';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
@@ -72,8 +74,18 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ standalone
       ))}
     </ol>
 
-    <div className="mt-12 flex justify-center">
+    <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
       <GoHomeButton size="lg">Download and try it</GoHomeButton>
+      {/* The full walkthrough, with the install commands, lives on its own
+          route; the home page carries the three steps and links across. */}
+      {!standalone && (
+        <Button variant="ghost" size="lg" asChild>
+          <Link href="/how-it-works">
+            Full walkthrough
+            <ArrowRight className="size-4" />
+          </Link>
+        </Button>
+      )}
     </div>
   </Section>
 );

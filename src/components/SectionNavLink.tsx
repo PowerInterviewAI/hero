@@ -11,6 +11,8 @@ interface SectionNavLinkProps {
   sectionId: string;
   to: string;
   isHome: boolean;
+  /** True when `to` is a route of its own rather than a home-page anchor. */
+  page?: boolean;
   scrollToSection?: (sectionId: string) => void;
   /** Fired after the link is activated - used to close the mobile sheet. */
   onNavigate?: () => void;
@@ -24,12 +26,14 @@ const BASE_CLASS =
 
 const ACTIVE_CLASS = 'text-foreground';
 
-// Renders an in-page scroll button on the home page, or a router Link elsewhere.
+// A scroll button only for home-page anchors while on the home page; anything
+// with a page of its own is always a router Link, from everywhere.
 export const SectionNavLink: React.FC<SectionNavLinkProps> = ({
   label,
   sectionId,
   to,
   isHome,
+  page = false,
   scrollToSection,
   onNavigate,
   active = false,
@@ -55,7 +59,7 @@ export const SectionNavLink: React.FC<SectionNavLinkProps> = ({
     </>
   );
 
-  return isHome && scrollToSection ? (
+  return !page && isHome && scrollToSection ? (
     <button onClick={handleClick} className={classes} aria-current={active ? 'true' : undefined}>
       {content}
     </button>

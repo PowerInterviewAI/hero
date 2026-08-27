@@ -56,7 +56,7 @@ export function HomeContent({
         {pricingSection}
         {testimonialsSection}
         <InstallPanel />
-        <FAQSection scrollToSection={scrollToSection} />
+        <FAQSection scrollToSection={scrollToSection} preview />
         {contactSection}
       </main>
 

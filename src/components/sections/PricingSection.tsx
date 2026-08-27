@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Check, Coins, Minus } from 'lucide-react';
+import { ArrowRight, Check, Coins, Minus } from 'lucide-react';
+import Link from 'next/link';
 
 import { GoHomeButton } from '@/components/GoHomeButton';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
 import { ENV } from '@/config/constants';
@@ -70,9 +72,20 @@ export const PricingSkeleton: React.FC = () => (
 interface PricingSectionProps {
   /** Set on the standalone /pricing route so the section owns the h1. */
   standalone?: boolean;
+  /**
+   * Home-page treatment: the credit packs and their prices, without the
+   * trial-vs-paid comparison, and a link to /pricing for the detail. The full
+   * treatment lives on one indexable URL instead of being duplicated whole on
+   * the home page - the same reasoning that turned /features and /why-choose
+   * into home-page anchors (see next.config.ts).
+   */
+  preview?: boolean;
 }
 
-export const PricingSection = async ({ standalone = false }: PricingSectionProps) => {
+export const PricingSection = async ({
+  standalone = false,
+  preview = false,
+}: PricingSectionProps) => {
   const plans = await getPlans();
 
   const heading = (
@@ -81,7 +94,11 @@ export const PricingSection = async ({ standalone = false }: PricingSectionProps
       as={standalone ? 'h1' : 'h2'}
       eyebrow="Pricing"
       title="Simple, transparent pricing"
-      description="Credits are consumed at 10 per minute of AI assistance, so 600 credits is about an hour. Buy what you need - there is no subscription."
+      description={
+        preview
+          ? 'Credits are consumed at 10 per minute of AI assistance, so 600 credits is about an hour. No subscription.'
+          : 'Credits are consumed at 10 per minute of AI assistance, so 600 credits is about an hour. Buy what you need - there is no subscription.'
+      }
     />
   );
 
@@ -117,45 +134,51 @@ export const PricingSection = async ({ standalone = false }: PricingSectionProps
         </Badge>
       </div>
 
-      {/* Trial vs paid */}
-      <Reveal className="mx-auto mt-12 max-w-3xl">
-        <div className="overflow-x-auto rounded-xl border border-border bg-card">
-          <table className="w-full min-w-[34rem] border-collapse text-sm">
-            <caption className="sr-only">Free trial compared with paid plans</caption>
-            <thead>
-              <tr className="border-b border-border">
-                <th scope="col" className="px-5 py-4 text-left font-medium text-muted-foreground">
-                  What you get
-                </th>
-                <th scope="col" className="w-48 px-4 py-4 text-left font-semibold text-foreground">
-                  Free trial
-                </th>
-                <th
-                  scope="col"
-                  className="w-48 bg-primary/5 px-4 py-4 text-left font-semibold text-foreground"
-                >
-                  Paid
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {TIER_ROWS.map((row) => (
-                <tr key={row.label} className="border-b border-border-subtle last:border-b-0">
-                  <th scope="row" className="px-5 py-3 text-left font-normal text-foreground">
-                    {row.label}
+      {/* Trial vs paid. Detail belongs on /pricing; the home page shows the
+          packs and links across rather than repeating the whole table. */}
+      {!preview && (
+        <Reveal className="mx-auto mt-12 max-w-3xl">
+          <div className="overflow-x-auto rounded-xl border border-border bg-card">
+            <table className="w-full min-w-[34rem] border-collapse text-sm">
+              <caption className="sr-only">Free trial compared with paid plans</caption>
+              <thead>
+                <tr className="border-b border-border">
+                  <th scope="col" className="px-5 py-4 text-left font-medium text-muted-foreground">
+                    What you get
                   </th>
-                  <td className="px-4 py-3">
-                    <TierValue value={row.trial} />
-                  </td>
-                  <td className="bg-primary/5 px-4 py-3">
-                    <TierValue value={row.paid} />
-                  </td>
+                  <th
+                    scope="col"
+                    className="w-48 px-4 py-4 text-left font-semibold text-foreground"
+                  >
+                    Free trial
+                  </th>
+                  <th
+                    scope="col"
+                    className="w-48 bg-primary/5 px-4 py-4 text-left font-semibold text-foreground"
+                  >
+                    Paid
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Reveal>
+              </thead>
+              <tbody>
+                {TIER_ROWS.map((row) => (
+                  <tr key={row.label} className="border-b border-border-subtle last:border-b-0">
+                    <th scope="row" className="px-5 py-3 text-left font-normal text-foreground">
+                      {row.label}
+                    </th>
+                    <td className="px-4 py-3">
+                      <TierValue value={row.trial} />
+                    </td>
+                    <td className="bg-primary/5 px-4 py-3">
+                      <TierValue value={row.paid} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+      )}
 
       {/* Credit packs */}
       <div className="mx-auto mt-14 grid max-w-5xl items-start gap-6 md:grid-cols-3">
@@ -238,6 +261,17 @@ export const PricingSection = async ({ standalone = false }: PricingSectionProps
           );
         })}
       </div>
+
+      {preview && (
+        <div className="mt-12 text-center">
+          <Button variant="outline" asChild>
+            <Link href="/pricing">
+              Compare the free trial and paid plans
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 };

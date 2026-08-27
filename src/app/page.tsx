@@ -13,6 +13,7 @@ import {
   TestimonialsSection,
   WhyChooseSection,
 } from '@/components/sections';
+import { softwareApplicationJsonLd } from '@/lib/jsonLd';
 import { buildMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = buildMetadata({
@@ -24,18 +25,25 @@ export const metadata: Metadata = buildMetadata({
 
 export default function Home() {
   return (
-    <HomeContent
-      howItWorksSection={<HowItWorksSection />}
-      featuresSection={<FeaturesSection />}
-      benefitsSection={<BenefitsSection />}
-      whyChooseSection={<WhyChooseSection />}
-      pricingSection={
-        <Suspense fallback={<PricingSkeleton />}>
-          <PricingSection />
-        </Suspense>
-      }
-      testimonialsSection={<TestimonialsSection />}
-      contactSection={<ContactSection />}
-    />
+    <>
+      {/* The page that is actually about the app carries its schema. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
+      />
+      <HomeContent
+        howItWorksSection={<HowItWorksSection />}
+        featuresSection={<FeaturesSection />}
+        benefitsSection={<BenefitsSection />}
+        whyChooseSection={<WhyChooseSection />}
+        pricingSection={
+          <Suspense fallback={<PricingSkeleton />}>
+            <PricingSection preview />
+          </Suspense>
+        }
+        testimonialsSection={<TestimonialsSection />}
+        contactSection={<ContactSection />}
+      />
+    </>
   );
 }

@@ -32,6 +32,17 @@ File-based routing under `src/app/`:
 
 Most pages use a shared `PageChrome` client component (`src/components/PageChrome.tsx`) for the Header/Footer + theme/mobile-menu state that's otherwise identical across every route.
 
+### Page vs. home-page section
+
+One rule decides where a marketing section lives, and the nav follows it:
+
+- **Has a page of its own** (`/how-it-works`, `/pricing`, `/faq`): the nav links to that page from everywhere, including the home page. The home page carries a *condensed* version — `<PricingSection preview />` drops the trial-vs-paid table, `<FAQSection preview />` shows the first five questions — that links across to the full treatment. This keeps one indexable URL per body of content instead of two competing ones.
+- **Home-page anchor only** (`#features`, `#why-choose`, `#contact`): the nav scrolls on the home page and deep-links to `/#id` elsewhere. `next.config.ts` 308s the old standalone routes (`/features`, `/benefits`, `/why-choose`, `/contact`) to those anchors — they were exact duplicates of the home sections and competed with the home page for ranking.
+
+`SectionNavLink` renders a scroll button only for the anchor case; anything with `page: true` in `NAV_LINKS` is always a router `Link`. Active state follows the same split — `pathname === to` for pages, scroll-spy for anchors — so `useScrollSpy` is only given the anchor ids. Don't reintroduce a nav item that scrolls on one route and navigates on another; that split is what produced the Pricing underline bug.
+
+JSON-LD is scoped the same way (`src/lib/jsonLd.ts`): `Organization` is site-wide and stays in the root layout, `SoftwareApplication` is on the home page, `FAQPage` is on `/faq`. Structured data has to describe the page it sits on — all three used to be emitted on every route, including `/privacy` and every docs page.
+
 ### Documentation System
 
 Markdown files live in `src/content/docs/`. `src/lib/docs.ts` reads them via Node `fs` (there's no `import.meta.glob` equivalent in Next.js) and holds the **single canonical `ORDER` array** used by both the docs index and the sidebar — don't add a second one. Adding a new doc: drop the `.md` file in `src/content/docs/` and add its slug to `ORDER` in `src/lib/docs.ts`.

@@ -6,7 +6,7 @@ import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { FAQ_ITEMS } from '@/config/faq';
+import { organizationJsonLd } from '@/lib/jsonLd';
 import { cn } from '@/lib/utils';
 import '@/styles/index.css';
 
@@ -137,79 +137,6 @@ export const viewport: Viewport = {
   ],
 };
 
-const softwareApplicationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: SITE_NAME,
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Windows, macOS, Linux',
-  offers: {
-    '@type': 'AggregateOffer',
-    lowPrice: '20',
-    highPrice: '500',
-    priceCurrency: 'USD',
-    offerCount: '3',
-  },
-  description:
-    'Privacy-first AI interview assistant and meeting note taker with real-time transcription, mock interview practice, live AI suggestions, coding challenge assistance, and smart exports for Zoom, Google Meet, and Microsoft Teams.',
-  author: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: `${SITE_URL}/`,
-    logo: `${SITE_URL}/logo.png`,
-    sameAs: ['https://github.com/PowerInterviewAI/client-app', 'https://t.me/power_interview_ai'],
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    ratingCount: '156',
-  },
-  screenshot: `${SITE_URL}/logo.png`,
-  featureList: [
-    '1-hour free trial with our free model - no rate limits, no interruptions',
-    'Live transcription with speaker detection',
-    'AI-powered reply and code suggestions',
-    'Mock interview practice',
-    'AI-powered meeting note taker for Zoom, Google Meet, Microsoft Teams',
-    'Smart export with AI summaries and action items',
-    'Bring your own LLM provider',
-    'Stealth mode with hotkeys',
-    'Privacy-first local data storage',
-  ],
-};
-
-const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: SITE_NAME,
-  url: `${SITE_URL}/`,
-  logo: `${SITE_URL}/logo.png`,
-  description:
-    'Privacy-first AI interview assistant and meeting note taker for interviews, mock interviews, and business calls. Supports Zoom, Google Meet, Microsoft Teams, and more.',
-  email: 'team@vectorleappulse.xyz',
-  sameAs: ['https://github.com/PowerInterviewAI/client-app', 'https://t.me/power_interview_ai'],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'team@vectorleappulse.xyz',
-    contactType: 'Customer Support',
-  },
-};
-
-const faqPageJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  // Derived from the same array FAQSection renders, so the rich result can't
-  // drift from the page the way two hand-maintained copies did.
-  mainEntity: FAQ_ITEMS.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
-};
-
 // Sets the dark/light class on <html> before hydration to avoid a flash of the wrong theme.
 const themeInitScript = `
 (function () {
@@ -231,17 +158,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
-        />
+        {/* Organization is the only schema true of every route. The
+            SoftwareApplication and FAQPage blocks moved to the pages whose
+            content they describe - see src/lib/jsonLd.ts. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd) }}
         />
       </head>
       <body suppressHydrationWarning>
