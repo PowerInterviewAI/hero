@@ -11,10 +11,11 @@ import {
   TrendingUp,
 } from 'lucide-react';
 
-import { GoHomeButton } from '@/components/GoHomeButton';
+import { DownloadCta } from '@/components/DownloadCta';
 import { Glow } from '@/components/ui/glow';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
+import { SECTIONS } from '@/config/routes';
 
 interface Benefit {
   icon: LucideIcon;
@@ -56,7 +57,7 @@ const BENEFITS: Benefit[] = [
 ];
 
 export const BenefitsSection: React.FC = () => (
-  <Section id="benefits" aria-labelledby="benefits-heading">
+  <Section id={SECTIONS.benefits} aria-labelledby="benefits-heading">
     <SectionHeading
       id="benefits-heading"
       eyebrow="Benefits"
@@ -88,10 +89,10 @@ export const BenefitsSection: React.FC = () => (
       <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
         One hour on the free model to try it against a real call. No card, no bank details.
       </p>
-      <GoHomeButton size="lg" className="mt-6">
+      <DownloadCta size="lg" className="mt-6">
         Start free with live suggestions
         <ArrowRight />
-      </GoHomeButton>
+      </DownloadCta>
     </div>
   </Section>
 );

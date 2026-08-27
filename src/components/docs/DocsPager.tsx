@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 
+import { ROUTES, docPath } from '@/config/routes';
 import type { DocNeighbours } from '@/lib/docs';
 
 const CARD_CLASS =
@@ -17,7 +18,7 @@ export const DocsPager: React.FC<DocNeighbours> = ({ previous, next }) => (
   <nav aria-label="Documentation pagination" className="mt-12 border-t border-border pt-6">
     <div className="flex flex-col gap-3 sm:flex-row">
       {previous ? (
-        <Link href={`/docs/${previous.slug}`} className={CARD_CLASS}>
+        <Link href={docPath(previous.slug)} className={CARD_CLASS}>
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <ArrowLeft className="size-3.5" aria-hidden="true" />
             Previous
@@ -33,7 +34,7 @@ export const DocsPager: React.FC<DocNeighbours> = ({ previous, next }) => (
       )}
 
       {next && (
-        <Link href={`/docs/${next.slug}`} className={`${CARD_CLASS} sm:items-end sm:text-right`}>
+        <Link href={docPath(next.slug)} className={`${CARD_CLASS} sm:items-end sm:text-right`}>
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             Next
             <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -47,7 +48,7 @@ export const DocsPager: React.FC<DocNeighbours> = ({ previous, next }) => (
 
     <div className="mt-6 flex justify-center">
       <Link
-        href="/docs"
+        href={ROUTES.docs}
         className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <LayoutGrid className="size-4" aria-hidden="true" />

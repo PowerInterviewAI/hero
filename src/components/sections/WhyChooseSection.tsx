@@ -2,10 +2,11 @@ import React from 'react';
 
 import { ArrowRight, Check, Minus, X } from 'lucide-react';
 
-import { GoHomeButton } from '@/components/GoHomeButton';
+import { DownloadCta } from '@/components/DownloadCta';
 import { Glow } from '@/components/ui/glow';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
+import { SECTIONS } from '@/config/routes';
 import { cn } from '@/lib/utils';
 
 /** true = yes, false = no, string = a qualified answer rendered as-is. */
@@ -103,7 +104,7 @@ const CellValue: React.FC<{ value: Cell; emphasis?: boolean }> = ({ value, empha
 };
 
 export const WhyChooseSection: React.FC = () => (
-  <Section id="why-choose" tone="muted" aria-labelledby="why-choose-heading">
+  <Section id={SECTIONS.whyChoose} tone="muted" aria-labelledby="why-choose-heading">
     <SectionHeading
       id="why-choose-heading"
       eyebrow="Why us"
@@ -173,10 +174,10 @@ export const WhyChooseSection: React.FC = () => (
         A standalone desktop app built for the live interview - download, install, start. No API
         wiring, no browser extension asking for permissions, no bot joining the call on your behalf.
       </p>
-      <GoHomeButton size="lg" className="mt-6">
+      <DownloadCta size="lg" className="mt-6">
         Experience the difference
         <ArrowRight />
-      </GoHomeButton>
+      </DownloadCta>
     </div>
   </Section>
 );

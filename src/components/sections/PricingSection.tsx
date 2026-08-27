@@ -3,12 +3,13 @@ import React from 'react';
 import { ArrowRight, Check, Coins, Minus } from 'lucide-react';
 import Link from 'next/link';
 
-import { GoHomeButton } from '@/components/GoHomeButton';
+import { DownloadCta } from '@/components/DownloadCta';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
-import { ENV } from '@/config/constants';
+import { ROUTES, SECTIONS } from '@/config/routes';
+import { getPlans } from '@/lib/plans';
 import { cn } from '@/lib/utils';
 import { Plan } from '@/types';
 
@@ -23,19 +24,6 @@ const calculateDiscount = (plan: Plan, starterPricePerCredit: number): number =>
   const discount = ((starterPricePerCredit - pricePerCredit) / starterPricePerCredit) * 100;
   return Math.round(discount);
 };
-
-async function getPlans(): Promise<Plan[] | null> {
-  try {
-    const response = await fetch(`${ENV.apiBaseUrl}api/payment/plans`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch plans');
-    }
-    return (await response.json()) as Plan[];
-  } catch (err) {
-    console.error('Error fetching plans:', err);
-    return null;
-  }
-}
 
 /** Trial vs paid, so the difference is visible before the credit packs. */
 const TIER_ROWS: { label: string; trial: string | true; paid: string | true }[] = [
@@ -57,9 +45,16 @@ const TierValue: React.FC<{ value: string | true }> = ({ value }) =>
     <span className="text-muted-foreground">{value}</span>
   );
 
-/** Rendered by the /pricing route and the home page while the fetch resolves. */
+/**
+ * Rendered by the /pricing route and the home page while the fetch resolves.
+ *
+ * Deliberately carries no id. It used to be `id="pricing"` as well, so the
+ * streamed HTML contained two elements with that id and `/#pricing` resolved to
+ * whichever came first - the fallback, which is then thrown away. An anchor
+ * target has to be the element that survives.
+ */
 export const PricingSkeleton: React.FC = () => (
-  <Section id="pricing" aria-label="Loading pricing">
+  <Section aria-label="Loading pricing">
     <SectionHeading eyebrow="Pricing" title="Simple, transparent pricing" />
     <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
       {[0, 1, 2].map((i) => (
@@ -104,14 +99,14 @@ export const PricingSection = async ({
 
   if (!plans) {
     return (
-      <Section id="pricing" aria-labelledby="pricing-heading">
+      <Section id={SECTIONS.pricing} aria-labelledby="pricing-heading">
         {heading}
         <div className="mx-auto mt-10 max-w-md rounded-xl border border-border bg-card p-6 text-center">
           <p className="text-sm text-muted-foreground">
             Live plan pricing is temporarily unavailable. Credit packs are listed in the app, and
             the 1-hour free trial is unaffected.
           </p>
-          <GoHomeButton className="mt-4">Download and start free</GoHomeButton>
+          <DownloadCta className="mt-4">Download and start free</DownloadCta>
         </div>
       </Section>
     );
@@ -121,7 +116,7 @@ export const PricingSection = async ({
   const starterPricePerCredit = starterPlan ? starterPlan.price_usd / starterPlan.credits : 0;
 
   return (
-    <Section id="pricing" aria-labelledby="pricing-heading">
+    <Section id={SECTIONS.pricing} aria-labelledby="pricing-heading">
       {heading}
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -250,12 +245,12 @@ export const PricingSection = async ({
                   </li>
                 </ul>
 
-                <GoHomeButton
+                <DownloadCta
                   className="mt-auto w-full"
                   variant={plan.popular ? 'default' : 'outline'}
                 >
                   Get started
-                </GoHomeButton>
+                </DownloadCta>
               </div>
             </Reveal>
           );
@@ -265,7 +260,7 @@ export const PricingSection = async ({
       {preview && (
         <div className="mt-12 text-center">
           <Button variant="outline" asChild>
-            <Link href="/pricing">
+            <Link href={ROUTES.pricing}>
               Compare the free trial and paid plans
               <ArrowRight className="size-4" />
             </Link>

@@ -13,12 +13,14 @@ import {
   MessageSquareText,
   UserLock,
 } from 'lucide-react';
+import Link from 'next/link';
 
-import { GoHomeButton } from '@/components/GoHomeButton';
+import { DownloadCta } from '@/components/DownloadCta';
 import { Kbd } from '@/components/ui/kbd';
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
 import { HOTKEYS, Hotkey } from '@/config/hotkeys';
+import { ROUTES, SECTIONS } from '@/config/routes';
 import { cn } from '@/lib/utils';
 
 interface Feature {
@@ -134,12 +136,12 @@ const FEATURES: Feature[] = [
       <>
         Practice with AI-guided mock interviews and get exportable performance notes. Learn more in
         the{' '}
-        <a
+        <Link
           className="font-medium text-primary underline-offset-4 hover:underline"
-          href="/docs/mock-interview"
+          href={`${ROUTES.docs}/mock-interview`}
         >
           mock interview guide
-        </a>
+        </Link>
         .
       </>
     ),
@@ -169,7 +171,7 @@ const FEATURES: Feature[] = [
 ];
 
 export const FeaturesSection: React.FC = () => (
-  <Section id="features" tone="muted" aria-labelledby="features-heading">
+  <Section id={SECTIONS.features} tone="muted" aria-labelledby="features-heading">
     <SectionHeading
       id="features-heading"
       eyebrow="Features"
@@ -200,10 +202,10 @@ export const FeaturesSection: React.FC = () => (
     </div>
 
     <div className="mt-14 flex justify-center">
-      <GoHomeButton size="lg">
+      <DownloadCta size="lg">
         Download for free
         <ArrowRight />
-      </GoHomeButton>
+      </DownloadCta>
     </div>
   </Section>
 );

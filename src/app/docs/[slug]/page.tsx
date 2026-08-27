@@ -8,8 +8,10 @@ import { DocsBreadcrumb } from '@/components/docs/DocsBreadcrumb';
 import { DocsLayout } from '@/components/docs/DocsLayout';
 import { DocsPager } from '@/components/docs/DocsPager';
 import { MarkdownImage } from '@/components/docs/MarkdownImage';
+import { docPath } from '@/config/routes';
 import {
   getDocContent,
+  getDocDescription,
   getDocNavItems,
   getDocNeighbours,
   getDocSlugs,
@@ -34,14 +36,14 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
     return buildMetadata({
       title: 'Not Found',
       description: 'No documentation found for this page.',
-      path: `/docs/${slug}`,
+      path: docPath(slug),
     });
   }
   const title = getDocTitle(slug, raw);
   return buildMetadata({
     title,
-    description: `Documentation: ${title}`,
-    path: `/docs/${slug}`,
+    description: getDocDescription(slug),
+    path: docPath(slug),
   });
 }
 

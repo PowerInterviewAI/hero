@@ -3,6 +3,8 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { ROUTES } from '@/config/routes';
+
 interface DocsBreadcrumbProps {
   /** Title of the doc being read. Omit on the docs index itself. */
   current?: string;
@@ -21,7 +23,7 @@ export const DocsBreadcrumb: React.FC<DocsBreadcrumbProps> = ({ current }) => (
   <nav aria-label="Breadcrumb" className="mb-6">
     <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
       <li>
-        <Link href="/" className={LINK_CLASS}>
+        <Link href={ROUTES.home} className={LINK_CLASS}>
           Home
         </Link>
       </li>
@@ -30,7 +32,7 @@ export const DocsBreadcrumb: React.FC<DocsBreadcrumbProps> = ({ current }) => (
 
       <li>
         {current ? (
-          <Link href="/docs" className={LINK_CLASS}>
+          <Link href={ROUTES.docs} className={LINK_CLASS}>
             Documentation
           </Link>
         ) : (

@@ -27,9 +27,16 @@
     ],
     "screenshots": [
         {
-            "src": "/favicon.png",
-            "sizes": "192x192",
-            "type": "image/png"
+            "src": "/media/marketing/poster-live-interview.jpg",
+            "sizes": "1920x1080",
+            "type": "image/jpeg",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/media/marketing/poster-coding-1.jpg",
+            "sizes": "1920x1080",
+            "type": "image/jpeg",
+            "form_factor": "wide"
         }
     ]
 }

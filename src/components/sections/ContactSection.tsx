@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
+import { SECTIONS } from '@/config/routes';
 
 interface Channel {
   icon: typeof SiGithub;
@@ -58,7 +59,7 @@ const CHANNELS: Channel[] = [
 ];
 
 export const ContactSection: React.FC = () => (
-  <Section id="contact" tone="muted" aria-labelledby="contact-heading">
+  <Section id={SECTIONS.contact} tone="muted" aria-labelledby="contact-heading">
     <SectionHeading
       id="contact-heading"
       eyebrow="Contact"

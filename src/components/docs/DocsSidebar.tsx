@@ -4,6 +4,7 @@ import { LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { ROUTES, docPath } from '@/config/routes';
 import { cn } from '@/lib/utils';
 
 export interface DocNavItem {
@@ -35,7 +36,7 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({ docs, className = '', 
               header's Docs link, which the mobile sidebar overlay covers. */}
           <li className="mb-1 border-b pb-2">
             <Link
-              href="/docs"
+              href={ROUTES.docs}
               onClick={onLinkClick}
               aria-current={atRoot ? 'page' : undefined}
               className={cn(
@@ -54,7 +55,7 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({ docs, className = '', 
             return (
               <li key={d.slug}>
                 <Link
-                  href={`/docs/${d.slug}`}
+                  href={docPath(d.slug)}
                   onClick={onLinkClick}
                   aria-current={active ? 'page' : undefined}
                   className={cn(

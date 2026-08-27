@@ -9,55 +9,33 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Container from '@/components/Container';
-import { SectionNavLink } from '@/components/SectionNavLink';
+import { NavLink } from '@/components/NavLink';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { useGoHome } from '@/hooks';
-import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { DOWNLOAD_HREF, NAV_LINKS, ROUTES } from '@/config/routes';
 import { useScrolled } from '@/hooks/useScrolled';
 import { cn } from '@/lib/utils';
 
-interface HeaderProps {
-  // Optional - only the home page threads in-page scrolling through.
-  scrollToSection?: (sectionId: string) => void;
-}
-
-/**
- * One rule, applied to every item: if the subject has a page of its own, the
- * nav goes to that page from everywhere, and the home page carries a condensed
- * version that links across. Everything else is a home-page anchor - it scrolls
- * on the home page and deep-links to `/#id` from elsewhere.
- *
- * The nav used to mix the two silently: 'Pricing' scrolled on the home page but
- * navigated to /pricing from anywhere else, so one label meant two things and
- * the active state needed two different rules to describe it.
- */
-const NAV_LINKS = [
-  { label: 'How it works', sectionId: 'how-it-works', to: '/how-it-works', page: true },
-  { label: 'Features', sectionId: 'features', to: '/#features', page: false },
-  { label: 'Why Us', sectionId: 'why-choose', to: '/#why-choose', page: false },
-  { label: 'Pricing', sectionId: 'pricing', to: '/pricing', page: true },
-  { label: 'FAQ', sectionId: 'faq', to: '/faq', page: true },
-  { label: 'Contact', sectionId: 'contact', to: '/#contact', page: false },
-] as const;
-
-// Only the anchors are spied on. A link that leaves the page shouldn't light up
-// as "you are here" just because you scrolled past its teaser.
-const SPY_IDS = NAV_LINKS.filter((link) => !link.page).map((link) => link.sectionId);
-
 const GITHUB_URL = 'https://github.com/PowerInterviewAI/client-app';
 
-export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
+/**
+ * One rule for the whole bar: every item is a route, and every item is a link.
+ *
+ * The nav previously mixed page links with home-page scroll targets - "Pricing"
+ * went to /pricing but "Features" scrolled - which meant one bar with two
+ * behaviours, an active state that needed two rules to describe it (pathname
+ * for pages, a scroll-spy for anchors), and a `scrollToSection` callback
+ * threaded down from the page through four components. Features, Why Us and
+ * Contact are still home-page sections; the footer links to them as `/#id`.
+ */
+export const Header: React.FC = () => {
   const pathname = usePathname();
-  const isHome = pathname === '/';
   const scrolled = useScrolled();
-  const activeSection = useScrollSpy(SPY_IDS);
   const [menuOpen, setMenuOpen] = useState(false);
-  const goHome = useGoHome();
 
   const isActive = (link: (typeof NAV_LINKS)[number]) =>
-    link.page ? pathname === link.to : isHome && activeSection === link.sectionId;
+    link.matchSubtree ? pathname.startsWith(link.href) : pathname === link.href;
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -75,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Link
-            href="/"
+            href={ROUTES.home}
             className="flex shrink-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <Image
@@ -93,23 +71,8 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
 
           <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
             {NAV_LINKS.map((link) => (
-              <SectionNavLink
-                key={link.sectionId}
-                {...link}
-                isHome={isHome}
-                scrollToSection={scrollToSection}
-                active={isActive(link)}
-              />
+              <NavLink key={link.href} {...link} underline active={isActive(link)} />
             ))}
-            <Link
-              href="/docs"
-              className={cn(
-                'text-sm font-medium text-muted-foreground transition-colors hover:text-foreground',
-                pathname.startsWith('/docs') && 'text-foreground'
-              )}
-            >
-              Docs
-            </Link>
           </nav>
 
           <div className="hidden items-center gap-1 md:flex">
@@ -125,8 +88,8 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
                 <SiGithub className="size-4" />
               </a>
             </Button>
-            <Button size="sm" onClick={goHome} className="ml-2">
-              Download
+            <Button size="sm" className="ml-2" asChild>
+              <Link href={DOWNLOAD_HREF}>Download</Link>
             </Button>
           </div>
 
@@ -141,24 +104,14 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
               <SheetContent title="Navigation menu">
                 <nav className="mt-8 flex flex-col gap-5" aria-label="Mobile navigation">
                   {NAV_LINKS.map((link) => (
-                    <SectionNavLink
-                      key={link.sectionId}
+                    <NavLink
+                      key={link.href}
                       {...link}
-                      isHome={isHome}
-                      scrollToSection={scrollToSection}
                       onNavigate={closeMenu}
                       active={isActive(link)}
                       className="w-fit text-base"
                     />
                   ))}
-                  <SheetClose asChild>
-                    <Link
-                      href="/docs"
-                      className="w-fit text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      Docs
-                    </Link>
-                  </SheetClose>
                 </nav>
 
                 <div className="mt-auto flex flex-col gap-2 border-t border-border pt-6">
@@ -168,14 +121,11 @@ export const Header: React.FC<HeaderProps> = ({ scrollToSection }) => {
                       GitHub
                     </a>
                   </Button>
-                  <Button
-                    onClick={() => {
-                      closeMenu();
-                      goHome();
-                    }}
-                  >
-                    Download
-                  </Button>
+                  <SheetClose asChild>
+                    <Button asChild>
+                      <Link href={DOWNLOAD_HREF}>Download</Link>
+                    </Button>
+                  </SheetClose>
                 </div>
               </SheetContent>
             </Sheet>

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { SiProtonmail } from '@icons-pack/react-simple-icons';
@@ -15,10 +13,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Section, SectionHeading } from '@/components/ui/section';
 import { FAQ_CATEGORIES, FAQ_ITEMS } from '@/config/faq';
+import { ROUTES, SECTIONS, homeAnchor } from '@/config/routes';
 
 interface FAQSectionProps {
-  /** Home scrolls to the contact section; the /faq route links to it. */
-  scrollToSection?: (sectionId: string) => void;
   /** Set on the standalone /faq route so the section owns the h1. */
   standalone?: boolean;
   /**
@@ -32,12 +29,8 @@ interface FAQSectionProps {
 /** How many questions the home page shows before handing off to /faq. */
 const PREVIEW_COUNT = 5;
 
-export const FAQSection: React.FC<FAQSectionProps> = ({
-  scrollToSection,
-  standalone = false,
-  preview = false,
-}) => (
-  <Section id="faq" aria-labelledby="faq-heading">
+export const FAQSection: React.FC<FAQSectionProps> = ({ standalone = false, preview = false }) => (
+  <Section id={SECTIONS.faq} aria-labelledby="faq-heading">
     <SectionHeading
       id="faq-heading"
       as={standalone ? 'h1' : 'h2'}
@@ -63,7 +56,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
 
         <div className="text-center">
           <Button variant="outline" asChild>
-            <Link href="/faq">
+            <Link href={ROUTES.faq}>
               All {FAQ_ITEMS.length} questions
               <ArrowRight className="size-4" />
             </Link>
@@ -98,19 +91,14 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
 
     <div className="mt-14 text-center">
       <p className="mb-4 text-muted-foreground">Still have questions?</p>
-      {scrollToSection ? (
-        <Button variant="outline" onClick={() => scrollToSection('contact')}>
+      {/* One destination from everywhere. This used to scroll on the home page
+          and be a raw <a> - a full page reload - on /faq. */}
+      <Button variant="outline" asChild>
+        <Link href={homeAnchor(SECTIONS.contact)}>
           Contact us
           <SiProtonmail className="size-4" />
-        </Button>
-      ) : (
-        <Button variant="outline" asChild>
-          <a href="/#contact">
-            Contact us
-            <SiProtonmail className="size-4" />
-          </a>
-        </Button>
-      )}
+        </Link>
+      </Button>
     </div>
   </Section>
 );

@@ -112,6 +112,24 @@
     @apply border-border;
   }
 
+  /*
+   * Hash links (/#features, the header's Download, the legacy /features 308)
+   * are plain anchors now, so the browser does the scrolling. These two rules
+   * are what used to be hand-rolled in a `scrollToSection` callback threaded
+   * through four components - except that version also left every target
+   * tucked under the sticky header, because scrollIntoView aligns to the
+   * viewport top and the header is 4rem tall.
+   *
+   * The prefers-reduced-motion block below overrides scroll-behavior to auto.
+   */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :target {
+    scroll-margin-top: 5rem;
+  }
+
   body {
     @apply bg-background font-sans text-foreground antialiased;
     font-feature-settings:

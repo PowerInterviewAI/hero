@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 
 import { Check, Copy, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Section, SectionHeading } from '@/components/ui/section';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ROUTES, SECTIONS } from '@/config/routes';
 
 import {
   DOWNLOAD_BASE_URL,
@@ -46,7 +48,7 @@ const DownloadRow: React.FC<DownloadRowProps> = ({ href, label, note }) => (
  * before they've decided to install, so the hero now carries a single download
  * button and the detail lives here.
  */
-export const InstallPanel: React.FC<{ id?: string }> = ({ id = 'install' }) => {
+export const InstallPanel: React.FC<{ id?: string }> = ({ id = SECTIONS.install }) => {
   const version = useLatestVersion();
   const [platform, setPlatform] = useState<InstallPlatform>('windows');
   const [shell, setShell] = useState<WindowsShell>('cmd');
@@ -187,9 +189,9 @@ export const InstallPanel: React.FC<{ id?: string }> = ({ id = 'install' }) => {
                 Clone the repository and run from source. Requires Node.js&nbsp;22.15+.
               </p>
               <Button variant="outline" asChild>
-                <a href="/docs/installation#option-c---build-from-source">
+                <Link href={`${ROUTES.docs}/installation#option-c---build-from-source`}>
                   View build instructions
-                </a>
+                </Link>
               </Button>
             </div>
           </TabsContent>

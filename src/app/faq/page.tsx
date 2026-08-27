@@ -8,13 +8,10 @@ import { buildMetadata } from '@/lib/metadata';
 export const metadata: Metadata = buildMetadata({
   title: 'FAQ',
   description:
-    'Frequently asked questions about Power Interview AI - features, mock interviews, meeting note taking, privacy, payments, and usage.',
+    'Answers on how Power Interview AI works: platform support, stealth mode and screen share, privacy and local data, mock interviews, billing and credits.',
   path: '/faq',
 });
 
-// No scrollToSection: with none supplied, FAQSection's "Contact us" renders as
-// a link to /contact rather than an in-page scroll. That replaces the client
-// wrapper this route used to need purely to intercept one button.
 export default function FAQPage() {
   return (
     <PageChrome>

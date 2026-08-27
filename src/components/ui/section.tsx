@@ -5,7 +5,10 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import Container from '@/components/Container';
 import { cn } from '@/lib/utils';
 
-const sectionVariants = cva('relative isolate', {
+// scroll-mt-20 clears the 4rem sticky header. Without it every anchor - the
+// nav's, the footer's, and the /features -> /#features redirect - dropped the
+// section heading behind the header bar.
+const sectionVariants = cva('relative isolate scroll-mt-20', {
   variants: {
     tone: {
       /** Sits on the page background. */
@@ -38,9 +41,9 @@ export interface SectionProps
 /**
  * The shared vertical rhythm for every marketing section.
  *
- * Six routes (/features, /pricing, /benefits, /why-choose, /contact, /faq)
- * re-render the same section components standalone inside PageChrome, so a
- * section must never depend on a neighbour for its spacing or background.
+ * /how-it-works, /pricing and /faq re-render their section standalone inside
+ * PageChrome, so a section must never depend on a neighbour for its spacing or
+ * background.
  */
 const Section = React.forwardRef<HTMLElement, SectionProps>(
   ({ className, tone, size, bleed, children, ...props }, ref) => (

@@ -3,12 +3,14 @@ import Link from 'next/link';
 
 import { DocsBreadcrumb } from '@/components/docs/DocsBreadcrumb';
 import { DocsLayout } from '@/components/docs/DocsLayout';
+import { docPath } from '@/config/routes';
 import { getAllDocs, getDocNavItems } from '@/lib/docs';
 import { buildMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Documentation',
-  description: 'Power Interview AI documentation and usage guides.',
+  description:
+    'Guides and reference for Power Interview AI: installation, everyday usage, mock interviews, hotkeys, best practices and troubleshooting.',
   path: '/docs',
 });
 
@@ -30,7 +32,7 @@ export default function DocsIndexPage() {
           {list.map((doc) => (
             <li key={doc.slug}>
               <Link
-                href={`/docs/${doc.slug}`}
+                href={docPath(doc.slug)}
                 className="flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <h2 className="text-lg font-semibold capitalize text-foreground">{doc.title}</h2>

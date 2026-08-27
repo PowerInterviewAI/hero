@@ -43,6 +43,19 @@ export function getDocContent(slug: string): string | null {
   return fs.readFileSync(filePath, 'utf-8');
 }
 
+/**
+ * Last-modified time of a doc's source file, for the sitemap.
+ *
+ * The sitemap used to stamp `new Date()` on every URL, so every route claimed
+ * to have changed at the moment of the last deploy - a lastmod that moves for
+ * pages that didn't change is a signal crawlers learn to ignore.
+ */
+export function getDocLastModified(slug: string): Date {
+  const filePath = path.join(DOCS_DIR, `${slug}.md`);
+  if (!fs.existsSync(filePath)) return new Date();
+  return fs.statSync(filePath).mtime;
+}
+
 export function getDocTitle(slug: string, raw: string): string {
   const titleMatch = raw.match(/^#\s+(.+)$/m);
   return titleMatch ? titleMatch[1].trim() : slug.replace(/-/g, ' ');
@@ -81,6 +94,28 @@ function getDocExcerpt(raw: string, title: string, titleMatched: boolean): strin
     excerpt = blocks[0] || '';
   }
   return excerpt.length > 220 ? `${excerpt.slice(0, 217).trim()}...` : excerpt;
+}
+
+/**
+ * Meta description for a doc page: its opening paragraph, as plain text,
+ * trimmed to a length Google will actually show.
+ *
+ * Doc pages used to describe themselves as `Documentation: ${title}` - 27 to 39
+ * characters of nothing, identical in shape across all seven pages, which is a
+ * snippet Google will discard in favour of scraping the page itself.
+ */
+export function getDocDescription(slug: string): string {
+  const raw = getDocContent(slug);
+  if (!raw) return 'Power Interview AI documentation.';
+
+  const titleMatch = raw.match(/^#\s+(.+)$/m);
+  const excerpt = getDocExcerpt(raw, getDocTitle(slug, raw), Boolean(titleMatch));
+  if (!excerpt) return 'Power Interview AI documentation.';
+
+  if (excerpt.length <= 160) return excerpt;
+  // Cut on a word boundary so the snippet doesn't end mid-word.
+  const cut = excerpt.slice(0, 157);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).trim()}...`;
 }
 
 export function getAllDocs(): DocListItem[] {

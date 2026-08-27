@@ -1,24 +1,23 @@
-'use client';
-
 import React from 'react';
 
-import { ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 import Container from '@/components/Container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Glow } from '@/components/ui/glow';
+import { ROUTES, SECTIONS } from '@/config/routes';
 
 import { DownloadButton } from './DownloadButton';
 import { ProductSurface } from './ProductSurface';
 import { TrustStrip } from './TrustStrip';
 
-interface HeroSectionProps {
-  scrollToSection: (sectionId: string) => void;
-}
-
-export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => (
-  <section id="home" className="relative isolate pb-16 pt-12 md:pb-24 md:pt-20">
+export const HeroSection: React.FC = () => (
+  <section
+    id={SECTIONS.hero}
+    className="relative isolate scroll-mt-20 pb-16 pt-12 md:pb-24 md:pt-20"
+  >
     <Glow position="top" intensity="medium" grid />
 
     <Container>
@@ -42,9 +41,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => 
 
         <div className="mt-2 flex flex-col items-center gap-4">
           <DownloadButton />
-          <Button variant="ghost" size="sm" onClick={() => scrollToSection('how-it-works')}>
-            See how it works
-            <ArrowDown />
+          {/* Was a button calling scrollIntoView('how-it-works'), which had no
+              URL and stopped at the home page's condensed version. */}
+          <Button variant="ghost" size="sm" asChild>
+            <Link href={ROUTES.howItWorks}>
+              See how it works
+              <ArrowRight />
+            </Link>
           </Button>
         </div>
 

@@ -1,22 +1,15 @@
-'use client';
-
 import React from 'react';
 
 import { SiDiscord, SiGithub, SiProtonmail, SiTelegram, SiX } from '@icons-pack/react-simple-icons';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import Container from '@/components/Container';
-import { GoHomeButton } from '@/components/GoHomeButton';
-import { SectionNavLink } from '@/components/SectionNavLink';
+import { DownloadCta } from '@/components/DownloadCta';
+import { NavLink } from '@/components/NavLink';
 import { Glow } from '@/components/ui/glow';
-
-interface FooterSectionProps {
-  // Optional; when provided the in-page links scroll rather than navigate.
-  scrollToSection?: (sectionId: string) => void;
-}
+import { DOWNLOAD_HREF, ROUTES, SECTIONS, homeAnchor } from '@/config/routes';
 
 const LINK_CLASS = 'text-sm text-muted-foreground transition-colors hover:text-foreground';
 
@@ -34,10 +27,14 @@ const RESOURCE_LINKS = [
   { label: 'Discord server', href: 'https://discord.gg/TJJp5azK7Z' },
 ] as const;
 
-export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection }) => {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
-
+/**
+ * Anchors live here rather than in the header.
+ *
+ * A footer linking to `/#features` is conventional and unambiguous - it is a
+ * real, copyable URL that behaves the same on every route. The header is
+ * routes only; see src/config/routes.ts.
+ */
+export const FooterSection: React.FC = () => {
   return (
     <>
       {/* Pre-footer CTA band */}
@@ -51,10 +48,10 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
             <p className="text-pretty text-muted-foreground">
               One hour free on us, running against a real call. Windows and macOS.
             </p>
-            <GoHomeButton size="lg">
+            <DownloadCta size="lg">
               Download Power Interview AI
               <ArrowRight />
-            </GoHomeButton>
+            </DownloadCta>
           </div>
         </Container>
       </section>
@@ -63,7 +60,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
         <Container>
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-1">
-              <Link href="/" className="mb-4 flex w-fit items-center gap-2.5">
+              <Link href={ROUTES.home} className="mb-4 flex w-fit items-center gap-2.5">
                 <Image
                   src="/logo.png"
                   alt=""
@@ -98,47 +95,26 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <SectionNavLink
-                    label="How it works"
-                    sectionId="how-it-works"
-                    to="/how-it-works"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
-                    className={LINK_CLASS}
-                  />
+                  <NavLink label="How it works" href={ROUTES.howItWorks} className={LINK_CLASS} />
                 </li>
                 <li>
-                  <SectionNavLink
+                  <NavLink
                     label="Features"
-                    sectionId="features"
-                    to="/#features"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
+                    href={homeAnchor(SECTIONS.features)}
                     className={LINK_CLASS}
                   />
                 </li>
                 <li>
-                  <SectionNavLink
-                    label="Pricing"
-                    sectionId="pricing"
-                    to="/pricing"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
-                    className={LINK_CLASS}
-                  />
+                  <NavLink label="Pricing" href={ROUTES.pricing} className={LINK_CLASS} />
                 </li>
                 <li>
-                  <a
-                    href="https://github.com/PowerInterviewAI/client-app/releases/latest"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={LINK_CLASS}
-                  >
-                    Download
-                  </a>
+                  {/* Same destination as the header's Download button. These
+                      two used to disagree - the header scrolled to the top of
+                      the home page, this one left for GitHub. */}
+                  <NavLink label="Download" href={DOWNLOAD_HREF} className={LINK_CLASS} />
                 </li>
                 <li>
-                  <Link href="/docs" className={LINK_CLASS}>
+                  <Link href={ROUTES.docs} className={LINK_CLASS}>
                     Documentation
                   </Link>
                 </li>
@@ -151,14 +127,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <SectionNavLink
-                    label="FAQ"
-                    sectionId="faq"
-                    to="/faq"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
-                    className={LINK_CLASS}
-                  />
+                  <NavLink label="FAQ" href={ROUTES.faq} className={LINK_CLASS} />
                 </li>
                 {RESOURCE_LINKS.map((link) => (
                   <li key={link.label}>
@@ -173,12 +142,9 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
                   </li>
                 ))}
                 <li>
-                  <SectionNavLink
+                  <NavLink
                     label="Support"
-                    sectionId="contact"
-                    to="/#contact"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
+                    href={homeAnchor(SECTIONS.contact)}
                     className={LINK_CLASS}
                   />
                 </li>
@@ -191,12 +157,12 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href="/privacy" className={LINK_CLASS}>
+                  <Link href={ROUTES.privacy} className={LINK_CLASS}>
                     Privacy policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className={LINK_CLASS}>
+                  <Link href={ROUTES.terms} className={LINK_CLASS}>
                     Terms of service
                   </Link>
                 </li>
@@ -211,12 +177,9 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ scrollToSection })
                   </a>
                 </li>
                 <li>
-                  <SectionNavLink
+                  <NavLink
                     label="Contact"
-                    sectionId="contact"
-                    to="/#contact"
-                    isHome={isHome}
-                    scrollToSection={scrollToSection}
+                    href={homeAnchor(SECTIONS.contact)}
                     className={LINK_CLASS}
                   />
                 </li>

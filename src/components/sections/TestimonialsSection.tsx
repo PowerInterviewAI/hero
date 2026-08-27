@@ -4,6 +4,7 @@ import { Quote } from 'lucide-react';
 
 import { Reveal } from '@/components/ui/reveal';
 import { Section, SectionHeading } from '@/components/ui/section';
+import { SECTIONS } from '@/config/routes';
 import { TESTIMONIALS } from '@/config/testimonials';
 
 /**
@@ -16,7 +17,7 @@ export const TestimonialsSection: React.FC = () => {
   if (TESTIMONIALS.length === 0) return null;
 
   return (
-    <Section id="testimonials" tone="muted" aria-labelledby="testimonials-heading">
+    <Section id={SECTIONS.testimonials} tone="muted" aria-labelledby="testimonials-heading">
       <SectionHeading
         id="testimonials-heading"
         eyebrow="Testimonials"
