@@ -96,28 +96,37 @@ function placeholderSvg({ width, height, title, subtitle }) {
 </svg>`;
 }
 
+function avatarSvg(size) {
+  // The testimonial avatar is the one "placeholder" that ships as-is when a
+  // quote has no photo, so it is drawn as a deliberate default avatar - a
+  // silhouette on the card surface - rather than a PLACEHOLDER grid card.
+  const c = size / 2;
+  const head = size * 0.19;
+  const shoulder = size * 0.32;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+  <defs>
+    <clipPath id="circle"><circle cx="${c}" cy="${c}" r="${c}"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle)">
+    <rect width="${size}" height="${size}" fill="#211e1b"/>
+    <g fill="${MUTED}" opacity="0.85">
+      <circle cx="${c}" cy="${c * 0.84}" r="${head}"/>
+      <circle cx="${c}" cy="${c * 1.66}" r="${shoulder}"/>
+    </g>
+  </g>
+  <circle cx="${c}" cy="${c}" r="${c - 1}" fill="none" stroke="${ACCENT}" stroke-width="2" opacity="0.35"/>
+</svg>`;
+}
+
 // Every placeholder on the site, with the size the markup declares for it.
 // Keep this list and public/media/*/README.md in step.
 const PLACEHOLDERS = [
-  // --- Hero carousel posters (16:9, first paint of the hero) ---
-  [
-    'media/marketing/poster-live-interview.png',
-    1920,
-    1080,
-    'Live Interview',
-    'Assistant + smart export',
-  ],
-  ['media/marketing/poster-coding-1.png', 1920, 1080, 'Coding Challenge 1', 'Graph traversal'],
-  ['media/marketing/poster-coding-2.png', 1920, 1080, 'Coding Challenge 2', 'Connected components'],
-  [
-    'media/marketing/poster-coding-3.png',
-    1920,
-    1080,
-    'Coding Challenge 3',
-    'Binary tree recursion',
-  ],
+  // The hero posters are NOT here on purpose - they are real frames cut from
+  // the demo clips by scripts/generate-posters.py. Adding them back would
+  // overwrite photographs with grid cards.
 
-  // --- Testimonial avatar ---
+  // --- Testimonial avatar (drawn as a real default avatar, not a card) ---
   ['media/marketing/avatar-placeholder.png', 96, 96, '', ''],
 
   // --- Docs screenshots, at the app's own capture size ---
@@ -149,7 +158,9 @@ for (const [relativePath, width, height, title, subtitle] of PLACEHOLDERS) {
   const outPath = path.join(ROOT, 'public', relativePath);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
 
-  const svg = placeholderSvg({ width, height, title, subtitle });
+  const svg = relativePath.endsWith('avatar-placeholder.png')
+    ? avatarSvg(width)
+    : placeholderSvg({ width, height, title, subtitle });
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(outPath);
 
   console.log(`${relativePath}  ${width}x${height}`);

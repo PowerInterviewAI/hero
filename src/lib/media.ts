@@ -16,10 +16,10 @@ export interface MediaSize {
  * so both are 16:9 - see public/media/marketing/README.md.
  */
 const VIDEO_POSTERS: Record<string, string> = {
-  '/media/live-interview-assistant.mp4': '/media/marketing/poster-live-interview.png',
-  '/media/coding-challenge-1.mp4': '/media/marketing/poster-coding-1.png',
-  '/media/coding-challenge-2.mp4': '/media/marketing/poster-coding-2.png',
-  '/media/coding-challenge-3.mp4': '/media/marketing/poster-coding-3.png',
+  '/media/live-interview-assistant.mp4': '/media/marketing/poster-live-interview.jpg',
+  '/media/coding-challenge-1.mp4': '/media/marketing/poster-coding-1.jpg',
+  '/media/coding-challenge-2.mp4': '/media/marketing/poster-coding-2.jpg',
+  '/media/coding-challenge-3.mp4': '/media/marketing/poster-coding-3.jpg',
 };
 
 export function getVideoPoster(src: string): string | undefined {

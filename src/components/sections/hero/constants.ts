@@ -11,8 +11,8 @@ export type WindowsShell = 'cmd' | 'powershell';
 // a poster so the frame paints before any video bytes arrive.
 //
 // All four clips are 2560x1440, so posters must be 16:9 or the frame
-// letterboxes. These are 1920x1080 placeholders - see
-// public/media/marketing/README.md for what to replace them with.
+// letterboxes. Each poster is a real 1920x1080 frame cut from its own clip and
+// annotated by scripts/generate-posters.py - see public/media/marketing/README.md.
 export interface MediaItem {
   src: string;
   poster: string;
@@ -23,28 +23,28 @@ export interface MediaItem {
 export const MEDIA_ITEMS: MediaItem[] = [
   {
     src: '/media/live-interview-assistant.mp4',
-    poster: '/media/marketing/poster-live-interview.png',
+    poster: '/media/marketing/poster-live-interview.jpg',
     title: 'Live Interview Assistant & Smart Export',
     description:
       'Real-time AI-powered interview assistance with instant suggestions and smart export of interview summaries and insights',
   },
   {
     src: '/media/coding-challenge-1.mp4',
-    poster: '/media/marketing/poster-coding-1.png',
+    poster: '/media/marketing/poster-coding-1.jpg',
     title: 'Coding Challenge - Graph Traversal',
     description:
       'Capture the problem from your screen and read a syntax-highlighted solution streamed into the stealth overlay while you type',
   },
   {
     src: '/media/coding-challenge-2.mp4',
-    poster: '/media/marketing/poster-coding-2.png',
+    poster: '/media/marketing/poster-coding-2.jpg',
     title: 'Coding Challenge - Connected Components',
     description:
       'Multi-screenshot context lets the AI pick up the full problem statement, constraints, and starter signature before it answers',
   },
   {
     src: '/media/coding-challenge-3.mp4',
-    poster: '/media/marketing/poster-coding-3.png',
+    poster: '/media/marketing/poster-coding-3.jpg',
     title: 'Coding Challenge - Binary Tree Recursion',
     description:
       'Scroll the code panel with hotkeys alone - the overlay stays hidden from screen share and never steals focus from your editor',
