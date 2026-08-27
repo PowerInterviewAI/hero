@@ -3,9 +3,17 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+import { DocsBreadcrumb } from '@/components/docs/DocsBreadcrumb';
 import { DocsLayout } from '@/components/docs/DocsLayout';
+import { DocsPager } from '@/components/docs/DocsPager';
 import { MarkdownImage } from '@/components/docs/MarkdownImage';
-import { getDocContent, getDocNavItems, getDocSlugs, getDocTitle } from '@/lib/docs';
+import {
+  getDocContent,
+  getDocNavItems,
+  getDocNeighbours,
+  getDocSlugs,
+  getDocTitle,
+} from '@/lib/docs';
 import { buildMetadata } from '@/lib/metadata';
 
 interface DocPageProps {
@@ -103,14 +111,20 @@ export default async function DocPage({ params }: DocPageProps) {
     notFound();
   }
 
+  const { previous, next } = getDocNeighbours(slug);
+
   return (
     <DocsLayout docs={navItems}>
-      <main className="mx-auto max-w-4xl p-6">
-        <article>
+      <main className="mx-auto max-w-4xl px-2 py-4 sm:px-4">
+        <DocsBreadcrumb current={getDocTitle(slug, content)} />
+
+        <article className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {content}
           </ReactMarkdown>
         </article>
+
+        <DocsPager previous={previous} next={next} />
       </main>
     </DocsLayout>
   );

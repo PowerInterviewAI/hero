@@ -48,10 +48,27 @@ export function getDocTitle(slug: string, raw: string): string {
   return titleMatch ? titleMatch[1].trim() : slug.replace(/-/g, ' ');
 }
 
+// Excerpts render as plain text on the index cards, so the markdown has to come
+// off them first - best-practices.md opens with a blockquote and was printing a
+// literal `> **Be Careful:** > >` onto its card.
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^\s*>\s?/gm, '') // blockquote markers
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links keep their text
+    .replace(/(\*\*|__)(.*?)\1/g, '$2') // bold
+    .replace(/(\*|_)(.*?)\1/g, '$2') // italic
+    .replace(/`([^`]*)`/g, '$1') // inline code
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function getDocExcerpt(raw: string, title: string, titleMatched: boolean): string {
   const blocks = raw
     .split(/\r?\n\r?\n/)
-    .map((b) => b.replace(/\r?\n/g, ' ').trim())
+    // Strip before collapsing newlines - the blockquote rule is per-line, and
+    // a `>` on every line of a quote block survives a flatten-first order.
+    .map((b) => stripMarkdown(b))
     .filter(
       (b) => b && !/^#{1,6}\s/.test(b) && !/^!\[/.test(b) && !/^\|/.test(b) && !/^---/.test(b)
     );
@@ -80,4 +97,26 @@ export function getAllDocs(): DocListItem[] {
 // H1-extracted titles shown on the index page.
 export function getDocNavItems(): { slug: string; title: string }[] {
   return getDocSlugs().map((slug) => ({ slug, title: slug.replace(/-/g, ' ') }));
+}
+
+export interface DocNeighbours {
+  previous: { slug: string; title: string } | null;
+  next: { slug: string; title: string } | null;
+}
+
+/**
+ * The doc before and after `slug` in ORDER, for the pager at the foot of a doc
+ * page. Ends of the list return null rather than wrapping - a "next" that
+ * loops back to the introduction reads like a bug to a reader working through
+ * the set in order.
+ */
+export function getDocNeighbours(slug: string): DocNeighbours {
+  const items = getDocNavItems();
+  const index = items.findIndex((item) => item.slug === slug);
+  if (index === -1) return { previous: null, next: null };
+
+  return {
+    previous: items[index - 1] ?? null,
+    next: items[index + 1] ?? null,
+  };
 }
