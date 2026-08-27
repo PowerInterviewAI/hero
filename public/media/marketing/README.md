@@ -8,10 +8,17 @@ real and nothing shifts on load; the content is meant to be replaced.
 explicit `width`/`height` (or is a `<video poster>` inside a fixed-ratio frame),
 so a different aspect ratio will either letterbox or shift the layout.
 
+Regenerate any of them with `node scripts/generate-placeholders.mjs` (pass a
+path fragment to do just one, e.g. `… step-install`). That script is the source
+of truth for the sizes below — keep the two in step.
+
 ## Hero carousel posters — 1920×1080 (16:9)
 
 Referenced from `src/components/sections/hero/constants.ts`. These are the first
 paint of the hero, so they are the LCP element — export them well-compressed.
+They are also what a viewer sees when autoplay is suppressed, which now happens
+deliberately under `prefers-reduced-motion` and Data Saver, so they need to sell
+the clip on their own.
 
 | File | Should show |
 |---|---|
@@ -25,14 +32,23 @@ paint of the hero, so they are the LCP element — export them well-compressed.
 > 1482×1083 — a 1.37 ratio that letterboxes badly inside the 16:9 frame.
 > Simplest correct source: grab frame 0 of each mp4 and downscale to 1920×1080.
 
+These same four posters are reused as the `poster` for the two demo clips
+embedded in the docs — see the `VIDEO_POSTERS` map in `src/lib/media.ts`.
+
 ## Features bento tiles — 1600×900 (16:9)
 
-Referenced from `src/components/sections/FeaturesSection.tsx`. Both wide tiles
-share a ratio so the grid rows line up — don't give one a different one.
+Referenced from `src/components/sections/FeaturesSection.tsx`. All three wide
+tiles share a ratio so the grid rows line up — don't give one a different one.
+
+The tile renders them `object-cover` in an `aspect-video` box capped at
+`max-h-64`, so on a wide viewport the top and bottom get trimmed (the cap keeps
+the text-only tile sharing the row from stretching to a 290px-tall void).
+**Keep anything essential in the middle band and away from the edges.**
 
 | File | Should show |
 |---|---|
 | `feature-stealth.png` | The stealth overlay sitting over a call, ideally mid screen-share so the point lands |
+| `feature-suggestions.png` | A reply suggestion streaming into the suggestions panel, ideally mid-stream |
 | `feature-export.png` | An exported DOCX report — summary, action items, speaker-labelled transcript |
 
 There are real screenshots at `media/docs/stealth-mode.png` (2544×1336) and
@@ -57,19 +73,15 @@ next to them, so they're decorative.
 an entry in `src/config/testimonials.ts` sets `avatar` — that file ships empty
 on purpose (real quotes only).
 
-## Open Graph card — 1200×630
+## Open Graph card
 
-`open-graph-spec-1200x630.png` is a **size reference only**, not wired into
-anything.
+Resolved: `public/open-graph.png` is now **1200×630**, the size the Open Graph
+and Twitter `summary_large_image` conventions expect, and the `width`/`height`
+pairs in `src/lib/metadata.ts` and `src/app/layout.tsx` match it. The 1235×647
+original is in git history; the size-reference file that used to live here has
+been deleted.
 
-The live card is `public/open-graph.png` and it is real artwork — but it's
-**1235×647**, and the Open Graph / Twitter `summary_large_image` convention is
-**1200×630**. Every scraper rescales it. Re-export the real card at 1200×630,
-replace `public/open-graph.png`, then update the two `width`/`height` pairs in
-`src/lib/metadata.ts` and `src/app/layout.tsx`. Delete this spec file once
-that's done.
-
-## Regenerating
-
-The generator is not checked in — these are one-off scaffolding. If you need
-them again, any 16:9 grey box at the sizes above will do.
+One thing that artwork still gets wrong: its mocked-up nav bar reads
+*Home / Features / Why Us / Pricing / FAQ / Docs / Contact*, which is not the
+site's current header (`How it works / Features / Why Us / Pricing / FAQ /
+Contact`, with Docs alongside). Worth fixing next time the card is re-exported.
