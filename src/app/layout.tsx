@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { FAQ_ITEMS } from '@/config/faq';
 import { cn } from '@/lib/utils';
 import '@/styles/index.css';
@@ -244,7 +245,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-V6LKZ75M3J"
           strategy="afterInteractive"

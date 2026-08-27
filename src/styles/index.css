@@ -196,40 +196,73 @@
   width: 100%;
 }
 
+/*
+ * Hand github-markdown-css our palette instead of the OS's.
+ *
+ * That stylesheet defines its whole colour palette inside
+ * `@media (prefers-color-scheme: dark|light)` blocks. It has a [data-theme]
+ * hook too, but that selector sits INSIDE those media queries, so it can only
+ * ever agree with the OS - it cannot override it. This site switches theme with
+ * a .light/.dark class on <html>, which that stylesheet knows nothing about, so
+ * the rendered markdown used to follow the OS and ignore the theme toggle
+ * completely: set the site to light on a dark-mode machine and every docs
+ * article stayed dark.
+ *
+ * Redefining the variables under our own class fixes the whole surface at once
+ * - links, borders, blockquotes, tables, code, headings - and replaced a
+ * growing pile of one-off `.dark .markdown-body table tr {...}` patches.
+ *
+ * These selectors are (0,2,0), so they outrank the stylesheet's own
+ * `.markdown-body` (0,1,0) regardless of import order. The site tokens already
+ * flip with the class, so one block covers both themes.
+ */
+.light .markdown-body,
 .dark .markdown-body {
-  background: hsl(var(--card) / 1);
-  color: hsl(var(--card-foreground) / 1);
+  --fgColor-default: hsl(var(--card-foreground));
+  --fgColor-muted: hsl(var(--muted-foreground));
+  --fgColor-accent: hsl(var(--primary));
+  --fgColor-danger: hsl(var(--destructive));
+  --fgColor-success: hsl(var(--success));
+  --fgColor-attention: hsl(var(--warning));
+  --fgColor-done: hsl(var(--info));
+
+  --bgColor-default: hsl(var(--card));
+  --bgColor-muted: hsl(var(--muted));
+  --bgColor-neutral-muted: hsl(var(--muted));
+  --bgColor-danger-muted: hsl(var(--destructive) / 0.15);
+  --bgColor-attention-muted: hsl(var(--warning) / 0.15);
+
+  --borderColor-default: hsl(var(--border));
+  --borderColor-muted: hsl(var(--border-subtle));
+  --borderColor-neutral-muted: hsl(var(--border-subtle));
+  --borderColor-accent-emphasis: hsl(var(--primary));
+  --borderColor-danger-emphasis: hsl(var(--destructive));
+  --borderColor-attention-emphasis: hsl(var(--warning));
+  --borderColor-success-emphasis: hsl(var(--success));
+  --borderColor-done-emphasis: hsl(var(--info));
+
+  --focus-outlineColor: hsl(var(--ring));
+
+  color-scheme: light dark;
 }
 
-/* Override github-markdown-css hardcoded table colors in dark mode */
-.dark .markdown-body table tr {
-  background-color: hsl(var(--card));
-  border-top-color: hsl(var(--border));
+/* Table stripes read as banding against a card that is already --bgColor-muted. */
+.markdown-body table tr:nth-child(2n) {
+  background-color: hsl(var(--muted) / 0.5);
 }
 
-.dark .markdown-body table tr:nth-child(2n) {
-  background-color: hsl(var(--muted));
-}
-
-.dark .markdown-body table td,
-.dark .markdown-body table th {
-  border-color: hsl(var(--border));
-  color: hsl(var(--foreground));
-}
-
-.dark .markdown-body table th {
-  background-color: hsl(var(--muted));
-}
-
-.markdown-body pre,
+/* Inline code sits in running prose; fenced blocks get the muted slab. */
 .markdown-body code {
-  background: transparent;
-}
-
-.dark .markdown-body pre,
-.dark .markdown-body code {
   background: hsl(var(--muted));
   color: hsl(var(--foreground));
+}
+
+.markdown-body pre {
+  background: hsl(var(--muted));
+}
+
+.markdown-body pre code {
+  background: transparent;
 }
 
 /*
