@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Container from '@/components/Container';
+import { SkipToContent } from '@/components/SkipToContent';
 import { FooterSection } from '@/components/sections/FooterSection';
 import { Header } from '@/components/sections/Header';
 
@@ -26,6 +27,7 @@ export const DocsLayout: React.FC<DocsLayoutProps> = ({ docs, children }) => {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SkipToContent />
       <Header />
 
       <Container>
@@ -46,7 +48,9 @@ export const DocsLayout: React.FC<DocsLayoutProps> = ({ docs, children }) => {
               onLinkClick={() => setSidebarOpen(false)}
             />
 
-            <div className="prose markdown-body w-full max-w-none">{children}</div>
+            <div id="main" className="prose markdown-body w-full max-w-none">
+              {children}
+            </div>
           </div>
         </div>
       </Container>
