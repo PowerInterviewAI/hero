@@ -9,7 +9,7 @@ explicit `width`/`height` (or is a `<video poster>` inside a fixed-ratio frame),
 so a different aspect ratio will either letterbox or shift the layout.
 
 Regenerate any of them with `node scripts/generate-placeholders.mjs` (pass a
-path fragment to do just one, e.g. `… feature-stealth`). That script is the source
+path fragment to do just one, e.g. `… poster-coding-1`). That script is the source
 of truth for the sizes below — keep the two in step.
 
 ## Hero carousel posters — 1920×1080 (16:9)
@@ -34,26 +34,6 @@ the clip on their own.
 
 These same four posters are reused as the `poster` for the two demo clips
 embedded in the docs — see the `VIDEO_POSTERS` map in `src/lib/media.ts`.
-
-## Features bento tiles — 1600×900 (16:9)
-
-Referenced from `src/components/sections/FeaturesSection.tsx`. All three wide
-tiles share a ratio so the grid rows line up — don't give one a different one.
-
-The tile renders them `object-cover` in an `aspect-video` box capped at
-`max-h-64`, so on a wide viewport the top and bottom get trimmed (the cap keeps
-the text-only tile sharing the row from stretching to a 290px-tall void).
-**Keep anything essential in the middle band and away from the edges.**
-
-| File | Should show |
-|---|---|
-| `feature-stealth.png` | The stealth overlay sitting over a call, ideally mid screen-share so the point lands |
-| `feature-suggestions.png` | A reply suggestion streaming into the suggestions panel, ideally mid-stream |
-| `feature-export.png` | An exported DOCX report — summary, action items, speaker-labelled transcript |
-
-There are real screenshots at `media/docs/stealth-mode.png` (2544×1336) and
-`media/docs/export-example.png` (1280×887) that could be recropped to 16:9
-rather than shot fresh.
 
 ## Testimonial avatar — 96×96
 

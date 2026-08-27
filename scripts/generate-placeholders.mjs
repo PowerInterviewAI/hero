@@ -117,23 +117,6 @@ const PLACEHOLDERS = [
     'Binary tree recursion',
   ],
 
-  // --- Features bento tiles (16:9) ---
-  [
-    'media/marketing/feature-stealth.png',
-    1600,
-    900,
-    'Stealth Mode',
-    'Overlay during a screen share',
-  ],
-  [
-    'media/marketing/feature-suggestions.png',
-    1600,
-    900,
-    'Reply Suggestions',
-    'Streamed answer in the panel',
-  ],
-  ['media/marketing/feature-export.png', 1600, 900, 'Smart Export', 'Generated DOCX report'],
-
   // --- Testimonial avatar ---
   ['media/marketing/avatar-placeholder.png', 96, 96, '', ''],
 
