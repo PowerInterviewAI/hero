@@ -232,6 +232,33 @@
   color: hsl(var(--foreground));
 }
 
+/*
+ * Figures inside rendered markdown (src/components/docs/MarkdownImage.tsx).
+ *
+ * github-markdown-css doesn't reset <figure>, so it keeps the UA default
+ * margin-inline: 40px. In a two-up comparison table that took each screenshot
+ * from ~380px down to ~300px of an already narrow column.
+ */
+.markdown-body figure {
+  margin-inline: 0;
+}
+
+.markdown-body img,
+.markdown-body video {
+  box-sizing: border-box;
+}
+
+/* In a comparison table the column header already names the shot, so the
+   caption underneath it would only repeat the header. The alt text stays on
+   the image either way. */
+.markdown-body td figure {
+  margin-block: 0.5rem;
+}
+
+.markdown-body td figcaption {
+  display: none;
+}
+
 /* Restore list styles reset by Tailwind preflight */
 .markdown-body ul {
   list-style-type: disc;
