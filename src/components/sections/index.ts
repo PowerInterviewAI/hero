@@ -6,6 +6,7 @@ export * from './FooterSection';
 export * from './Header';
 export * from './HowItWorksSection';
 export * from './PricingSection';
+export * from './TeamSection';
 export * from './TestimonialsSection';
 export * from './WhyChooseSection';
 export * from './hero';

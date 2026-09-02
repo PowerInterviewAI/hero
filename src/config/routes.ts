@@ -18,6 +18,7 @@ export const ROUTES = {
   howItWorks: '/how-it-works',
   pricing: '/pricing',
   faq: '/faq',
+  team: '/team',
   docs: '/docs',
   privacy: '/privacy',
   terms: '/terms',
@@ -41,6 +42,7 @@ export const SECTIONS = {
   install: 'install',
   faq: 'faq',
   contact: 'contact',
+  team: 'team',
 } as const;
 
 /** Builds the URL of a single documentation page. */
@@ -72,9 +74,11 @@ export interface NavLinkDef {
  * scrolling and linked from the footer, where anchors are conventional.
  */
 export const NAV_LINKS: readonly NavLinkDef[] = [
+  { label: 'Home', href: ROUTES.home },
   { label: 'How it works', href: ROUTES.howItWorks },
   { label: 'Pricing', href: ROUTES.pricing },
   { label: 'FAQ', href: ROUTES.faq },
+  { label: 'Team', href: ROUTES.team },
   { label: 'Docs', href: ROUTES.docs, matchSubtree: true },
 ] as const;
 
@@ -84,6 +88,7 @@ export const SITEMAP_ROUTES: readonly string[] = [
   ROUTES.howItWorks,
   ROUTES.pricing,
   ROUTES.faq,
+  ROUTES.team,
   ROUTES.privacy,
   ROUTES.terms,
   ROUTES.docs,

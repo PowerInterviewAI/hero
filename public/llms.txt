@@ -13,6 +13,7 @@ Power Interview AI is a standalone desktop application, not a browser extension 
 - [Why Choose](https://www.powerinterviewai.com/#why-choose): privacy and stealth-mode differentiation versus other interview-assistant and interview-practice tools.
 - [Benefits](https://www.powerinterviewai.com/#benefits): outcomes for job seekers using the product.
 - [FAQ](https://www.powerinterviewai.com/faq): platform support, privacy model, billing, and usage questions.
+- [Team](https://www.powerinterviewai.com/team): the developers building Power Interview AI.
 - [Contact](https://www.powerinterviewai.com/#contact): support and community channels (email, GitHub, Telegram, X, Discord).
 
 ## Documentation

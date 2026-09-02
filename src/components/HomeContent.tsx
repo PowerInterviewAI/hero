@@ -17,6 +17,7 @@ interface HomeContentProps {
   pricingSection: ReactNode;
   testimonialsSection: ReactNode;
   contactSection: ReactNode;
+  teamSection: ReactNode;
 }
 
 // The sections that fetch data are async Server Components, so the page
@@ -35,6 +36,7 @@ export function HomeContent({
   pricingSection,
   testimonialsSection,
   contactSection,
+  teamSection,
 }: HomeContentProps) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -53,6 +55,7 @@ export function HomeContent({
         <InstallPanel />
         <FAQSection preview />
         {contactSection}
+        {teamSection}
       </main>
 
       <FooterSection />

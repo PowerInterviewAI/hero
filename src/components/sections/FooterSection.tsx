@@ -118,6 +118,9 @@ export const FooterSection: React.FC = () => {
                     Documentation
                   </Link>
                 </li>
+                <li>
+                  <NavLink label="Our Team" href={ROUTES.team} className={LINK_CLASS} />
+                </li>
               </ul>
             </nav>
 

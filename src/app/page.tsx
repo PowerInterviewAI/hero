@@ -10,6 +10,7 @@ import {
   HowItWorksSection,
   PricingSection,
   PricingSkeleton,
+  TeamSection,
   TestimonialsSection,
   WhyChooseSection,
 } from '@/components/sections';
@@ -52,6 +53,7 @@ export default async function Home() {
         }
         testimonialsSection={<TestimonialsSection />}
         contactSection={<ContactSection />}
+        teamSection={<TeamSection preview />}
       />
     </>
   );
