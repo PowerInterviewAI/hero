@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SiGithub } from '@icons-pack/react-simple-icons';
 import { Menu } from 'lucide-react';
@@ -27,17 +27,33 @@ const GITHUB_URL = 'https://github.com/PowerInterviewAI/client-app';
  * since re-navigating to a page you're already looking at just to land back
  * on the same content is pointless. Anywhere else, it's a normal link to the
  * real page - which still exists, is still indexable, and is what a search
- * result or a bookmark lands on. `isActive` always compares against that real
- * page's path, never the anchor, so it only lights up on a direct visit.
+ * result or a bookmark lands on. On the home page, `isActive` compares
+ * against the URL hash instead of the path, since every item there shares
+ * the same path ("/") and only the hash tells them apart - it updates on
+ * `hashchange`, which fires for both a nav click and a direct visit to
+ * `/#pricing`. This tracks the hash the address bar shows, not which section
+ * has scrolled into view - it won't follow a reader who scrolls past Pricing
+ * without clicking anything, only intentional navigation to a section.
  */
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hash, setHash] = useState('');
   const isHome = pathname === ROUTES.home;
 
-  const isActive = (link: (typeof NAV_LINKS)[number]) =>
-    link.matchSubtree ? pathname.startsWith(link.href) : pathname === link.href;
+  useEffect(() => {
+    const updateHash = () => setHash(window.location.hash);
+    updateHash();
+    window.addEventListener('hashchange', updateHash);
+    return () => window.removeEventListener('hashchange', updateHash);
+  }, []);
+
+  const isActive = (link: (typeof NAV_LINKS)[number]) => {
+    if (link.matchSubtree) return pathname.startsWith(link.href);
+    if (isHome) return link.section ? hash === `#${link.section}` : hash === '';
+    return pathname === link.href;
+  };
 
   const linkHref = (link: (typeof NAV_LINKS)[number]) =>
     isHome && link.section ? homeAnchor(link.section) : link.href;
