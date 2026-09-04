@@ -127,3 +127,19 @@ export const LEGACY_ANCHOR_REDIRECTS = [
   { source: '/why-choose', destination: homeAnchor(SECTIONS.whyChoose) },
   { source: '/contact', destination: homeAnchor(SECTIONS.contact) },
 ] as const;
+
+/**
+ * A bare visit to `/` lands on `/#home` instead, so the header's Home item
+ * (which always links to `/#home` - see NAV_LINKS) matches the address bar
+ * on first load too, and `isActive` in Header.tsx doesn't need a "no hash
+ * means home" special case.
+ *
+ * Deliberately temporary (307), not permanent like LEGACY_ANCHOR_REDIRECTS:
+ * `/` is still this site's real canonical URL (metadata, Open Graph, JSON-LD
+ * and the sitemap all say so) - this is a display preference for the address
+ * bar, not a claim that `/` has moved. A fragment-only redirect costs
+ * nothing extra over the network either way: the browser already has the
+ * document `/` would have served, so it just updates the bar and scrolls -
+ * no second request.
+ */
+export const HOME_HASH_REDIRECT = { source: '/', destination: homeAnchor(SECTIONS.hero) } as const;
