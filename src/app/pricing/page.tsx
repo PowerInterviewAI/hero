@@ -1,9 +1,7 @@
-import { Suspense } from 'react';
-
 import type { Metadata } from 'next';
 
 import { PageChrome } from '@/components/PageChrome';
-import { PricingSection, PricingSkeleton } from '@/components/sections';
+import { PricingSection } from '@/components/sections';
 import { buildMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = buildMetadata({
@@ -16,11 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function PricingPage() {
   return (
     <PageChrome>
-      {/* PricingSection fetches live plans; the skeleton keeps the page from
-          blanking while that request is in flight. */}
-      <Suspense fallback={<PricingSkeleton />}>
-        <PricingSection standalone />
-      </Suspense>
+      <PricingSection standalone />
     </PageChrome>
   );
 }

@@ -4,12 +4,15 @@ import { Plan } from '@/types';
 /**
  * The live credit packs.
  *
- * Lifted out of PricingSection because the home page's SoftwareApplication
- * JSON-LD needs the same numbers: its `offers` block used to hardcode
- * lowPrice 20 / highPrice 500 / offerCount 3 while the visible pricing came
- * from this endpoint, so the structured data was free to disagree with the
- * page it described. Both callers render in the same pass, and React memoizes
- * `fetch` per request, so this still makes one request.
+ * Originally shared between PricingSection and the home page's
+ * SoftwareApplication JSON-LD so its `offers` block couldn't drift from the
+ * visible pricing (it used to hardcode lowPrice 20 / highPrice 500 /
+ * offerCount 3 against a live price list). SoftwareApplicationJsonLd still
+ * calls this server-side, inside its own Suspense boundary. The visible
+ * pricing cards (PricingCards.tsx) call it again independently, client-side,
+ * so a slow or rate-limited response can't block navigation to /pricing the
+ * way it used to - the two are separate requests now rather than one
+ * memoized fetch, which is an acceptable trade for never blocking the page.
  *
  * Returns null rather than throwing - callers degrade to omitting pricing.
  */
