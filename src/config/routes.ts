@@ -56,30 +56,47 @@ export const DOWNLOAD_HREF = homeAnchor(SECTIONS.install);
 
 export interface NavLinkDef {
   label: string;
+  /** The item's own indexable route - what `isActive` compares against, and
+   *  where it goes from any page other than home. */
   href: string;
   /** Marks the item active for `/docs` *and* every `/docs/*` page beneath it. */
   matchSubtree?: boolean;
+  /**
+   * The matching home-page section id, for items that are also a home
+   * section. When set, the header links to `/#section` instead of `href`
+   * while already on `/` - a same-page scroll rather than a navigation -
+   * and falls back to `href` (the real page) everywhere else. The route
+   * itself is untouched: still indexable, still linkable, still what a
+   * search result or a bookmark lands on.
+   */
+  section?: (typeof SECTIONS)[keyof typeof SECTIONS];
+  /** Opens in a new tab - for a destination that isn't a home-page section
+   *  at all, currently just Docs. */
+  newTab?: boolean;
 }
 
 /**
- * The primary navigation - routes only, never anchors.
+ * The primary navigation.
  *
- * The bar used to mix the two: How it works / Pricing / FAQ navigated to a
- * page, while Features / Why Us / Contact scrolled the home page. Identical
- * styling, two different outcomes, and on the home page the anchor items
- * rendered as <button> rather than a link, so they had no URL to copy, could
- * not be opened in a new tab and left the address bar reading `/`.
+ * Every item still has a real route (`href`) - Pricing, FAQ, Team and How it
+ * works are indexable pages in their own right, not reconstructed from home
+ * page anchors, and a direct visit or a search result lands on the page
+ * itself. `section` is what lets the header shortcut to an in-page scroll
+ * when you're already on `/`, since navigating to a page you're already
+ * looking at (just to land back on the same content via an anchor) is
+ * pointless. See NavLinkDef.section and Header.tsx for how the two combine.
  *
- * Features, Why Us and Contact are still home-page sections; they're reached by
- * scrolling and linked from the footer, where anchors are conventional.
+ * Features, Why Us and Contact are home-page-only sections with no page of
+ * their own; they're reached by scrolling and linked from the footer, where
+ * anchors are conventional.
  */
 export const NAV_LINKS: readonly NavLinkDef[] = [
   { label: 'Home', href: ROUTES.home },
-  { label: 'How it works', href: ROUTES.howItWorks },
-  { label: 'Pricing', href: ROUTES.pricing },
-  { label: 'FAQ', href: ROUTES.faq },
-  { label: 'Team', href: ROUTES.team },
-  { label: 'Docs', href: ROUTES.docs, matchSubtree: true },
+  { label: 'How it works', href: ROUTES.howItWorks, section: SECTIONS.howItWorks },
+  { label: 'Pricing', href: ROUTES.pricing, section: SECTIONS.pricing },
+  { label: 'FAQ', href: ROUTES.faq, section: SECTIONS.faq },
+  { label: 'Team', href: ROUTES.team, section: SECTIONS.team },
+  { label: 'Docs', href: ROUTES.docs, matchSubtree: true, newTab: true },
 ] as const;
 
 /** Routes listed in the sitemap - pages in their own right, nothing that 3xx's. */

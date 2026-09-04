@@ -26,6 +26,9 @@ interface NavLinkProps {
    * below the fold prefetches until it's actually scrolled into view.
    */
   prefetch?: boolean;
+  /** Opens the link in a new tab - for a destination that isn't a section of
+   *  the page you're likely already on, currently just Docs. */
+  newTab?: boolean;
 }
 
 const BASE_CLASS =
@@ -53,11 +56,14 @@ export const NavLink: React.FC<NavLinkProps> = ({
   onNavigate,
   className,
   prefetch,
+  newTab = false,
 }) => (
   <Link
     href={href}
     prefetch={prefetch}
     onClick={onNavigate}
+    target={newTab ? '_blank' : undefined}
+    rel={newTab ? 'noopener noreferrer' : undefined}
     aria-current={active ? 'page' : undefined}
     className={cn(BASE_CLASS, active && 'text-foreground', className)}
   >

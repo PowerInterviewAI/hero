@@ -13,29 +13,34 @@ import { NavLink } from '@/components/NavLink';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { DOWNLOAD_HREF, NAV_LINKS, ROUTES } from '@/config/routes';
+import { DOWNLOAD_HREF, NAV_LINKS, ROUTES, homeAnchor } from '@/config/routes';
 import { useScrolled } from '@/hooks/useScrolled';
 import { cn } from '@/lib/utils';
 
 const GITHUB_URL = 'https://github.com/PowerInterviewAI/client-app';
 
 /**
- * One rule for the whole bar: every item is a route, and every item is a link.
- *
- * The nav previously mixed page links with home-page scroll targets - "Pricing"
- * went to /pricing but "Features" scrolled - which meant one bar with two
- * behaviours, an active state that needed two rules to describe it (pathname
- * for pages, a scroll-spy for anchors), and a `scrollToSection` callback
- * threaded down from the page through four components. Features, Why Us and
- * Contact are still home-page sections; the footer links to them as `/#id`.
+ * Every item is a route, and every item is a link - always, including here.
+ * The difference from the footer is only where that link points: while
+ * already on `/`, an item with a matching home section (see NAV_LINKS in
+ * routes.ts) scrolls to it instead of navigating to the standalone page,
+ * since re-navigating to a page you're already looking at just to land back
+ * on the same content is pointless. Anywhere else, it's a normal link to the
+ * real page - which still exists, is still indexable, and is what a search
+ * result or a bookmark lands on. `isActive` always compares against that real
+ * page's path, never the anchor, so it only lights up on a direct visit.
  */
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isHome = pathname === ROUTES.home;
 
   const isActive = (link: (typeof NAV_LINKS)[number]) =>
     link.matchSubtree ? pathname.startsWith(link.href) : pathname === link.href;
+
+  const linkHref = (link: (typeof NAV_LINKS)[number]) =>
+    isHome && link.section ? homeAnchor(link.section) : link.href;
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -74,6 +79,7 @@ export const Header: React.FC = () => {
               <NavLink
                 key={link.href}
                 {...link}
+                href={linkHref(link)}
                 underline
                 active={isActive(link)}
                 prefetch={false}
@@ -113,6 +119,7 @@ export const Header: React.FC = () => {
                     <NavLink
                       key={link.href}
                       {...link}
+                      href={linkHref(link)}
                       onNavigate={closeMenu}
                       active={isActive(link)}
                       className="w-fit text-base"
