@@ -56,18 +56,20 @@ export const DOWNLOAD_HREF = homeAnchor(SECTIONS.install);
 
 export interface NavLinkDef {
   label: string;
-  /** The item's own indexable route - what `isActive` compares against, and
-   *  where it goes from any page other than home. */
+  /** The item's own indexable route. Still a real, standalone page - still
+   *  what search results, bookmarks and the footer's own links land on -
+   *  even for an item the header always links to as `/#section` instead
+   *  (see `section`). Also what `isActive` compares against off the home
+   *  page, and where the header sends you for an item with no `section`. */
   href: string;
   /** Marks the item active for `/docs` *and* every `/docs/*` page beneath it. */
   matchSubtree?: boolean;
   /**
    * The matching home-page section id, for items that are also a home
-   * section. When set, the header links to `/#section` instead of `href`
-   * while already on `/` - a same-page scroll rather than a navigation -
-   * and falls back to `href` (the real page) everywhere else. The route
-   * itself is untouched: still indexable, still linkable, still what a
-   * search result or a bookmark lands on.
+   * section. When set, the header always links to `/#section` instead of
+   * `href` - from any page, not only while on home - since the header is
+   * meant to keep you on the single-page experience. `href` is untouched
+   * everywhere else it's used (footer, sitemap, direct visits).
    */
   section?: (typeof SECTIONS)[keyof typeof SECTIONS];
   /** Opens in a new tab - for a destination that isn't a home-page section
@@ -80,11 +82,11 @@ export interface NavLinkDef {
  *
  * Every item still has a real route (`href`) - Pricing, FAQ, Team and How it
  * works are indexable pages in their own right, not reconstructed from home
- * page anchors, and a direct visit or a search result lands on the page
- * itself. `section` is what lets the header shortcut to an in-page scroll
- * when you're already on `/`, since navigating to a page you're already
- * looking at (just to land back on the same content via an anchor) is
- * pointless. See NavLinkDef.section and Header.tsx for how the two combine.
+ * page anchors, and a direct visit, a search result or a footer link lands
+ * on the page itself. `section` is what makes the *header's own* links
+ * always point at the matching home anchor instead, regardless of which
+ * page you're clicking it from - see NavLinkDef.section and Header.tsx for
+ * how the two combine, and why that doesn't cost the page its SEO.
  *
  * Features, Why Us and Contact are home-page-only sections with no page of
  * their own; they're reached by scrolling and linked from the footer, where

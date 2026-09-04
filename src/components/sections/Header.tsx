@@ -20,20 +20,23 @@ import { cn } from '@/lib/utils';
 const GITHUB_URL = 'https://github.com/PowerInterviewAI/client-app';
 
 /**
- * Every item is a route, and every item is a link - always, including here.
- * The difference from the footer is only where that link points: while
- * already on `/`, an item with a matching home section (see NAV_LINKS in
- * routes.ts) scrolls to it instead of navigating to the standalone page,
- * since re-navigating to a page you're already looking at just to land back
- * on the same content is pointless. Anywhere else, it's a normal link to the
- * real page - which still exists, is still indexable, and is what a search
- * result or a bookmark lands on. On the home page, `isActive` compares
- * against the URL hash instead of the path, since every item there shares
- * the same path ("/") and only the hash tells them apart - it updates on
- * `hashchange`, which fires for both a nav click and a direct visit to
- * `/#pricing`. This tracks the hash the address bar shows, not which section
- * has scrolled into view - it won't follow a reader who scrolls past Pricing
- * without clicking anything, only intentional navigation to a section.
+ * An item with a matching home section (see NAV_LINKS in routes.ts) always
+ * links to its `/#section` anchor here, from any page - clicking Pricing
+ * from /faq goes to `/#pricing`, not `/pricing`. The standalone route itself
+ * is untouched: still indexable, still what a search result or a bookmark
+ * lands on, still what the footer links to directly (see FooterSection,
+ * which isn't part of this and links to the real route always). This is
+ * only about where the header's own links point.
+ *
+ * On the home page, `isActive` compares against the URL hash instead of the
+ * path, since every item there shares the same path ("/") and only the hash
+ * tells them apart - it updates on `hashchange`, which fires for both a nav
+ * click and a direct visit to `/#pricing`. This tracks the hash the address
+ * bar shows, not which section has scrolled into view - it won't follow a
+ * reader who scrolls past Pricing without clicking anything, only
+ * intentional navigation to a section. Off the home page, `isActive` falls
+ * back to comparing the path against the item's real route, so landing on
+ * /faq directly still lights up FAQ correctly.
  */
 export const Header: React.FC = () => {
   const pathname = usePathname();
@@ -55,11 +58,19 @@ export const Header: React.FC = () => {
     return pathname === link.href;
   };
 
+  // Every item with a home section always links to its anchor, from any
+  // page - the standalone route (link.href) still exists, is still indexed,
+  // and is still what a search result, a bookmark or a footer link lands on
+  // (see FooterSection, which links to link.href directly and is unaffected
+  // by this). The header just never uses it for its own links anymore.
   const linkHref = (link: (typeof NAV_LINKS)[number]) =>
-    isHome && link.section ? homeAnchor(link.section) : link.href;
+    link.section ? homeAnchor(link.section) : link.href;
 
   // Same-page hash links skip Next's router entirely - see plainAnchor on
-  // NavLink for the concatenated-hash bug this avoids.
+  // NavLink for the concatenated-hash bug this avoids. A hash link that also
+  // changes the page (clicking Pricing from /faq) doesn't hit that bug -
+  // Next's router only mishandles a hash change on the *same* route - so it
+  // stays a <Link> for the fast client-side transition.
   const isPlainAnchor = (link: (typeof NAV_LINKS)[number]) => isHome && !!link.section;
 
   const closeMenu = () => setMenuOpen(false);
