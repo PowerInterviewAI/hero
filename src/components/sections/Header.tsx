@@ -71,7 +71,13 @@ export const Header: React.FC = () => {
 
           <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
             {NAV_LINKS.map((link) => (
-              <NavLink key={link.href} {...link} underline active={isActive(link)} />
+              <NavLink
+                key={link.href}
+                {...link}
+                underline
+                active={isActive(link)}
+                prefetch={false}
+              />
             ))}
           </nav>
 
@@ -110,6 +116,7 @@ export const Header: React.FC = () => {
                       onNavigate={closeMenu}
                       active={isActive(link)}
                       className="w-fit text-base"
+                      prefetch={false}
                     />
                   ))}
                 </nav>

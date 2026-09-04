@@ -16,6 +16,16 @@ interface NavLinkProps {
   /** Fired after the link is activated - used to close the mobile sheet. */
   onNavigate?: () => void;
   className?: string;
+  /**
+   * The header bar sits in the viewport from the moment any page paints, so
+   * with the default `prefetch={true}` every item - Pricing, Team, FAQ, Docs -
+   * started prefetching at once on first load. Each fetch was real network
+   * work, and firing all of them together could leave a click made in that
+   * first window queued behind the burst instead of instant. False here opts
+   * out for exactly that bar; footer links stay lazy on their own, since nothing
+   * below the fold prefetches until it's actually scrolled into view.
+   */
+  prefetch?: boolean;
 }
 
 const BASE_CLASS =
@@ -42,9 +52,11 @@ export const NavLink: React.FC<NavLinkProps> = ({
   underline = false,
   onNavigate,
   className,
+  prefetch,
 }) => (
   <Link
     href={href}
+    prefetch={prefetch}
     onClick={onNavigate}
     aria-current={active ? 'page' : undefined}
     className={cn(BASE_CLASS, active && 'text-foreground', className)}
