@@ -93,7 +93,7 @@ export interface NavLinkDef {
  * anchors are conventional.
  */
 export const NAV_LINKS: readonly NavLinkDef[] = [
-  { label: 'Home', href: ROUTES.home },
+  { label: 'Home', href: ROUTES.home, section: SECTIONS.hero },
   { label: 'How it works', href: ROUTES.howItWorks, section: SECTIONS.howItWorks },
   { label: 'Pricing', href: ROUTES.pricing, section: SECTIONS.pricing },
   { label: 'FAQ', href: ROUTES.faq, section: SECTIONS.faq },

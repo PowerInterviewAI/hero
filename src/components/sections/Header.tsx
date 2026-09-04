@@ -13,7 +13,7 @@ import { NavLink } from '@/components/NavLink';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { DOWNLOAD_HREF, NAV_LINKS, ROUTES, homeAnchor } from '@/config/routes';
+import { DOWNLOAD_HREF, NAV_LINKS, ROUTES, SECTIONS, homeAnchor } from '@/config/routes';
 import { useScrolled } from '@/hooks/useScrolled';
 import { cn } from '@/lib/utils';
 
@@ -54,7 +54,13 @@ export const Header: React.FC = () => {
 
   const isActive = (link: (typeof NAV_LINKS)[number]) => {
     if (link.matchSubtree) return pathname.startsWith(link.href);
-    if (isHome) return link.section ? hash === `#${link.section}` : hash === '';
+    if (isHome) {
+      // An empty hash (a plain "/" visit, or having scrolled back to the
+      // top) still counts as the hero section, so Home reads as active by
+      // default instead of nothing being selected.
+      const effectiveHash = hash || `#${SECTIONS.hero}`;
+      return link.section ? effectiveHash === `#${link.section}` : false;
+    }
     return pathname === link.href;
   };
 
