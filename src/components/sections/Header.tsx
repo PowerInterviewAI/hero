@@ -58,6 +58,10 @@ export const Header: React.FC = () => {
   const linkHref = (link: (typeof NAV_LINKS)[number]) =>
     isHome && link.section ? homeAnchor(link.section) : link.href;
 
+  // Same-page hash links skip Next's router entirely - see plainAnchor on
+  // NavLink for the concatenated-hash bug this avoids.
+  const isPlainAnchor = (link: (typeof NAV_LINKS)[number]) => isHome && !!link.section;
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -99,6 +103,7 @@ export const Header: React.FC = () => {
                 underline
                 active={isActive(link)}
                 prefetch={false}
+                plainAnchor={isPlainAnchor(link)}
               />
             ))}
           </nav>
@@ -140,6 +145,7 @@ export const Header: React.FC = () => {
                       active={isActive(link)}
                       className="w-fit text-base"
                       prefetch={false}
+                      plainAnchor={isPlainAnchor(link)}
                     />
                   ))}
                 </nav>

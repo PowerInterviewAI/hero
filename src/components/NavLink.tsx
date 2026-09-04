@@ -29,6 +29,18 @@ interface NavLinkProps {
   /** Opens the link in a new tab - for a destination that isn't a section of
    *  the page you're likely already on, currently just Docs. */
   newTab?: boolean;
+  /**
+   * Renders a plain `<a>` instead of next/link's `<Link>` - for a hash link
+   * to a section of the page already loaded. Next's client router has a real
+   * bug here (segment-cache/navigation.js: `route.canonicalUrl + url.hash`,
+   * string concatenation instead of replacement) that can leave a stale hash
+   * from the previous section stitched onto the new one, e.g. clicking Team
+   * then How it works landing on `/#team#how-it-works`. A plain anchor never
+   * enters Next's router for the click, so the browser's native, spec-correct
+   * fragment navigation handles it instead - which is also all this ever
+   * needed, per the comment below.
+   */
+  plainAnchor?: boolean;
 }
 
 const BASE_CLASS =
@@ -57,27 +69,51 @@ export const NavLink: React.FC<NavLinkProps> = ({
   className,
   prefetch,
   newTab = false,
-}) => (
-  <Link
-    href={href}
-    prefetch={prefetch}
-    onClick={onNavigate}
-    target={newTab ? '_blank' : undefined}
-    rel={newTab ? 'noopener noreferrer' : undefined}
-    aria-current={active ? 'page' : undefined}
-    className={cn(BASE_CLASS, active && 'text-foreground', className)}
-  >
-    {label}
-    {underline && (
-      <span
-        aria-hidden="true"
-        className={cn(
-          'absolute -bottom-1.5 left-0 h-px w-full origin-left bg-primary transition-transform duration-200',
-          active ? 'scale-x-100' : 'scale-x-0'
-        )}
-      />
-    )}
-  </Link>
-);
+  plainAnchor = false,
+}) => {
+  const content = (
+    <>
+      {label}
+      {underline && (
+        <span
+          aria-hidden="true"
+          className={cn(
+            'absolute -bottom-1.5 left-0 h-px w-full origin-left bg-primary transition-transform duration-200',
+            active ? 'scale-x-100' : 'scale-x-0'
+          )}
+        />
+      )}
+    </>
+  );
+
+  const sharedClassName = cn(BASE_CLASS, active && 'text-foreground', className);
+
+  if (plainAnchor) {
+    return (
+      <a
+        href={href}
+        onClick={onNavigate}
+        aria-current={active ? 'page' : undefined}
+        className={sharedClassName}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      prefetch={prefetch}
+      onClick={onNavigate}
+      target={newTab ? '_blank' : undefined}
+      rel={newTab ? 'noopener noreferrer' : undefined}
+      aria-current={active ? 'page' : undefined}
+      className={sharedClassName}
+    >
+      {content}
+    </Link>
+  );
+};
 
 export default NavLink;
