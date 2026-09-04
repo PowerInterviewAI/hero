@@ -32,7 +32,7 @@ Each new build of Power Interview AI is signed independently, so macOS treats an
 
 ![Permissions Required dialog showing Screen Recording access denied](/media/docs/macos-update-permission-issue.png)
 
-Re-opening **System Settings** and toggling the existing entry back on is not enough — macOS still associates that entry with the old build. You need to remove the old entry and add the updated app fresh:
+Re-opening **System Settings** and toggling the existing entry back on is not enough: macOS still associates that entry with the old build. You need to remove the old entry and add the updated app fresh:
 
 1. Open **System Settings → Privacy & Security → Screen & System Audio Recording**.
 2. Select the existing **Power Interview AI** entry and click the **-** button to remove it.
