@@ -15,7 +15,9 @@ import { Plan } from '@/types';
  */
 export async function getPlans(): Promise<Plan[] | null> {
   try {
-    const response = await fetch(`${ENV.apiBaseUrl}api/payment/plans`);
+    const response = await fetch(`${ENV.apiBaseUrl}api/payment/plans`, {
+      signal: AbortSignal.timeout(6_000),
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch plans');
     }

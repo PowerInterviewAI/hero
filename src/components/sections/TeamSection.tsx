@@ -81,10 +81,12 @@ async function getTeamMemberProfile(
       fetch(`https://api.github.com/users/${member.username}`, {
         headers: { accept: 'application/vnd.github+json' },
         next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(6_000),
       }),
       fetch(`https://api.github.com/users/${member.username}/social_accounts`, {
         headers: { accept: 'application/vnd.github+json' },
         next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(6_000),
       }),
     ]);
 
@@ -141,6 +143,38 @@ interface TeamSectionProps {
    */
   preview?: boolean;
 }
+
+/**
+ * Rendered while the GitHub profile fetches resolve. Deliberately carries no
+ * id, same reasoning as PricingSkeleton: TeamSection itself owns
+ * `id={SECTIONS.team}`, and an anchor target has to be the element that
+ * survives once the real content streams in.
+ */
+export const TeamSkeleton = () => (
+  <Section aria-label="Loading team">
+    <SectionHeading
+      eyebrow="Team"
+      title="Our Team"
+      description="Meet the builders behind Power Interview AI."
+    />
+    <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
+      {[0, 1, 2].map((i) => (
+        <div
+          key={i}
+          className="flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6"
+        >
+          <div className="flex items-center gap-3">
+            <div className="size-14 shrink-0 animate-pulse rounded-full bg-muted" />
+            <div className="flex min-w-0 flex-1 flex-col gap-2">
+              <div className="h-4 w-2/5 animate-pulse rounded bg-muted" />
+              <div className="h-3 w-1/4 animate-pulse rounded bg-muted" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Section>
+);
 
 export const TeamSection = async ({ standalone = false, preview = false }: TeamSectionProps) => {
   const results = await Promise.all(TEAM.map(getTeamMemberProfile));

@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
+
 import type { Metadata } from 'next';
 
 import { PageChrome } from '@/components/PageChrome';
-import { TeamSection } from '@/components/sections';
+import { TeamSection, TeamSkeleton } from '@/components/sections';
 import { buildMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = buildMetadata({
@@ -14,7 +16,11 @@ export const metadata: Metadata = buildMetadata({
 export default function TeamPage() {
   return (
     <PageChrome>
-      <TeamSection standalone />
+      {/* TeamSection fetches live GitHub profiles; the skeleton keeps the
+          page from blanking while those requests are in flight. */}
+      <Suspense fallback={<TeamSkeleton />}>
+        <TeamSection standalone />
+      </Suspense>
     </PageChrome>
   );
 }
