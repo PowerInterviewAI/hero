@@ -7,7 +7,7 @@ import Container from '@/components/Container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Glow } from '@/components/ui/glow';
-import { ROUTES, SECTIONS } from '@/config/routes';
+import { SECTIONS, homeAnchor } from '@/config/routes';
 
 import { DownloadButton } from './DownloadButton';
 import { ProductSurface } from './ProductSurface';
@@ -41,10 +41,10 @@ export const HeroSection: React.FC = () => (
 
         <div className="mt-2 flex flex-col items-center gap-4">
           <DownloadButton />
-          {/* Was a button calling scrollIntoView('how-it-works'), which had no
-              URL and stopped at the home page's condensed version. */}
+          {/* Scrolls to the home page's condensed HowItWorksSection, not the
+              standalone /how-it-works page. */}
           <Button variant="ghost" size="sm" asChild>
-            <Link href={ROUTES.howItWorks}>
+            <Link href={homeAnchor(SECTIONS.howItWorks)}>
               See how it works
               <ArrowRight />
             </Link>
