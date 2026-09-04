@@ -1,32 +1,22 @@
-import { ENV } from '@/config/constants';
 import { Plan } from '@/types';
 
 /**
- * The live credit packs.
+ * The credit packs, mirrored from backend/app/cfg/payment.py's CREDIT_PLANS
+ * (as of writing: starter $5/600, pro $20/3000 - popular, enterprise
+ * $150/30000).
  *
- * Originally shared between PricingSection and the home page's
- * SoftwareApplication JSON-LD so its `offers` block couldn't drift from the
- * visible pricing (it used to hardcode lowPrice 20 / highPrice 500 /
- * offerCount 3 against a live price list). SoftwareApplicationJsonLd still
- * calls this server-side, inside its own Suspense boundary. The visible
- * pricing cards (PricingCards.tsx) call it again independently, client-side,
- * so a slow or rate-limited response can't block navigation to /pricing the
- * way it used to - the two are separate requests now rather than one
- * memoized fetch, which is an acceptable trade for never blocking the page.
- *
- * Returns null rather than throwing - callers degrade to omitting pricing.
+ * This used to be fetched live on every page load/click, which meant /pricing
+ * and the home page waited on a backend round trip just to show a price list
+ * that changes rarely. Hardcoded instead - there is no shared source between
+ * the two repos, so if CREDIT_PLANS changes in the backend, update this list
+ * to match by hand.
  */
-export async function getPlans(): Promise<Plan[] | null> {
-  try {
-    const response = await fetch(`${ENV.apiBaseUrl}api/payment/plans`, {
-      signal: AbortSignal.timeout(6_000),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch plans');
-    }
-    return (await response.json()) as Plan[];
-  } catch (err) {
-    console.error('Error fetching plans:', err);
-    return null;
-  }
+const PLANS: Plan[] = [
+  { plan: 'starter', credits: 600, price_usd: 5, popular: false },
+  { plan: 'pro', credits: 3000, price_usd: 20, popular: true },
+  { plan: 'enterprise', credits: 30000, price_usd: 150, popular: false },
+];
+
+export function getPlans(): Plan[] {
+  return PLANS;
 }

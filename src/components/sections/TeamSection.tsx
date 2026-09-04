@@ -21,9 +21,8 @@ interface TeamSectionProps {
 
 /**
  * Rendered as the route-level loading.tsx fallback for /team while its JS
- * chunk loads. TeamSection itself no longer needs this: the GitHub profile
- * fetch now happens client-side in TeamCards, so this section paints
- * immediately with the same placeholder look these bars approximate.
+ * chunk loads - the only gap left to cover, now that TeamCards reads
+ * hardcoded profile data instead of fetching it from GitHub.
  * Deliberately carries no id, same reasoning as PricingSkeleton: TeamSection
  * itself owns `id={SECTIONS.team}`, and an anchor target has to be the
  * element that survives.
@@ -55,16 +54,14 @@ export const TeamSkeleton = () => (
 );
 
 /**
- * GitHub profile enrichment (avatar, bio, follower counts, contact links)
- * fetches client-side in TeamCards, the same pattern TrustStrip and
- * useLatestVersion already use for this site's other GitHub/backend calls.
- * That used to be 6 unauthenticated GitHub calls awaited server-side with no
- * Suspense boundary, which meant a slow or rate-limited GitHub response
- * blocked navigation to /team (and the home page) for every visitor. This
- * section is now synchronous and paints instantly; the cards degrade to
- * `@username` + a placeholder avatar until GitHub responds, which is already
- * the look for a failed fetch, so there's nothing to flash in later but the
- * real data.
+ * GitHub profile data (avatar, bio, follower counts, contact links) is
+ * hardcoded in TeamCards rather than fetched. That used to be 6
+ * unauthenticated GitHub calls awaited server-side with no Suspense
+ * boundary, which meant a slow or rate-limited GitHub response blocked
+ * navigation to /team (and the home page) for every visitor. Hardcoding
+ * removed the dependency entirely rather than just deferring it - see
+ * TeamCards.tsx for the trade-off (a snapshot that goes stale until updated
+ * by hand).
  */
 export const TeamSection = ({ standalone = false, preview = false }: TeamSectionProps) => (
   <Section id={SECTIONS.team} tone="muted" aria-labelledby="team-heading">

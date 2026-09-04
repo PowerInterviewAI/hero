@@ -2,12 +2,13 @@ import { buildSoftwareApplicationJsonLd } from '@/lib/jsonLd';
 import { getPlans } from '@/lib/plans';
 
 /**
- * Split out of page.tsx so the plans fetch it needs sits behind its own
- * Suspense boundary instead of blocking the whole home page (including the
- * Hero, which needs none of this data) on every request.
+ * Split out of page.tsx so this doesn't sit inline in Home() - getPlans() is
+ * a hardcoded constant now, not a fetch, so there's nothing left to block on,
+ * but keeping the schema generation in its own small component still keeps
+ * page.tsx focused on layout.
  */
-export async function SoftwareApplicationJsonLd() {
-  const plans = await getPlans();
+export function SoftwareApplicationJsonLd() {
+  const plans = getPlans();
 
   return (
     <script

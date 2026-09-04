@@ -1,7 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 import { Check, Minus } from 'lucide-react';
 
 import { DownloadCta } from '@/components/DownloadCta';
@@ -23,58 +19,13 @@ const calculateDiscount = (plan: Plan, starterPricePerCredit: number): number =>
   return Math.round(discount);
 };
 
-// getPlans() used to be awaited inside PricingSection itself, which meant
-// /pricing (and the home page) was only as fast as this fetch - and since it
-// has no revalidate directive, Next treats the route as static and only pays
-// that cost again on the first visit after each deploy, the same freeze
-// TeamSection had. Fetching here instead, after mount, means the section
-// paints its heading and skeleton immediately and the cards themselves fill
-// in a moment later. SoftwareApplicationJsonLd keeps its own server-side call
-// to getPlans() for the schema - that one is already Suspense-wrapped with a
-// null fallback, so it was never the blocking half of this.
-function usePlans(): Plan[] | null | undefined {
-  const [plans, setPlans] = useState<Plan[] | null | undefined>(undefined);
-
-  useEffect(() => {
-    let mounted = true;
-
-    getPlans().then((result) => {
-      if (mounted) setPlans(result);
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return plans;
-}
-
-const CardSkeleton: React.FC = () => (
-  <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
-    {[0, 1, 2].map((i) => (
-      <div key={i} className="h-72 animate-pulse rounded-xl border border-border bg-card" />
-    ))}
-  </div>
-);
-
+// getPlans() used to be a live fetch awaited here, which meant /pricing (and
+// the home page) waited on a backend round trip - a real request that could
+// be slow, rate-limited or hit a cold start. It's a hardcoded constant now
+// (see plans.ts), so this reads it directly rather than through a client
+// fetch-and-skeleton dance that no longer has anything to wait for.
 export const PricingCards: React.FC = () => {
-  const plans = usePlans();
-
-  if (plans === undefined) return <CardSkeleton />;
-
-  if (plans === null) {
-    return (
-      <div className="mx-auto mt-10 max-w-md rounded-xl border border-border bg-card p-6 text-center">
-        <p className="text-sm text-muted-foreground">
-          Live plan pricing is temporarily unavailable. Credit packs are listed in the app, and the
-          1-hour free trial is unaffected.
-        </p>
-        <DownloadCta className="mt-4">Download and start free</DownloadCta>
-      </div>
-    );
-  }
-
+  const plans = getPlans();
   const starterPlan = plans.find((p) => p.plan.toLowerCase() === 'starter');
   const starterPricePerCredit = starterPlan ? starterPlan.price_usd / starterPlan.credits : 0;
 

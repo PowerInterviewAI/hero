@@ -33,9 +33,8 @@ const TierValue: React.FC<{ value: string | true }> = ({ value }) =>
 
 /**
  * Rendered as the route-level loading.tsx fallback for /pricing while its JS
- * chunk loads. PricingSection itself no longer needs this: the live plans
- * fetch now happens client-side in PricingCards, so this section paints
- * immediately with its own card-shaped skeleton while that resolves.
+ * chunk loads - the only gap left to cover, now that PricingCards reads a
+ * hardcoded plan list instead of fetching one.
  *
  * Deliberately carries no id. It used to be `id="pricing"` as well, so the
  * streamed HTML contained two elements with that id and `/#pricing` resolved to
@@ -67,15 +66,12 @@ interface PricingSectionProps {
 }
 
 /**
- * The live credit-pack prices fetch client-side in PricingCards, the same
- * pattern TeamCards, TrustStrip and useLatestVersion already use for this
- * site's other backend/GitHub calls. That fetch used to be awaited here,
- * server-side, with no revalidate directive - which meant Next treated
+ * Credit-pack prices come from PricingCards, which reads a hardcoded constant
+ * (see lib/plans.ts) rather than fetching. That fetch used to be awaited
+ * here, server-side, with no revalidate directive - which meant Next treated
  * /pricing as static and only paid that cost again on the first visit after
  * each deploy, freezing the page the same way TeamSection once froze /team.
- * Everything in this section that doesn't depend on live prices (heading,
- * badges, the trial-vs-paid table) renders immediately since it's plain,
- * static JSX.
+ * Hardcoding removed the dependency entirely rather than just deferring it.
  */
 export const PricingSection = ({ standalone = false, preview = false }: PricingSectionProps) => (
   <Section id={SECTIONS.pricing} aria-labelledby="pricing-heading">
