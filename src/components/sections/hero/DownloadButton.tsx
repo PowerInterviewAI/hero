@@ -7,7 +7,7 @@ import { Apple, Download, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-import { RELEASES_URL, getDownloadUrl } from './constants';
+import { MACOS_SUPPORTED, RELEASES_URL, getDownloadUrl } from './constants';
 import { useLatestVersion } from './useLatestVersion';
 
 type DetectedOS = 'windows' | 'macos' | 'other';
@@ -51,19 +51,41 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({ className, size 
       href: getDownloadUrl(version, 'windows'),
       Icon: Monitor,
     },
-    macos: {
-      label: 'Download for macOS',
-      href: getDownloadUrl(version, 'macos-arm64'),
-      Icon: Apple,
-    },
     other: {
       label: 'Download',
       href: RELEASES_URL,
       Icon: Download,
     },
-  }[os];
+  }[os === 'macos' ? 'other' : os];
 
   const { Icon } = primary;
+
+  if (os === 'macos' && !MACOS_SUPPORTED) {
+    return (
+      <div className={cn('flex flex-col items-center gap-3', className)}>
+        <div className="max-w-sm rounded-lg border border-border bg-card px-4 py-3 text-center text-sm text-muted-foreground">
+          <Apple className="mx-auto mb-1.5 size-5" aria-hidden="true" />
+          macOS support isn&rsquo;t ready yet &mdash; we&rsquo;re actively working on it.
+        </div>
+        <Button size={size} variant="outline" asChild>
+          <a href={getDownloadUrl(version, 'windows')} download={version ? '' : undefined}>
+            <Monitor />
+            Download for Windows instead
+          </a>
+        </Button>
+        <p className="text-xs text-muted-foreground">
+          <a
+            href={RELEASES_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+          >
+            All releases
+          </a>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={cn('flex flex-col items-center gap-3', className)}>
@@ -92,28 +114,8 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({ className, size 
             {' · '}
           </>
         )}
-        {os !== 'macos' && (
-          <>
-            <a
-              href={getDownloadUrl(version, 'macos-arm64')}
-              className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
-            >
-              macOS
-            </a>
-            {' · '}
-          </>
-        )}
-        {os === 'macos' && (
-          <>
-            <a
-              href={getDownloadUrl(version, 'macos-x64')}
-              className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
-            >
-              Intel Mac
-            </a>
-            {' · '}
-          </>
-        )}
+        <span title="Actively being worked on">macOS (coming soon)</span>
+        {' · '}
         <a
           href={RELEASES_URL}
           target="_blank"

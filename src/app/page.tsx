@@ -12,7 +12,6 @@ import {
   PricingSection,
   PricingSkeleton,
   TeamSection,
-  TeamSkeleton,
   TestimonialsSection,
   WhyChooseSection,
 } from '@/components/sections';
@@ -50,11 +49,7 @@ export default function Home() {
         }
         testimonialsSection={<TestimonialsSection />}
         contactSection={<ContactSection />}
-        teamSection={
-          <Suspense fallback={<TeamSkeleton />}>
-            <TeamSection preview />
-          </Suspense>
-        }
+        teamSection={<TeamSection preview />}
       />
     </>
   );

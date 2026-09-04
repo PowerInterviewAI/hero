@@ -77,7 +77,9 @@ export const TrustStrip: React.FC = () => {
         <div className="flex items-center gap-2">
           <MonitorSmartphone className="size-4 shrink-0" aria-hidden="true" />
           <dt className="sr-only">Platforms</dt>
-          <dd>Windows &amp; macOS</dd>
+          {/* macOS isn't ready to ship yet - see MACOS_SUPPORTED in
+              DownloadButton.tsx. Update both when it lands. */}
+          <dd>Windows now, macOS coming soon</dd>
         </div>
 
         <div className="flex items-center gap-2">

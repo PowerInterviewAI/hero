@@ -13,6 +13,7 @@ import { ROUTES, SECTIONS } from '@/config/routes';
 import {
   DOWNLOAD_BASE_URL,
   type InstallPlatform,
+  MACOS_SUPPORTED,
   RELEASES_LATEST_URL,
   RELEASES_URL,
   type WindowsShell,
@@ -135,7 +136,13 @@ export const InstallPanel: React.FC<{ id?: string }> = ({ id = SECTIONS.install 
                 </Button>
               </div>
 
-              {!version && (
+              {platform === 'macos' && !MACOS_SUPPORTED && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  macOS support isn&rsquo;t ready yet &mdash; we&rsquo;re actively working on it.
+                  This command is left here for reference but may not produce a working install.
+                </p>
+              )}
+              {platform === 'windows' && !version && (
                 <p className="mt-2 text-xs text-muted-foreground">
                   Showing the version-agnostic command - the release lookup runs at install time.
                 </p>
@@ -154,24 +161,33 @@ export const InstallPanel: React.FC<{ id?: string }> = ({ id = SECTIONS.install 
                 label="Windows installer"
                 note={version ? `PowerInterviewAI-Setup-${version}.exe` : 'latest release'}
               />
-              <DownloadRow
-                href={
-                  version
-                    ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-arm64.dmg`
-                    : RELEASES_LATEST_URL
-                }
-                label="macOS - Apple Silicon"
-                note={version ? `Power.Interview.AI-${version}-arm64.dmg` : 'latest release'}
-              />
-              <DownloadRow
-                href={
-                  version
-                    ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-x64.dmg`
-                    : RELEASES_LATEST_URL
-                }
-                label="macOS - Intel"
-                note={version ? `Power.Interview.AI-${version}-x64.dmg` : 'latest release'}
-              />
+              {MACOS_SUPPORTED ? (
+                <>
+                  <DownloadRow
+                    href={
+                      version
+                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-arm64.dmg`
+                        : RELEASES_LATEST_URL
+                    }
+                    label="macOS - Apple Silicon"
+                    note={version ? `Power.Interview.AI-${version}-arm64.dmg` : 'latest release'}
+                  />
+                  <DownloadRow
+                    href={
+                      version
+                        ? `${DOWNLOAD_BASE_URL}/Power.Interview.AI-${version}-x64.dmg`
+                        : RELEASES_LATEST_URL
+                    }
+                    label="macOS - Intel"
+                    note={version ? `Power.Interview.AI-${version}-x64.dmg` : 'latest release'}
+                  />
+                </>
+              ) : (
+                <div className="rounded-lg border border-dashed border-border px-4 py-3 text-center text-sm text-muted-foreground">
+                  macOS installers aren&rsquo;t ready yet &mdash; we&rsquo;re actively working on
+                  it.
+                </div>
+              )}
               <a
                 href={RELEASES_URL}
                 target="_blank"

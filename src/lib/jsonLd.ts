@@ -49,9 +49,11 @@ export function buildSoftwareApplicationJsonLd(plans: Plan[] | null) {
     name: SITE_NAME,
     url: `${SITE_URL}/`,
     applicationCategory: 'BusinessApplication',
-    // The site ships installers for these two only - the third was never
-    // offered, and claiming a platform you don't build for is a support ticket.
-    operatingSystem: 'Windows, macOS',
+    // macOS isn't ready to ship yet (see MACOS_SUPPORTED in DownloadButton.tsx)
+    // - claiming a platform that isn't actually downloadable is exactly the
+    // kind of drift this file's other comments already warn against. Add it
+    // back once the macOS build is supported again.
+    operatingSystem: 'Windows',
     description:
       'Privacy-first AI interview assistant and meeting note taker with real-time transcription, mock interview practice, live AI suggestions, coding challenge assistance, and smart exports for Zoom, Google Meet, and Microsoft Teams.',
     author: {

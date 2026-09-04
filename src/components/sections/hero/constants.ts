@@ -7,6 +7,11 @@ export const RELEASES_API_URL =
 export type InstallPlatform = 'windows' | 'macos';
 export type WindowsShell = 'cmd' | 'powershell';
 
+// macOS isn't ready to ship yet - actively being worked on. Until it is,
+// DownloadButton and InstallPanel show an honest "not yet" instead of a
+// download that may not work. Flip this back on once the fix lands.
+export const MACOS_SUPPORTED = false;
+
 // Media carousel data - every item is an .mp4 under public/media/, paired with
 // a poster so the frame paints before any video bytes arrive.
 //
