@@ -33,6 +33,7 @@ export default function DocsIndexPage() {
             <li key={doc.slug}>
               <Link
                 href={docPath(doc.slug)}
+                prefetch={false}
                 className="flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <h2 className="text-lg font-semibold capitalize text-foreground">{doc.title}</h2>

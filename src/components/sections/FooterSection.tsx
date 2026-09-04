@@ -95,31 +95,52 @@ export const FooterSection: React.FC = () => {
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <NavLink label="How it works" href={ROUTES.howItWorks} className={LINK_CLASS} />
+                  <NavLink
+                    label="How it works"
+                    href={ROUTES.howItWorks}
+                    className={LINK_CLASS}
+                    prefetch={false}
+                  />
                 </li>
                 <li>
                   <NavLink
                     label="Features"
                     href={homeAnchor(SECTIONS.features)}
                     className={LINK_CLASS}
+                    prefetch={false}
                   />
                 </li>
                 <li>
-                  <NavLink label="Pricing" href={ROUTES.pricing} className={LINK_CLASS} />
+                  <NavLink
+                    label="Pricing"
+                    href={ROUTES.pricing}
+                    className={LINK_CLASS}
+                    prefetch={false}
+                  />
                 </li>
                 <li>
                   {/* Same destination as the header's Download button. These
                       two used to disagree - the header scrolled to the top of
                       the home page, this one left for GitHub. */}
-                  <NavLink label="Download" href={DOWNLOAD_HREF} className={LINK_CLASS} />
+                  <NavLink
+                    label="Download"
+                    href={DOWNLOAD_HREF}
+                    className={LINK_CLASS}
+                    prefetch={false}
+                  />
                 </li>
                 <li>
-                  <Link href={ROUTES.docs} className={LINK_CLASS}>
+                  <Link href={ROUTES.docs} prefetch={false} className={LINK_CLASS}>
                     Documentation
                   </Link>
                 </li>
                 <li>
-                  <NavLink label="Our Team" href={ROUTES.team} className={LINK_CLASS} />
+                  <NavLink
+                    label="Our Team"
+                    href={ROUTES.team}
+                    className={LINK_CLASS}
+                    prefetch={false}
+                  />
                 </li>
               </ul>
             </nav>
@@ -130,7 +151,7 @@ export const FooterSection: React.FC = () => {
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <NavLink label="FAQ" href={ROUTES.faq} className={LINK_CLASS} />
+                  <NavLink label="FAQ" href={ROUTES.faq} className={LINK_CLASS} prefetch={false} />
                 </li>
                 {RESOURCE_LINKS.map((link) => (
                   <li key={link.label}>
@@ -149,6 +170,7 @@ export const FooterSection: React.FC = () => {
                     label="Support"
                     href={homeAnchor(SECTIONS.contact)}
                     className={LINK_CLASS}
+                    prefetch={false}
                   />
                 </li>
               </ul>
@@ -160,12 +182,12 @@ export const FooterSection: React.FC = () => {
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href={ROUTES.privacy} className={LINK_CLASS}>
+                  <Link href={ROUTES.privacy} prefetch={false} className={LINK_CLASS}>
                     Privacy policy
                   </Link>
                 </li>
                 <li>
-                  <Link href={ROUTES.terms} className={LINK_CLASS}>
+                  <Link href={ROUTES.terms} prefetch={false} className={LINK_CLASS}>
                     Terms of service
                   </Link>
                 </li>
@@ -184,6 +206,7 @@ export const FooterSection: React.FC = () => {
                     label="Contact"
                     href={homeAnchor(SECTIONS.contact)}
                     className={LINK_CLASS}
+                    prefetch={false}
                   />
                 </li>
               </ul>

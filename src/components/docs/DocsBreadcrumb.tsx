@@ -23,7 +23,7 @@ export const DocsBreadcrumb: React.FC<DocsBreadcrumbProps> = ({ current }) => (
   <nav aria-label="Breadcrumb" className="mb-6">
     <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
       <li>
-        <Link href={ROUTES.home} className={LINK_CLASS}>
+        <Link href={ROUTES.home} prefetch={false} className={LINK_CLASS}>
           Home
         </Link>
       </li>
@@ -32,7 +32,7 @@ export const DocsBreadcrumb: React.FC<DocsBreadcrumbProps> = ({ current }) => (
 
       <li>
         {current ? (
-          <Link href={ROUTES.docs} className={LINK_CLASS}>
+          <Link href={ROUTES.docs} prefetch={false} className={LINK_CLASS}>
             Documentation
           </Link>
         ) : (

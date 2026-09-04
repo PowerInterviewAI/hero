@@ -37,6 +37,7 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({ docs, className = '', 
           <li className="mb-1 border-b pb-2">
             <Link
               href={ROUTES.docs}
+              prefetch={false}
               onClick={onLinkClick}
               aria-current={atRoot ? 'page' : undefined}
               className={cn(
@@ -56,6 +57,7 @@ export const DocsSidebar: React.FC<DocsSidebarProps> = ({ docs, className = '', 
               <li key={d.slug}>
                 <Link
                   href={docPath(d.slug)}
+                  prefetch={false}
                   onClick={onLinkClick}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
