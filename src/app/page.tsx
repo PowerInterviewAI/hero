@@ -28,14 +28,14 @@ export default function Home() {
       {/* The page that is actually about the app carries its schema. */}
       <SoftwareApplicationJsonLd />
       <HomeContent
-        howItWorksSection={<HowItWorksSection preview />}
+        howItWorksSection={<HowItWorksSection />}
         featuresSection={<FeaturesSection />}
         benefitsSection={<BenefitsSection />}
         whyChooseSection={<WhyChooseSection />}
-        pricingSection={<PricingSection preview />}
+        pricingSection={<PricingSection />}
         testimonialsSection={<TestimonialsSection />}
         contactSection={<ContactSection />}
-        teamSection={<TeamSection preview />}
+        teamSection={<TeamSection />}
       />
     </>
   );

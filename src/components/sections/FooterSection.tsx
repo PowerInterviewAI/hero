@@ -182,12 +182,24 @@ export const FooterSection: React.FC = () => {
               </h3>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href={ROUTES.privacy} prefetch={false} className={LINK_CLASS}>
+                  <Link
+                    href={ROUTES.privacy}
+                    prefetch={false}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={LINK_CLASS}
+                  >
                     Privacy policy
                   </Link>
                 </li>
                 <li>
-                  <Link href={ROUTES.terms} prefetch={false} className={LINK_CLASS}>
+                  <Link
+                    href={ROUTES.terms}
+                    prefetch={false}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={LINK_CLASS}
+                  >
                     Terms of service
                   </Link>
                 </li>

@@ -160,6 +160,8 @@ export default function TermsOfServicePage() {
                 Your use of the Service is also governed by our Privacy Policy. Please review our{' '}
                 <Link
                   href={ROUTES.privacy}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-primary underline-offset-4 hover:underline"
                 >
                   Privacy Policy

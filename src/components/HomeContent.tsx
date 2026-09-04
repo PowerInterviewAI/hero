@@ -53,7 +53,7 @@ export function HomeContent({
         {pricingSection}
         {testimonialsSection}
         <InstallPanel />
-        <FAQSection preview />
+        <FAQSection />
         {contactSection}
         {teamSection}
       </main>

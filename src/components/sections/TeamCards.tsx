@@ -85,7 +85,7 @@ function getHandleFromUrl(url: string) {
 const LINK_CLASS =
   'inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground';
 
-export const TeamCards: React.FC<{ preview?: boolean }> = ({ preview = false }) => (
+export const TeamCards: React.FC = () => (
   <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
     {TEAM.map((member, index) => (
       <Reveal key={member.username} delay={index * 80}>
@@ -112,65 +112,56 @@ export const TeamCards: React.FC<{ preview?: boolean }> = ({ preview = false }) 
             </div>
           </div>
 
-          {preview ? null : (
-            <>
-              <p className="min-h-10 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
+          <p className="min-h-10 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
 
-              <div className="flex gap-4 text-xs text-muted-foreground">
-                <span>{member.followers} followers</span>
-                <span>{member.repos} repos</span>
-                <span>{member.location}</span>
-              </div>
+          <div className="flex gap-4 text-xs text-muted-foreground">
+            <span>{member.followers} followers</span>
+            <span>{member.repos} repos</span>
+            <span>{member.location}</span>
+          </div>
 
-              <div className="mt-auto flex flex-col gap-2 border-t border-border pt-4 text-sm">
-                <a
-                  href={member.profileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={LINK_CLASS}
-                >
-                  <SiGithub className="size-4" />@{member.username}
-                </a>
-                {member.email ? (
-                  <a href={`mailto:${member.email}`} className={LINK_CLASS}>
-                    <Mail className="size-4" />
-                    {member.email}
-                  </a>
-                ) : null}
-                {member.x ? (
-                  <a
-                    href={member.x}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={LINK_CLASS}
-                  >
-                    <SiX className="size-4" />@{getHandleFromUrl(member.x)}
-                  </a>
-                ) : null}
-                {member.telegram ? (
-                  <a
-                    href={member.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={LINK_CLASS}
-                  >
-                    <Send className="size-4" />@{getHandleFromUrl(member.telegram)}
-                  </a>
-                ) : null}
-                {member.linkedin ? (
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={LINK_CLASS}
-                  >
-                    <LinkedinIcon className="size-4" />
-                    {getHandleFromUrl(member.linkedin)}
-                  </a>
-                ) : null}
-              </div>
-            </>
-          )}
+          <div className="mt-auto flex flex-col gap-2 border-t border-border pt-4 text-sm">
+            <a
+              href={member.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={LINK_CLASS}
+            >
+              <SiGithub className="size-4" />@{member.username}
+            </a>
+            {member.email ? (
+              <a href={`mailto:${member.email}`} className={LINK_CLASS}>
+                <Mail className="size-4" />
+                {member.email}
+              </a>
+            ) : null}
+            {member.x ? (
+              <a href={member.x} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+                <SiX className="size-4" />@{getHandleFromUrl(member.x)}
+              </a>
+            ) : null}
+            {member.telegram ? (
+              <a
+                href={member.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={LINK_CLASS}
+              >
+                <Send className="size-4" />@{getHandleFromUrl(member.telegram)}
+              </a>
+            ) : null}
+            {member.linkedin ? (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={LINK_CLASS}
+              >
+                <LinkedinIcon className="size-4" />
+                {getHandleFromUrl(member.linkedin)}
+              </a>
+            ) : null}
+          </div>
         </div>
       </Reveal>
     ))}

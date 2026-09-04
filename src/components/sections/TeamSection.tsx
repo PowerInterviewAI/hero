@@ -1,22 +1,11 @@
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-
-import { Button } from '@/components/ui/button';
 import { Section, SectionHeading } from '@/components/ui/section';
-import { ROUTES, SECTIONS } from '@/config/routes';
+import { SECTIONS } from '@/config/routes';
 
 import { TeamCards } from './TeamCards';
 
 interface TeamSectionProps {
   /** Set on the standalone /team route so the section owns the h1. */
   standalone?: boolean;
-  /**
-   * Home-page treatment: avatar, name and role only, plus a link across to
-   * /team for bios, stats and contact links. Mirrors the condensed treatment
-   * HowItWorksSection, PricingSection and FAQSection already use, so the same
-   * profile isn't rendered in full on two URLs.
-   */
-  preview?: boolean;
 }
 
 /**
@@ -54,6 +43,13 @@ export const TeamSkeleton = () => (
 );
 
 /**
+ * Full team profiles (bio, stats, contact links), on the home page and /team
+ * alike - not condensed to avatar/name/role with a link across, the way this
+ * section used to work. With the header nav always pointing at the home
+ * anchor (see NAV_LINKS in routes.ts), a reader landing here via the nav is
+ * already where they're going. /team itself is unchanged - still a real,
+ * indexable page for direct links and search results.
+ *
  * GitHub profile data (avatar, bio, follower counts, contact links) is
  * hardcoded in TeamCards rather than fetched. That used to be 6
  * unauthenticated GitHub calls awaited server-side with no Suspense
@@ -63,7 +59,7 @@ export const TeamSkeleton = () => (
  * TeamCards.tsx for the trade-off (a snapshot that goes stale until updated
  * by hand).
  */
-export const TeamSection = ({ standalone = false, preview = false }: TeamSectionProps) => (
+export const TeamSection = ({ standalone = false }: TeamSectionProps) => (
   <Section id={SECTIONS.team} tone="muted" aria-labelledby="team-heading">
     <SectionHeading
       id="team-heading"
@@ -73,18 +69,7 @@ export const TeamSection = ({ standalone = false, preview = false }: TeamSection
       description="Meet the builders behind Power Interview AI."
     />
 
-    <TeamCards preview={preview} />
-
-    {preview && (
-      <div className="mt-10 flex justify-center">
-        <Button variant="ghost" size="lg" asChild>
-          <Link href={ROUTES.team}>
-            Meet the full team
-            <ArrowRight className="size-4" />
-          </Link>
-        </Button>
-      </div>
-    )}
+    <TeamCards />
   </Section>
 );
 
